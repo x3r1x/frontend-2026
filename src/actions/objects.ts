@@ -1,37 +1,18 @@
 import type {Slide} from "../types/slide.js";
-import type {Coordinates, ImageObject, SlideObject, TextObject, Vector} from "../types/objects.js";
+import type {
+    BaseSlideObject,
+    SlideObject, SlideObjectProps,
+    Vector
+} from "../types/objects.js";
 
-function addTextObject(slide: Slide, textId: string, content: string, position: Coordinates, size: Vector,
-                       fontFamily: string, fontSize: number, fontColor: string): Slide {
-    const newTextObject: TextObject = {
-        id: textId,
-        position: position,
-        size: size,
-        type: "Text",
-        text: content,
-        fontFamily: fontFamily,
-        fontSize: fontSize,
-        color: fontColor
+function addSlideObject(slide: Slide, baseObject: BaseSlideObject, objectProps: SlideObjectProps): Slide {
+    const object: SlideObject = {
+        ...baseObject,
+        ...objectProps
     }
-
     return {
         ...slide,
-        objects: [...slide.objects, newTextObject]
-    }
-}
-
-function addImageObject(slide: Slide, imageId: string, imageUrl: string, position: Coordinates, size: Vector): Slide {
-    const newImageObject: ImageObject = {
-        id: imageId,
-        position: position,
-        size: size,
-        type: "Image",
-        src: imageUrl
-    }
-
-    return {
-        ...slide,
-        objects: [...slide.objects, newImageObject]
+        objects: [...slide.objects, object]
     }
 }
 
@@ -47,7 +28,7 @@ function removeObjects(slide: Slide, objectIds: string[]): Slide {
 }
 
 function moveObjects(slide: Slide, objectIds: string[], shift: Vector): Slide {
-    const newObjectsArray: SlideObject[] = slide.objects.map(function (object: SlideObject): SlideObject {
+    const newObjectsArray: SlideObject[] = slide.objects.map(object => {
         if (objectIds.includes(object.id)) {
             return {
                 ...object,
@@ -68,13 +49,13 @@ function moveObjects(slide: Slide, objectIds: string[], shift: Vector): Slide {
 }
 
 function resizeObject(slide: Slide, objectId: string, change: Vector): Slide {
-    const newObjectsArray: SlideObject[] = slide.objects.map(function (object: SlideObject): SlideObject {
+    const newObjectsArray: SlideObject[] = slide.objects.map(object => {
         if (objectId === object.id) {
             return {
                 ...object,
                 size: {
-                    dx: object.size.dx + change.dx,
-                    dy: object.size.dy + change.dy
+                    width: object.size.width + change.dx,
+                    height: object.size.height + change.dy
                 }
             }
         }
@@ -89,13 +70,13 @@ function resizeObject(slide: Slide, objectId: string, change: Vector): Slide {
 }
 
 function updateTextObjectStyle(slide: Slide, objectId: string, fontFamily: string, fontSize: number, fontColor: string): Slide {
-    const newObjectsArray: SlideObject[] = slide.objects.map(function (object: SlideObject): SlideObject {
-        if (object.id === objectId && object.type === "Text") {
+    const newObjectsArray: SlideObject[] = slide.objects.map(object => {
+        if (object.id === objectId && object.type === "text") {
             return {
                 ...object,
                 fontSize: fontSize,
                 fontFamily: fontFamily,
-                color: fontColor
+                fontColor: fontColor
             }
         }
 
@@ -109,8 +90,8 @@ function updateTextObjectStyle(slide: Slide, objectId: string, fontFamily: strin
 }
 
 function updateTextObjectContent(slide: Slide, objectId: string, content: string): Slide {
-    const newObjectsArray: SlideObject[] = slide.objects.map(function (object: SlideObject): SlideObject {
-        if (object.id === objectId && object.type === "Text") {
+    const newObjectsArray: SlideObject[] = slide.objects.map(object => {
+        if (object.id === objectId && object.type === "text") {
             return {
                 ...object,
                 text: content
@@ -127,8 +108,8 @@ function updateTextObjectContent(slide: Slide, objectId: string, content: string
 }
 
 function updateImageObjectUrl(slide: Slide, objectId: string, imageUrl: string): Slide {
-    const newObjectsArray: SlideObject[] = slide.objects.map(function (object: SlideObject): SlideObject {
-        if (object.id === objectId && object.type === "Image") {
+    const newObjectsArray: SlideObject[] = slide.objects.map(object => {
+        if (object.id === objectId && object.type === "image") {
             return {
                 ...object,
                 src: imageUrl
@@ -145,8 +126,7 @@ function updateImageObjectUrl(slide: Slide, objectId: string, imageUrl: string):
 }
 
 export {
-    addTextObject,
-    addImageObject,
+    addSlideObject,
     removeObjects,
     moveObjects,
     resizeObject,

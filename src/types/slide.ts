@@ -11,18 +11,18 @@ type Background = SolidBackground | ImageBackground | GradientBackground;
 
 type SolidBackground = {
     color: string;
-    type: "Solid";
+    type: "solid";
 }
 
 type ImageBackground = {
     src: string;
-    type: "Image";
+    type: "image";
 }
 
 type GradientBackground = {
     colors: string[];
     angle: number;
-    type: "Gradient";
+    type: "gradient";
 }
 
 export {

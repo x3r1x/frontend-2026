@@ -17,7 +17,7 @@ const slideWithSolidBg1: Slide = {
     name: "Are you gay?",
     background: {
         color: "#34A98F",
-        type: "Solid"
+        type: "solid"
     },
     objects: [imageObject2, textObject3, textObject1, imageObject2, imageObject1]
 }
@@ -27,7 +27,7 @@ const slideWithImageBg1: Slide = {
     name: "You are gay!",
     background: {
         src: "She knows...",
-        type: "Image"
+        type: "image"
     },
     objects: [textObject1, imageObject1, imageObject3, textObject3]
 }
@@ -38,7 +38,7 @@ const slideWithGradientBg1: Slide = {
     background: {
         colors: ["#FFFFFF", "#ABCDEF", "#1243A1", "#8BCED1"],
         angle: 1.23,
-        type: "Gradient"
+        type: "gradient"
     },
     objects: [imageObject3, textObject3, textObject1, imageObject2, imageObject1]
 }
@@ -48,7 +48,7 @@ const slideWithSolidBg2: Slide = {
     name: "Gleb Ryzhov",
     background: {
         color: "#235ABC",
-        type: "Solid"
+        type: "solid"
     },
     objects: [imageObject2]
 }
@@ -58,7 +58,7 @@ const slideWithImageBg2: Slide = {
     name: "And Dima Chizhov",
     background: {
         src: "some/random/url",
-        type: "Image"
+        type: "image"
     },
     objects: [textObject3, imageObject3, imageObject1, textObject2]
 }
@@ -69,7 +69,7 @@ const slideWithGradientBg2: Slide = {
     background: {
         colors: ["#AD12CB", "2591A5"],
         angle: -0.05,
-        type: "Gradient"
+        type: "gradient"
     },
     objects: [imageObject1, imageObject2, textObject3, textObject1]
 }
@@ -77,7 +77,7 @@ const slideWithGradientBg2: Slide = {
 function getEmptyBackground(): SolidBackground {
     return {
         color: "#FFFFFF",
-        type: "Solid"
+        type: "solid"
     }
 }
 

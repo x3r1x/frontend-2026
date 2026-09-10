@@ -178,7 +178,7 @@ describe("setSlideBackgroundColor", () => {
             ...oldSlide,
             background: {
                 color: backgroundColor,
-                type: "Solid"
+                type: "solid"
             }
         }
 
@@ -199,7 +199,7 @@ describe("setSlideBackgroundImage", () => {
             ...oldSlide,
             background: {
                 src: backgroundSrc,
-                type: "Image"
+                type: "image"
             }
         }
 
@@ -222,7 +222,7 @@ describe("setSlideBackgroundGradient", () => {
             background: {
                 colors: gradientColors,
                 angle: gradientAngle,
-                type: "Gradient"
+                type: "gradient"
             }
         }
 
@@ -238,7 +238,7 @@ describe("setSlideBackgroundGradient", () => {
             background: {
                 colors: gradientColors,
                 angle: 0,
-                type: "Gradient"
+                type: "gradient"
             }
         }
 

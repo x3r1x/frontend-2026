@@ -1,8 +1,7 @@
 import {describe, expect, it} from "vitest";
 import {Slide} from "../../types/slide.js";
 import {
-    addImageObject,
-    addTextObject,
+    addSlideObject,
     moveObjects,
     removeObjects, resizeObject, updateImageObjectUrl, updateTextObjectContent,
     updateTextObjectStyle
@@ -20,9 +19,17 @@ import {
     getNewImageObject, newImageSrc, newObjectSize, newObjectCoordinates, imageObject2, imageObject1,
     textObject1
 } from "./objectsTestStorage.js";
-import {ImageObject, SlideObject, TextObject, Vector} from "../../types/objects.js";
+import {
+    BaseSlideObject,
+    ImageObject,
+    ImageObjectProps,
+    SlideObject,
+    TextObject,
+    TextObjectProps,
+    Vector
+} from "../../types/objects.js";
 
-describe("addTextObject", () => {
+describe("addSlideObject", () => {
     it("adds text object to slide", () => {
         const oldSlide = slideWithSolidBg1
         const oldSlideCopy = structuredClone(oldSlide)
@@ -32,15 +39,26 @@ describe("addTextObject", () => {
             objects: [...oldSlide.objects, getNewTextObject()]
         }
 
-        const slideWithTextObject = addTextObject(oldSlide, newObjectId, newTextContent, newObjectCoordinates,
-            newObjectSize, newTextFontFamily, newTextFontSize, newTextFontColor)
+        const baseObject: BaseSlideObject = {
+            id: newObjectId,
+            position: newObjectCoordinates,
+            size: newObjectSize,
+        }
+
+        const textObjectProps: TextObjectProps = {
+            text: newTextContent,
+            fontFamily: newTextFontFamily,
+            fontSize: newTextFontSize,
+            fontColor: newTextFontColor,
+            type: "text"
+        }
+
+        const slideWithTextObject = addSlideObject(oldSlide, baseObject, textObjectProps)
 
         expect(slideWithTextObject).toEqual(expectedSlide)
         expect(oldSlide).toEqual(oldSlideCopy)
     })
-})
 
-describe("addImageObject", () => {
     it("adds image object to slide", () => {
         const oldSlide = slideWithImageBg2
         const oldSlideCopy = structuredClone(slideWithImageBg2)
@@ -50,7 +68,18 @@ describe("addImageObject", () => {
             objects: [...oldSlide.objects, getNewImageObject()]
         }
 
-        const slideWithImageObject = addImageObject(oldSlide, newObjectId, newImageSrc, newObjectCoordinates, newObjectSize)
+        const baseObject: BaseSlideObject = {
+            id: newObjectId,
+            position: newObjectCoordinates,
+            size: newObjectSize
+        }
+
+        const imageObjectProps: ImageObjectProps = {
+            src: newImageSrc,
+            type: "image"
+        }
+
+        const slideWithImageObject = addSlideObject(oldSlide, baseObject, imageObjectProps)
 
         expect(slideWithImageObject).toEqual(expectedSlide)
         expect(oldSlide).toEqual(oldSlideCopy)
@@ -131,8 +160,8 @@ describe("resizeObject", () => {
         const resizedObject: SlideObject = {
             ...oldSlide.objects[1],
             size: {
-                dx: oldSlide.objects[1].size.dx + delta.dx,
-                dy: oldSlide.objects[1].size.dy + delta.dy
+                width: oldSlide.objects[1].size.width + delta.dx,
+                height: oldSlide.objects[1].size.height + delta.dy
             }
         }
 
@@ -157,7 +186,7 @@ describe("updateTextObjectStyle", () => {
             ...textObject,
             fontFamily: newTextFontFamily,
             fontSize: newTextFontSize,
-            color: newTextFontColor
+            fontColor: newTextFontColor
         }
         const expectedSlide: Slide = {
             ...oldSlide,

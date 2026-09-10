@@ -10,30 +10,45 @@ type Vector = {
     dy: number
 }
 
+type ObjectSize = {
+    width: number
+    height: number
+}
+
 type BaseSlideObject = {
     id: string;
     position: Coordinates;
-    size: Vector;
-    type: "Text" | "Image"
+    size: ObjectSize;
 }
 
-type TextObject = BaseSlideObject & {
+type TextObjectProps = {
     text: string;
     fontFamily: string;
     fontSize: number;
-    color: string;
-    type: "Text";
-};
+    fontColor: string;
+    type: "text";
+}
 
-type ImageObject = BaseSlideObject & {
+type TextObject = BaseSlideObject & TextObjectProps
+
+type ImageObjectProps = {
     src: string;
-    type: "Image";
-};
+    type: "image";
+}
+
+type SlideObjectProps = TextObjectProps | ImageObjectProps
+
+type ImageObject = BaseSlideObject & ImageObjectProps
 
 export {
     type SlideObject,
     type Coordinates,
     type Vector,
+    type ObjectSize,
+    type BaseSlideObject,
+    type TextObjectProps,
+    type ImageObjectProps,
+    type SlideObjectProps,
     type TextObject,
     type ImageObject
 }

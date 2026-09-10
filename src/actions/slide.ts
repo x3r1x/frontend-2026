@@ -4,7 +4,7 @@ import type {GradientBackground, ImageBackground, Slide, SolidBackground} from "
 function addSlide(presentation: Presentation, slideId: string, slideName?: string): Presentation {
     const newSlideBackground: SolidBackground = {
         color: "#FFFFFF",
-        type: "Solid"
+        type: "solid"
     }
 
     const newSlide: Slide = {
@@ -46,7 +46,9 @@ function moveSlide(presentation: Presentation, slideId: string, newIndex: number
 
 function duplicateSlide(presentation: Presentation, slideId: string): Presentation {
     const currentSlide = presentation.slideCollection.find(slide => slide.id === slideId)
-    if (!currentSlide) return presentation
+    if (!currentSlide) {
+        return presentation
+    }
 
     return {
         ...presentation,
@@ -57,7 +59,7 @@ function duplicateSlide(presentation: Presentation, slideId: string): Presentati
 function setSlideBackgroundColor(slide: Slide, color: string): Slide {
     const newBackground: SolidBackground = {
         color: color,
-        type: "Solid"
+        type: "solid"
     }
 
     return {
@@ -69,7 +71,7 @@ function setSlideBackgroundColor(slide: Slide, color: string): Slide {
 function setSlideBackgroundImage(slide: Slide, imageUrl: string): Slide {
     const newBackground: ImageBackground = {
         src: imageUrl,
-        type: "Image"
+        type: "image"
     }
 
     return {
@@ -82,7 +84,7 @@ function setSlideBackgroundGradient(slide: Slide, colors: string[], angle?: numb
     const newBackground: GradientBackground = {
         colors: colors,
         angle: angle ? angle : 0,
-        type: "Gradient"
+        type: "gradient"
     }
 
     return {
@@ -94,7 +96,7 @@ function setSlideBackgroundGradient(slide: Slide, colors: string[], angle?: numb
 function clearSlideBackground(slide: Slide): Slide {
     const newBackground: SolidBackground = {
         color: "#FFFFFF",
-        type: "Solid"
+        type: "solid"
     }
 
     return {
