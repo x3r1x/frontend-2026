@@ -52,7 +52,7 @@ function duplicateSlide(presentation: Presentation, slideId: string): Presentati
 
     return {
         ...presentation,
-        slideCollection: [...presentation.slideCollection, currentSlide]
+        slideCollection: [...presentation.slideCollection, structuredClone(currentSlide)]
     }
 }
 

@@ -193,8 +193,14 @@ describe("updateTextObjectStyle", () => {
             objects: [expectedTextObject, ...oldSlide.objects.slice(1, oldSlide.objects.length)]
         }
 
-        const slideWithUpdatedTextObject = updateTextObjectStyle(oldSlide, oldSlide.objects[0].id, newTextFontFamily,
-            newTextFontSize, newTextFontColor)
+        const newTextProps: TextObjectProps = {
+            ...textObject,
+            fontColor: newTextFontColor,
+            fontFamily: newTextFontFamily,
+            fontSize: newTextFontSize
+        }
+
+        const slideWithUpdatedTextObject = updateTextObjectStyle(oldSlide, oldSlide.objects[0].id, newTextProps)
 
         expect(slideWithUpdatedTextObject).toEqual(expectedSlide)
         expect(oldSlide).toEqual(oldSlideCopy)

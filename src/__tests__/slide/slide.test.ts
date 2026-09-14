@@ -9,7 +9,11 @@ import {
     setSlideBackgroundImage
 } from "../../actions/slide.js";
 import {Slide} from "../../types/slide.js";
-import {getEmptyPresentation, getOldPresentation} from "../presentation/presentationTestStorage.js";
+import {
+    getEmptyPresentation,
+    getOldPresentation,
+    getPresentationWithDuplicatedSlide
+} from "../presentation/presentationTestStorage.js";
 import {
     getEmptyBackground,
     newSlideId,
@@ -157,10 +161,7 @@ describe("duplicateSlide", () => {
         const oldPresentation = getOldPresentation()
         const oldPresentationCopy = structuredClone(oldPresentation)
 
-        const expectedPresentation: Presentation = {
-            ...oldPresentation,
-            slideCollection: [...oldPresentation.slideCollection, oldPresentation.slideCollection[1]]
-        }
+        const expectedPresentation: Presentation = getPresentationWithDuplicatedSlide()
         const presentationWithClonedSlide = duplicateSlide(oldPresentation, oldPresentation.slideCollection[1].id)
 
         expect(presentationWithClonedSlide).toEqual(expectedPresentation)

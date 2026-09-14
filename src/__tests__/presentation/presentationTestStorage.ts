@@ -13,6 +13,15 @@ function getOldPresentation(): Presentation {
     }
 }
 
+function getPresentationWithDuplicatedSlide(): Presentation {
+    const oldPresentation = getOldPresentation();
+
+    return {
+        ...oldPresentation,
+        slideCollection: [...oldPresentation.slideCollection, slideWithImageBg1]
+    }
+}
+
 function getEmptyPresentation(): Presentation {
     return {
         id: "",
@@ -32,6 +41,7 @@ function getChangedNamePresentation(): Presentation {
 export {
     newPresentationName,
     getOldPresentation,
+    getPresentationWithDuplicatedSlide,
     getEmptyPresentation,
     getChangedNamePresentation
 }

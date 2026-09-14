@@ -1,7 +1,7 @@
 import type {Slide} from "../types/slide.js";
 import type {
     BaseSlideObject,
-    SlideObject, SlideObjectProps,
+    SlideObject, SlideObjectProps, TextObjectProps,
     Vector
 } from "../types/objects.js";
 
@@ -69,14 +69,14 @@ function resizeObject(slide: Slide, objectId: string, change: Vector): Slide {
     }
 }
 
-function updateTextObjectStyle(slide: Slide, objectId: string, fontFamily: string, fontSize: number, fontColor: string): Slide {
+function updateTextObjectStyle(slide: Slide, objectId: string, textProps: TextObjectProps): Slide {
     const newObjectsArray: SlideObject[] = slide.objects.map(object => {
         if (object.id === objectId && object.type === "text") {
             return {
                 ...object,
-                fontSize: fontSize,
-                fontFamily: fontFamily,
-                fontColor: fontColor
+                fontSize: textProps.fontSize,
+                fontFamily: textProps.fontFamily,
+                fontColor: textProps.fontColor
             }
         }
 
