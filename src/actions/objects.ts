@@ -1,15 +1,29 @@
 import type {Slide} from "../types/slide.js";
 import type {
-    BaseSlideObject,
-    SlideObject, SlideObjectProps, TextObjectProps,
+    BaseSlideObject, ObjectSize,
+    SlideObject,
     Vector
 } from "../types/objects.js";
 
-function addSlideObject(slide: Slide, baseObject: BaseSlideObject, objectProps: SlideObjectProps): Slide {
-    const object: SlideObject = {
+type TextObjectProps = {
+    text: string;
+    fontFamily: string;
+    fontSize: number;
+    fontColor: string;
+    type: "text";
+}
+
+type ImageObjectProps = {
+    src: string;
+    type: "image";
+}
+
+function addSlideObject(slide: Slide, baseObject: BaseSlideObject, props: TextObjectProps | ImageObjectProps): Slide {
+    const object = {
         ...baseObject,
-        ...objectProps
+        ...props
     }
+
     return {
         ...slide,
         objects: [...slide.objects, object]
@@ -48,84 +62,44 @@ function moveObjects(slide: Slide, objectIds: string[], shift: Vector): Slide {
     }
 }
 
-function resizeObject(slide: Slide, objectId: string, change: Vector): Slide {
-    const newObjectsArray: SlideObject[] = slide.objects.map(object => {
-        if (objectId === object.id) {
-            return {
-                ...object,
-                size: {
-                    width: object.size.width + change.dx,
-                    height: object.size.height + change.dy
-                }
-            }
-        }
-
-        return object
-    })
-
-    return {
-        ...slide,
-        objects: newObjectsArray
-    }
+function resizeObject(slide: Slide, objectId: string, newSize: ObjectSize): Slide {
+    return modifyObject(slide, objectId, { size: newSize })
 }
 
-function updateTextObjectStyle(slide: Slide, objectId: string, textProps: TextObjectProps): Slide {
-    const newObjectsArray: SlideObject[] = slide.objects.map(object => {
-        if (object.id === objectId && object.type === "text") {
-            return {
-                ...object,
-                fontSize: textProps.fontSize,
-                fontFamily: textProps.fontFamily,
-                fontColor: textProps.fontColor
-            }
-        }
-
-        return object
-    })
-
-    return {
-        ...slide,
-        objects: newObjectsArray
-    }
+function updateTextObjectStyle(slide: Slide, objectId: string, props: TextObjectProps): Slide {
+    return modifyObject(slide, objectId, props)
 }
 
+//make abstract
 function updateTextObjectContent(slide: Slide, objectId: string, content: string): Slide {
-    const newObjectsArray: SlideObject[] = slide.objects.map(object => {
-        if (object.id === objectId && object.type === "text") {
-            return {
-                ...object,
-                text: content
-            }
-        }
-
-        return object
-    })
-
-    return {
-        ...slide,
-        objects: newObjectsArray
-    }
+    return modifyObject(slide, objectId, { text: content })
 }
 
 function updateImageObjectUrl(slide: Slide, objectId: string, imageUrl: string): Slide {
-    const newObjectsArray: SlideObject[] = slide.objects.map(object => {
-        if (object.id === objectId && object.type === "image") {
-            return {
-                ...object,
-                src: imageUrl
-            }
+    return modifyObject(slide, objectId, { src: imageUrl })
+}
+
+function modifyObject(slide: Slide, objectId: string, payload: Partial<SlideObject>): Slide {
+    const newObjects: SlideObject[] = slide.objects.map(object => {
+        if (object.id !== objectId) {
+            return object
         }
 
-        return object
+        return {
+            ...object,
+            ...payload
+        } as SlideObject
     })
 
     return {
         ...slide,
-        objects: newObjectsArray
+        objects: newObjects
     }
 }
 
 export {
+    type TextObjectProps,
+    type ImageObjectProps,
     addSlideObject,
     removeObjects,
     moveObjects,

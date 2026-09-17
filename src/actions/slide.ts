@@ -1,5 +1,5 @@
 import type {Presentation} from "../types/presentation.js";
-import type {GradientBackground, ImageBackground, Slide, SolidBackground} from "../types/slide.js";
+import type {Background, GradientBackground, ImageBackground, Slide, SolidBackground} from "../types/slide.js";
 
 function addSlide(presentation: Presentation, slideId: string, slideName?: string): Presentation {
     const newSlideBackground: SolidBackground = {
@@ -56,16 +56,14 @@ function duplicateSlide(presentation: Presentation, slideId: string): Presentati
     }
 }
 
+//abstraction
 function setSlideBackgroundColor(slide: Slide, color: string): Slide {
     const newBackground: SolidBackground = {
         color: color,
         type: "solid"
     }
 
-    return {
-        ...slide,
-        background: newBackground
-    }
+    return modifySlideBackground(slide, newBackground)
 }
 
 function setSlideBackgroundImage(slide: Slide, imageUrl: string): Slide {
@@ -74,10 +72,7 @@ function setSlideBackgroundImage(slide: Slide, imageUrl: string): Slide {
         type: "image"
     }
 
-    return {
-        ...slide,
-        background: newBackground
-    }
+    return modifySlideBackground(slide, newBackground)
 }
 
 function setSlideBackgroundGradient(slide: Slide, colors: string[], angle?: number): Slide {
@@ -87,10 +82,7 @@ function setSlideBackgroundGradient(slide: Slide, colors: string[], angle?: numb
         type: "gradient"
     }
 
-    return {
-        ...slide,
-        background: newBackground
-    }
+    return modifySlideBackground(slide, newBackground)
 }
 
 function clearSlideBackground(slide: Slide): Slide {
@@ -99,6 +91,10 @@ function clearSlideBackground(slide: Slide): Slide {
         type: "solid"
     }
 
+    return modifySlideBackground(slide, newBackground)
+}
+
+function modifySlideBackground(slide: Slide, newBackground: Background): Slide {
     return {
         ...slide,
         background: newBackground

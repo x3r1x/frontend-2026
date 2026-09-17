@@ -1,9 +1,9 @@
 import {describe, expect, it} from "vitest";
 import {Slide} from "../../types/slide.js";
 import {
-    addSlideObject,
+    addSlideObject, ImageObjectProps,
     moveObjects,
-    removeObjects, resizeObject, updateImageObjectUrl, updateTextObjectContent,
+    removeObjects, resizeObject, TextObjectProps, updateImageObjectUrl, updateTextObjectContent,
     updateTextObjectStyle
 } from "../../actions/objects.js";
 import {
@@ -21,11 +21,9 @@ import {
 } from "./objectsTestStorage.js";
 import {
     BaseSlideObject,
-    ImageObject,
-    ImageObjectProps,
+    ImageObject, ObjectSize,
     SlideObject,
     TextObject,
-    TextObjectProps,
     Vector
 } from "../../types/objects.js";
 
@@ -152,24 +150,21 @@ describe("resizeObject", () => {
         const oldSlide = slideWithSolidBg1
         const oldSlideCopy = structuredClone(slideWithSolidBg1)
 
-        const delta: Vector = {
-            dx: -12.425,
-            dy: 145
+        const newSize: ObjectSize = {
+            width: 3125.12,
+            height: 12
         }
 
         const resizedObject: SlideObject = {
             ...oldSlide.objects[1],
-            size: {
-                width: oldSlide.objects[1].size.width + delta.dx,
-                height: oldSlide.objects[1].size.height + delta.dy
-            }
+            size: newSize
         }
 
         const expectedSlide: Slide = {
             ...oldSlide,
             objects: [imageObject2, resizedObject, textObject1, imageObject2, imageObject1]
         }
-        const slideWithResizedObjects: Slide = resizeObject(oldSlide, oldSlide.objects[1].id, delta)
+        const slideWithResizedObjects: Slide = resizeObject(oldSlide, oldSlide.objects[1].id, newSize)
 
         expect(slideWithResizedObjects).toEqual(expectedSlide)
         expect(oldSlide).toEqual(oldSlideCopy)
@@ -221,7 +216,6 @@ describe("updateTextObjectContent", () => {
             ...oldSlide,
             objects: [expectedTextObject, ...oldSlide.objects.slice(1, oldSlide.objects.length)]
         }
-
         const slideWithUpdatedTextObject = updateTextObjectContent(oldSlide, oldSlide.objects[0].id, newTextContent)
 
         expect(slideWithUpdatedTextObject).toEqual(expectedSlide)

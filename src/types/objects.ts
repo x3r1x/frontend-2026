@@ -21,7 +21,7 @@ type BaseSlideObject = {
     size: ObjectSize;
 }
 
-type TextObjectProps = {
+type TextObject = BaseSlideObject & {
     text: string;
     fontFamily: string;
     fontSize: number;
@@ -29,16 +29,10 @@ type TextObjectProps = {
     type: "text";
 }
 
-type TextObject = BaseSlideObject & TextObjectProps
-
-type ImageObjectProps = {
+type ImageObject = BaseSlideObject & {
     src: string;
     type: "image";
 }
-
-type SlideObjectProps = TextObjectProps | ImageObjectProps
-
-type ImageObject = BaseSlideObject & ImageObjectProps
 
 export {
     type SlideObject,
@@ -46,9 +40,6 @@ export {
     type Vector,
     type ObjectSize,
     type BaseSlideObject,
-    type TextObjectProps,
-    type ImageObjectProps,
-    type SlideObjectProps,
     type TextObject,
     type ImageObject
 }

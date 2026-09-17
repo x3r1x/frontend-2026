@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="lab1 PR changes due to Bogdan Krasilnikov's corrections">
+    <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="duplicate slide bugfix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/__tests__/objects/objects.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/objects/objects.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/objects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/objects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/slide.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/slide.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/objects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/objects.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +64,7 @@
     &quot;Vitest.createPresentation.executor&quot;: &quot;Run&quot;,
     &quot;Vitest.presentation actions.executor&quot;: &quot;Run&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;lab1&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#1 on lab1&quot;,
     &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/x3r1x/WebstormProjects/frontend-2026/src/actions&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -147,6 +149,11 @@
       <workItem from="1789028306290" duration="1508000" />
       <workItem from="1789033056372" duration="5453000" />
       <workItem from="1789059444732" duration="901000" />
+      <workItem from="1789370349626" duration="1807000" />
+      <workItem from="1789380574452" duration="61000" />
+      <workItem from="1789497201759" duration="338000" />
+      <workItem from="1789591058216" duration="238000" />
+      <workItem from="1789637920930" duration="5984000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -164,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789029736716</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="duplicate slide bugfix">
+      <option name="closed" value="true" />
+      <created>1789370570191</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1789370570191</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,6 +200,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="lab1 done" />
     <MESSAGE value="lab1 PR changes due to Bogdan Krasilnikov's corrections" />
-    <option name="LAST_COMMIT_MESSAGE" value="lab1 PR changes due to Bogdan Krasilnikov's corrections" />
+    <MESSAGE value="duplicate slide bugfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="duplicate slide bugfix" />
   </component>
 </project>
