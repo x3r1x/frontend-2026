@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="duplicate slide bugfix">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__tests__/objects/objects.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/objects/objects.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/objects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/objects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/slide.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/slide.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/objects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/objects.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;x3r1x&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/x3r1x/frontend-2026.git&quot;,
+    &quot;accountId&quot;: &quot;3e2909af-1c5d-4295-b80f-9aa6ab775cce&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3IoR0CsGoODU9LtQLHZo5GxuA7z" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Vitest.createPresentation.executor&quot;: &quot;Run&quot;,
+    &quot;Vitest.presentation actions.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#1 on lab1&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/x3r1x/WebstormProjects/frontend-2026/src/actions&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.JavaScript&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/x3r1x/WebstormProjects/frontend-2026/node_modules/typescript/lib&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/actions" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/__tests__/presentation" />
+      <recent name="$PROJECT_DIR$/src/__tests__/objects" />
+      <recent name="$PROJECT_DIR$/src/__tests__/slide" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Vitest.createPresentation">
+    <configuration name="createPresentation" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/__tests__/presentation/presentation.test.ts" />
+      <test-names>
+        <test-name value="createPresentation" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="presentation actions" type="JavaScriptTestRunnerVitest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <vitest-package value="$PROJECT_DIR$/node_modules/vitest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <vitest-options value="--run" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/__tests__/presentation.test.ts" />
+      <test-names>
+        <test-name value="presentation actions" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Vitest.createPresentation" />
+        <item itemvalue="Vitest.presentation actions" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.8665.341" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="" />
+      <created>1788428709668</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1788428709668</updated>
+      <workItem from="1788428710677" duration="1639000" />
+      <workItem from="1788430360426" duration="309000" />
+      <workItem from="1788430674180" duration="6231000" />
+      <workItem from="1788450614277" duration="347000" />
+      <workItem from="1788720600506" duration="5969000" />
+      <workItem from="1788775387670" duration="1039000" />
+      <workItem from="1788896601754" duration="6515000" />
+      <workItem from="1788930362413" duration="7319000" />
+      <workItem from="1788946888797" duration="9173000" />
+      <workItem from="1788958489192" duration="1134000" />
+      <workItem from="1789028306290" duration="1508000" />
+      <workItem from="1789033056372" duration="5453000" />
+      <workItem from="1789059444732" duration="901000" />
+      <workItem from="1789370349626" duration="1807000" />
+      <workItem from="1789380574452" duration="61000" />
+      <workItem from="1789497201759" duration="338000" />
+      <workItem from="1789591058216" duration="238000" />
+      <workItem from="1789637920930" duration="5984000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1788725648778</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1788725648779</updated>
+    </task>
+    <task id="LOCAL-00002" summary="lab1 PR changes due to Bogdan Krasilnikov's corrections">
+      <option name="closed" value="true" />
+      <created>1789029736715</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1789029736716</updated>
+    </task>
+    <task id="LOCAL-00003" summary="duplicate slide bugfix">
+      <option name="closed" value="true" />
+      <created>1789370570191</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1789370570191</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="lab1 done" />
+    <MESSAGE value="lab1 PR changes due to Bogdan Krasilnikov's corrections" />
+    <MESSAGE value="duplicate slide bugfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="duplicate slide bugfix" />
+  </component>
+</project>
