@@ -30,7 +30,11 @@ function addSlideObject(slide: Slide, baseObject: BaseSlideObject, props: TextOb
     }
 }
 
-function removeObjects(slide: Slide, objectIds: string[]): Slide {
+type RemoveObjectsParams = {
+    objectIds: string[]
+}
+
+function removeObjects(slide: Slide, {objectIds}: RemoveObjectsParams): Slide {
     const newObjectsArray: SlideObject[] = slide.objects.filter(
         (object: SlideObject) => !objectIds.includes(object.id)
     )

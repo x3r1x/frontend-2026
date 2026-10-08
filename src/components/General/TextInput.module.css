@@ -1,0 +1,63 @@
+.nameField {
+    height: 33%;
+    width: fit-content;
+    border: none;
+    color: #000000;
+    font: 400 130% "Jost";
+    padding: 0 2%;
+    border-radius: 10px;
+    outline: 1px solid transparent;
+    overflow: clip;
+    text-overflow: ellipsis;
+    transition: outline-color 0.5s ease;
+}
+
+.nameField:hover {
+    background-color: rgb(188 139 255 / 0.3);
+    transition: 0.4s;
+}
+
+.nameField:focus {
+    background-color: rgb(188 139 255 / 0.6);
+    outline-color: #000000;
+    transition: 0.4s;
+}
+
+.slideText {
+    border: none;
+    background: none;
+    outline: 1px solid transparent;
+    transition: outline-color 0.5s ease;
+    padding-left: 0.2%;
+}
+
+.slideText:hover {
+    outline-color: #B1A3A3;
+    transition: 0.4s;
+}
+
+.slideText:focus {
+    transition: outline-color 0.4s;
+}
+
+.slideName {
+    border: none;
+    background: none;
+    outline: 1px solid transparent;
+    transition: outline-color 0.5s ease;
+    overflow: clip;
+    width: 100%;
+    font: 400 150% "Jost";
+    margin-bottom: 3%;
+    padding: 0 2%;
+}
+
+.slideName:hover {
+    outline-color: #B1A3A3;
+    transition: 0.4s;
+}
+
+.slideName:focus {
+    outline: 3px solid #0033FF;
+    transition: outline-color 0.4s;
+}

@@ -1,9 +1,9 @@
 import {describe, expect, it} from "vitest";
-import {Slide} from "../../types/slide.js";
+import type {Slide} from "../../types/slide.js";
 import {
-    addSlideObject, ImageObjectProps,
+    addSlideObject, type ImageObjectProps,
     moveObjects,
-    removeObjects, resizeObject, TextObjectProps, updateImageObjectUrl, updateTextObjectContent,
+    removeObjects, resizeObject, type TextObjectProps, updateImageObjectUrl, updateTextObjectContent,
     updateTextObjectStyle
 } from "../../actions/objects.js";
 import {
@@ -19,7 +19,7 @@ import {
     getNewImageObject, newImageSrc, newObjectSize, newObjectCoordinates, imageObject2, imageObject1,
     textObject1
 } from "./objectsTestStorage.js";
-import {
+import type {
     BaseSlideObject,
     ImageObject, ObjectSize,
     SlideObject,

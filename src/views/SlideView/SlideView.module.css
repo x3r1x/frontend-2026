@@ -1,0 +1,6 @@
+.container {
+    position: relative;
+    background-color: #FFFFFF;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}

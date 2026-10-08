@@ -14,7 +14,11 @@ function createPresentation(name: string, id: string): Presentation {
     }
 }
 
-function updatePresentationName(presentation: Presentation, name: string): Presentation {
+type UpdatePresentationNameParams = {
+    name: string
+}
+
+function updatePresentationName(presentation: Presentation, {name}: UpdatePresentationNameParams): Presentation {
     return {
         ...presentation,
         name: name

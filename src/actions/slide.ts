@@ -1,7 +1,30 @@
 import type {Presentation} from "../types/presentation.js";
 import type {Background, GradientBackground, ImageBackground, Slide, SolidBackground} from "../types/slide.js";
 
-function addSlide(presentation: Presentation, slideId: string, slideName?: string): Presentation {
+function getSlideById(slides: Slide[], id: string): Slide {
+    return slides.find(slide => slide.id === id)!;
+}
+
+type SlideActionContainerParams = {
+    slideId: string,
+    newSlide: Slide
+}
+
+function slideActionContainer(presentation: Presentation, {slideId, newSlide}: SlideActionContainerParams): Presentation {
+    const newSlideCollection = presentation.slideCollection.map(slide => slide.id === slideId ? newSlide : slide)
+
+    return {
+        ...presentation,
+        slideCollection: newSlideCollection
+    }
+}
+
+type AddSlideParams = {
+    slideId: string,
+    slideName?: string
+}
+
+function addSlide(presentation: Presentation, {slideId, slideName = ""}: AddSlideParams): Presentation {
     const newSlideBackground: SolidBackground = {
         color: "#FFFFFF",
         type: "solid"
@@ -20,7 +43,11 @@ function addSlide(presentation: Presentation, slideId: string, slideName?: strin
     }
 }
 
-function removeSlides(presentation: Presentation, slideIds: string[]): Presentation {
+type RemoveSlidesParams = {
+    slideIds: string[]
+}
+
+function removeSlides(presentation: Presentation, {slideIds}: RemoveSlidesParams): Presentation {
     const newSlideCollection: Slide[] = presentation.slideCollection.filter(
         (slide: Slide) => !slideIds.includes(slide.id)
     )
@@ -102,6 +129,8 @@ function modifySlideBackground(slide: Slide, newBackground: Background): Slide {
 }
 
 export {
+    getSlideById,
+    slideActionContainer,
     addSlide,
     removeSlides,
     moveSlide,
