@@ -1,9 +1,10 @@
 type TextInputProps = {
     text: string,
     className: string,
-    onChange: (newName: string) => void,
+    onChange: (newValue: string) => void,
     additionalStyle?: object,
-    editable?: boolean
+    editable?: boolean,
+    onClick?: () => void
 }
 
 function TextInput(props: TextInputProps) {
@@ -13,6 +14,7 @@ function TextInput(props: TextInputProps) {
             className={props.className}
             style={props.additionalStyle ?? props.additionalStyle}
             suppressContentEditableWarning={true}
+            onClick={props.onClick}
             onBlur={event => props.onChange(event.currentTarget.textContent)}
         >
             {props.text}

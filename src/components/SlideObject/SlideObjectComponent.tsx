@@ -6,8 +6,9 @@ type SlideObjectProps = {
     slideObject: SlideObject
     scale: number,
     editable: boolean,
-    onChange: () => void,
-    isSelected: boolean
+    isSelected: boolean,
+    onClick?: () => void,
+    onTextObjectChange?: (newText: string) => void
 }
 
 function SlideObjectComponent(props: SlideObjectProps) {
@@ -20,7 +21,6 @@ function SlideObjectComponent(props: SlideObjectProps) {
         border: props.isSelected && props.editable ? "3px solid #0033FF" : "none"
     }
 
-
     switch (props.slideObject.type) {
         case "text":
             return <TextObjectComponent
@@ -28,14 +28,15 @@ function SlideObjectComponent(props: SlideObjectProps) {
                 editable={props.editable}
                 baseObjectStyle={baseObjectStyle}
                 scale={props.scale}
-                onChange={props.onChange}
+                onChange={props.editable && props.onTextObjectChange ? props.onTextObjectChange : () => {}}
+                onClick={props.editable && props.onClick ? props.onClick : () => {}}
             />
         case "image":
             return <ImageObjectComponent
                 imageObject={props.slideObject}
                 editable={props.editable}
                 baseObjectStyle={baseObjectStyle}
-                onChange={props.onChange}
+                onClick={props.editable && props.onClick ? props.onClick : () => {}}
             />
         default:
             return <></>

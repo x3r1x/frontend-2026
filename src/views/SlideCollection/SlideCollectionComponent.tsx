@@ -6,6 +6,7 @@ import TextInput from "../../components/General/TextInput.js";
 import {SCALES_CONSTANTS} from "../../AppConstants.js";
 import type {Presentation} from "../../types/presentation.js";
 import type {AppState} from "../../data.js";
+import {onSlideNameChange, onSlideViewClick} from "./SlideCollectionActions.js";
 
 type SlideCollectionComponentProps = {
     slideCollection: Slide[],
@@ -42,9 +43,9 @@ function translateSlideToPreview(slide: Slide, index: number, selected: Selected
                         ? slide.name
                         : (index + 1).toString()
                 }
+                editable={true}
                 className={textInputStyles.slideName}
-                onChange={() => {
-                }}
+                onChange={(value: string) => onSlideNameChange(slide, value)}
             />
 
             <SlideView
@@ -53,6 +54,7 @@ function translateSlideToPreview(slide: Slide, index: number, selected: Selected
                 selectedObjectIds={appState.selectedObjectIds}
                 scale={scale}
                 additionalStyle={additionalStyle}
+                onClick={() => onSlideViewClick(slide.id)}
             />
         </div>
     )

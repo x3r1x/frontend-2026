@@ -74,7 +74,6 @@ function updateTextObjectStyle(slide: Slide, objectId: string, props: TextObject
     return modifyObject(slide, objectId, props)
 }
 
-//make abstract
 function updateTextObjectContent(slide: Slide, objectId: string, content: string): Slide {
     return modifyObject(slide, objectId, { text: content })
 }

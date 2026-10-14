@@ -24,8 +24,20 @@ const SCALES_CONSTANTS = {
     SELECTED_SLIDE: 0.15
 }
 
+const DEFAULTS = {
+    SIZE: {
+        width: 160,
+        height: 90
+    },
+    TEXT: "New",
+    FONT_FAMILY: "Arial",
+    FONT_SIZE: 12,
+    COLOR: "#000000"
+}
+
 export {
     TEXT_CONSTANTS,
     PATH_CONSTANTS,
-    SCALES_CONSTANTS
+    SCALES_CONSTANTS,
+    DEFAULTS
 }

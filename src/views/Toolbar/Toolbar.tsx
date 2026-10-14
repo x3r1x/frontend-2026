@@ -2,7 +2,7 @@ import style from "./Toolbar.module.css"
 import Button from "../../components/Toolbar/Button/Button.js";
 import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
 import type {AppState} from "../../data.js";
-import {onAddSlide, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
+import {onAddSlide, onRemoveObjects, onRemoveSlides, onSlideActionButtonClick} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import {getSlideById} from "../../actions/slide.js";
 
@@ -38,8 +38,7 @@ function Toolbar(props: ToolbarProps) {
                         ? "selected"
                         : "default"
                 }
-                onClick={() => {
-                }}
+                onClick={() => onSlideActionButtonClick("mouse")}
             />
             <Button
                 text={TEXT_CONSTANTS.ADD_NEW_TEXT_TEXT}
@@ -49,8 +48,7 @@ function Toolbar(props: ToolbarProps) {
                         ? "selected"
                         : "default"
                 }
-                onClick={() => {
-                }}
+                onClick={() => onSlideActionButtonClick("add text")}
             />
             <Button
                 text={TEXT_CONSTANTS.ADD_NEW_IMAGE_TEXT}
@@ -60,8 +58,7 @@ function Toolbar(props: ToolbarProps) {
                         ? "selected"
                         : "default"
                 }
-                onClick={() => {
-                }}
+                onClick={() => onSlideActionButtonClick("add image")}
             />
 
             <Button
@@ -72,8 +69,7 @@ function Toolbar(props: ToolbarProps) {
                         ? "selected"
                         : "default"
                 }
-                onClick={() => {
-                }}
+                onClick={() => onSlideActionButtonClick("change background")}
             />
 
             <Button

@@ -1,6 +1,8 @@
 import style from "./SlideView.module.css";
 import type {Background, Slide} from "../../types/slide.js";
 import SlideObjectComponent from "../../components/SlideObject/SlideObjectComponent.js";
+import {onTextObjectChange} from "../../AppActions.js";
+import type {Coordinates} from "../../types/objects.js";
 
 type SlideViewProps = {
     slide: Slide,
@@ -8,19 +10,21 @@ type SlideViewProps = {
     objectsEditable: boolean,
     selectedObjectIds: string[],
     additionalStyle?: object,
+    onClick: (coords: Coordinates) => void,
+    onObjectClick?: (objectId: string) => void
 }
 
-function SlideView(props: SlideViewProps) {
+function SlideView({onObjectClick, ...props}: SlideViewProps) {
     if (!props.slide) {
-        return <></>
+        return null
     }
 
     const objects = props.slide.objects.map(
         object => <SlideObjectComponent
             slideObject={object}
             isSelected={props.selectedObjectIds.includes(object.id)}
-            onChange={() => {
-            }}
+            onClick={onObjectClick ? () => onObjectClick(object.id) : () => {}}
+            onTextObjectChange={(newText: string) => onTextObjectChange(props.slide, object.id, newText)}
             editable={props.objectsEditable}
             key={object.id}
             scale={props.scale}
@@ -32,7 +36,9 @@ function SlideView(props: SlideViewProps) {
 
     return (
         <div className={style.container}
-             style={{...props.additionalStyle, ...additionalStyle, ...getBackgroundStyle(props.slide.background)}}>
+             style={{...props.additionalStyle, ...additionalStyle, ...getBackgroundStyle(props.slide.background)}}
+             onClick={props.onClick}
+        >
             {objects}
         </div>
     )

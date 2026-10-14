@@ -37,6 +37,8 @@ function addSlide(presentation: Presentation, {slideId, slideName = ""}: AddSlid
         objects: []
     }
 
+    console.log(slideId)
+
     return {
         ...presentation,
         slideCollection: [...presentation.slideCollection, newSlide]
@@ -83,7 +85,13 @@ function duplicateSlide(presentation: Presentation, slideId: string): Presentati
     }
 }
 
-//abstraction
+function changeSlideName(slide: Slide, newName: string): Slide {
+    return {
+        ...slide,
+        name: newName
+    }
+}
+
 function setSlideBackgroundColor(slide: Slide, color: string): Slide {
     const newBackground: SolidBackground = {
         color: color,
@@ -135,6 +143,7 @@ export {
     removeSlides,
     moveSlide,
     duplicateSlide,
+    changeSlideName,
     setSlideBackgroundColor,
     setSlideBackgroundImage,
     setSlideBackgroundGradient,

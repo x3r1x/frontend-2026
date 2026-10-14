@@ -7,7 +7,8 @@ type TextObjectComponentProps = {
     baseObjectStyle: object,
     scale: number,
     editable: boolean,
-    onChange: () => void,
+    onChange: (newText: string) => void,
+    onClick?: () => void
 }
 
 function TextObjectComponent(props: TextObjectComponentProps) {
@@ -22,6 +23,7 @@ function TextObjectComponent(props: TextObjectComponentProps) {
             text={props.textObject.text}
             className={props.editable ? inputStyle.slideText : ""}
             onChange={props.onChange}
+            onClick={props.onClick}
             editable={props.editable}
             additionalStyle={{...props.baseObjectStyle, ...textObjectStyle}}
         />

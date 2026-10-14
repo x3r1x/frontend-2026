@@ -4,31 +4,32 @@ import style from "./App.module.css"
 import Toolbar from "./views/Toolbar/Toolbar.js";
 import SlideCollectionComponent from "./views/SlideCollection/SlideCollectionComponent.js";
 import SlideView from "./views/SlideView/SlideView.js";
-import {getPreviewMode, getPreviewSlide} from "./editor.js";
 import type {Presentation} from "./types/presentation.js";
-import type {Slide} from "./types/slide.js";
 import PreviewOverlay from "./views/PreviewOverlay/PreviewOverlay.js";
 import {onClose, onNextSlideClick, onPreviousSlideClick} from "./views/PreviewOverlay/PreviewOverlayActions.js";
-import {getTestAppState} from "./data.js";
+import {getSlideById} from "./actions/slide.js";
+import type {AppState} from "./data.js";
+import {onObjectClick, onWorkspaceSlideClick} from "./AppActions.js";
+import type {Coordinates} from "./types/objects.js";
 
 type AppProps = {
-    domainState: Presentation
+    domainState: Presentation,
+    appState: AppState
 }
 
 function App(props: AppProps) {
     console.log("Перерисовка!");
     const domainState: Presentation = props.domainState;
-    const appState = getTestAppState();
-    const currentSlide = getPreviewSlide();
+    const appState = props.appState;
 
-    if (getPreviewMode()) {
+    if (appState.previewMode) {
         return (
             <PreviewOverlay
                 presentation={domainState}
-                currentSelectedSlide={currentSlide}
+                currentSelectedSlide={appState.previewSlide}
                 onClose={onClose}
-                onBack={() => onPreviousSlideClick(currentSlide)}
-                onNext={() => onNextSlideClick(currentSlide, props.domainState.slideCollection.length)}
+                onBack={onPreviousSlideClick}
+                onNext={() => onNextSlideClick(props.domainState.slideCollection.length)}
             />
         )
     }
@@ -61,6 +62,12 @@ function App(props: AppProps) {
                                 slide={getSlideById(domainState.slideCollection, appState.selectedSlideIds[0])}
                                 selectedObjectIds={appState.selectedObjectIds}
                                 objectsEditable={true}
+                                onObjectClick={onObjectClick}
+                                onClick={(coords: Coordinates) => onWorkspaceSlideClick(
+                                    getSlideById(domainState.slideCollection, appState.selectedSlideIds[0]),
+                                    appState.toolbarOption,
+                                    coords
+                                )}
                                 scale={0.7}
                             />
                             : null
@@ -69,10 +76,6 @@ function App(props: AppProps) {
             </div>
         </div>
     )
-}
-
-function getSlideById(slides: Slide[], id: string): Slide {
-    return slides.find(slide => slide.id === id)!;
 }
 
 export default App

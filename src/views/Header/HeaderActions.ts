@@ -1,9 +1,16 @@
-import {dispatch, setPreviewMode} from "../../editor.js";
+import {dispatch, getAppState, setAppState} from "../../editor.js";
 import {updatePresentationName} from "../../actions/presentation.js";
+import type {AppState} from "../../data.js";
 
 const onPresentationNameChange= (newName: string) => dispatch(updatePresentationName, {name: newName})
 const onPreviewClick = () => {
-    setPreviewMode(true);
+    const currentAppState = getAppState()!;
+    const newAppState: AppState = {
+        ...currentAppState,
+        previewMode: true
+    }
+
+    setAppState(newAppState)
 }
 const onExportClick = () => {}
 

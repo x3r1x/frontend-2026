@@ -1,4 +1,5 @@
 import type {Presentation} from "./types/presentation.js"
+import type {AppState} from "./data.js";
 
 type Modifier<P = any> = (model: Presentation, params: P) => Presentation;
 
@@ -30,40 +31,35 @@ function dispatch(modifier: Modifier, params: any = null): void {
     }
 }
 
-let isPreviewMode = false;
-let currentPreviewSlide = 0;
+let currentAppState: AppState | null = null
 
-function setPreviewMode(mode: boolean): void {
-    isPreviewMode = mode;
-    if (!mode) {
-        currentPreviewSlide = 0;
+function setInitialAppState(state: AppState): void {
+    currentAppState = state
+}
+
+function getAppState(): AppState | null {
+    return currentAppState
+}
+
+function setAppState(newAppState: AppState): void {
+    if (!currentAppState) {
+        console.error("App state not initialised!")
+        return
     }
+
+    currentAppState = newAppState
+
     if (editorChangeHandler) {
-        editorChangeHandler();
+        editorChangeHandler()
     }
 }
 
-function getPreviewMode(): boolean {
-    return isPreviewMode;
-}
-
-function setPreviewSlide(slideIndex: number): void {
-    currentPreviewSlide = slideIndex;
-    if (editorChangeHandler) {
-        editorChangeHandler();
-    }
-}
-
-function getPreviewSlide(): number {
-    return currentPreviewSlide;
-}
 export {
     setInitialState,
     getState,
     addEditorChangeHandler,
     dispatch,
-    setPreviewMode,
-    getPreviewMode,
-    setPreviewSlide,
-    getPreviewSlide
+    setInitialAppState,
+    setAppState,
+    getAppState,
 }

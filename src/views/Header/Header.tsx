@@ -20,6 +20,7 @@ function Header(props: HeaderProps) {
                 <TextInput
                     text={props.presentationName}
                     className={inputStyle.nameField}
+                    editable={true}
                     onChange={onPresentationNameChange}
                 />
             </div>

@@ -5,7 +5,8 @@ type ImageObjectComponentProps = {
     imageObject: ImageObject,
     baseObjectStyle: object,
     editable: boolean,
-    onChange: () => void
+    onChange?: () => void,
+    onClick?: () => void
 }
 
 function ImageObjectComponent(props: ImageObjectComponentProps) {
@@ -15,7 +16,8 @@ function ImageObjectComponent(props: ImageObjectComponentProps) {
             src={props.imageObject.src}
             style={props.baseObjectStyle}
             className={props.editable ? style.imageContainer : ""}
-            onChange={props.onChange}
+            onChange={props.onChange ?? props.onChange}
+            onClick={props.onClick ?? props.onClick}
         />
     )
 }

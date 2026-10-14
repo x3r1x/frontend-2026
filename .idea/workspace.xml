@@ -4,74 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="duplicate slide bugfix">
-      <change afterPath="$PROJECT_DIR$/eslint.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppConstants.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/mouse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/plus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/rectangle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/test_bg_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/test_image_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/test_image_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/test_image_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/trash icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/General/TextInput.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/General/TextInput.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/AppIcon/AppIcon.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/AppIcon/AppIcon.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/HeaderButton/HeaderButton.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/HeaderButton/HeaderButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/ThemeSwitcher/ThemeSwitcher.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/ThemeSwitcher/ThemeSwitcher.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header/ThemeSwitcher/ThemeSwitcherButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SlideObject/ImageObjectComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SlideObject/SlideObjectComponent.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SlideObject/SlideObjectComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SlideObject/TextObjectComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Toolbar/Button/Button.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Toolbar/Button/Button.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Toolbar/Button/ButtonConstants.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Toolbar/Button/ButtonImage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Toolbar/Button/ButtonText.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/editor.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Header/Header.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Header/Header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Header/HeaderActions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/PreviewOverlay/PreviewOverlay.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/PreviewOverlay/PreviewOverlay.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/PreviewOverlay/PreviewOverlayActions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/SlideCollection/SlideCollectionActions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/SlideCollection/SlideCollectionComponent.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/SlideCollection/SlideCollectionComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/SlideView/SlideView.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/SlideView/SlideView.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Toolbar/Toolbar.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Toolbar/Toolbar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Toolbar/ToolbarActions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.node.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="lab2.1 &amp; lab2.2 accepted by Bogdan Krasilnikov">
+      <change afterPath="$PROJECT_DIR$/src/AppActions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/test_image_4.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SlideObject/SlideObjectActions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Toolbar/BackgroundPicker/BackgroundPicker.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Toolbar/BackgroundPicker/BackgroundPicker.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/objects/objects.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/objects/objects.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/objects/objectsTestStorage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/objects/objectsTestStorage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/presentation/presentationTestStorage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/presentation/presentationTestStorage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/slide/slide.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/slide/slide.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppConstants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/__tests__/slide/slideTestStorage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/__tests__/slide/slideTestStorage.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/objects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/objects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/presentation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/presentation.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/slide.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/slide.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/General/TextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/General/TextInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SlideObject/ImageObjectComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SlideObject/ImageObjectComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SlideObject/SlideObjectComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SlideObject/SlideObjectComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SlideObject/TextObjectComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SlideObject/TextObjectComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Toolbar/Button/Button.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Toolbar/Button/Button.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/editor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/editor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Header/HeaderActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Header/HeaderActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/PreviewOverlay/PreviewOverlayActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/PreviewOverlay/PreviewOverlayActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/SlideCollection/SlideCollectionActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/SlideCollection/SlideCollectionActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/SlideCollection/SlideCollectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/SlideCollection/SlideCollectionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/SlideView/SlideView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/SlideView/SlideView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Toolbar/Toolbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Toolbar/Toolbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Toolbar/ToolbarActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Toolbar/ToolbarActions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,10 +111,10 @@
       <recent name="$PROJECT_DIR$/src/actions" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/views/Toolbar" />
       <recent name="$PROJECT_DIR$/src/__tests__" />
       <recent name="$PROJECT_DIR$/src/views" />
-      <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/views/Header" />
     </key>
   </component>
@@ -248,7 +207,12 @@
       <workItem from="1791360710339" duration="6367000" />
       <workItem from="1791377393491" duration="1096000" />
       <workItem from="1791407535178" duration="298000" />
-      <workItem from="1791452607731" duration="5112000" />
+      <workItem from="1791452607731" duration="5547000" />
+      <workItem from="1791491489626" duration="5158000" />
+      <workItem from="1791546098476" duration="14000" />
+      <workItem from="1791546448203" duration="880000" />
+      <workItem from="1791792104017" duration="2794000" />
+      <workItem from="1791828747850" duration="4790000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -274,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789370570191</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="lab2.1 &amp; lab2.2 accepted by Bogdan Krasilnikov">
+      <option name="closed" value="true" />
+      <created>1791457970157</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1791457970157</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,6 +268,7 @@
     <MESSAGE value="lab1 done" />
     <MESSAGE value="lab1 PR changes due to Bogdan Krasilnikov's corrections" />
     <MESSAGE value="duplicate slide bugfix" />
-    <option name="LAST_COMMIT_MESSAGE" value="duplicate slide bugfix" />
+    <MESSAGE value="lab2.1 &amp; lab2.2 accepted by Bogdan Krasilnikov" />
+    <option name="LAST_COMMIT_MESSAGE" value="lab2.1 &amp; lab2.2 accepted by Bogdan Krasilnikov" />
   </component>
 </project>

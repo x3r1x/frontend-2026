@@ -1,16 +1,39 @@
-import {setPreviewMode, setPreviewSlide} from "../../editor.js";
+import {getAppState, setAppState} from "../../editor.js";
+import type {AppState} from "../../data.js";
 
-const onClose = () => setPreviewMode(false);
+const onClose = () => {
+    const currentAppState = getAppState()!
+    const newAppState: AppState = {
+        ...currentAppState,
+        previewMode: false
+    }
 
-const onPreviousSlideClick = (currentSlideIndex: number) => {
-    if (currentSlideIndex > 0) {
-        setPreviewSlide(currentSlideIndex - 1);
+    setAppState(newAppState)
+};
+
+const onPreviousSlideClick = () => {
+    const currentAppState = getAppState()!
+
+    if (currentAppState.previewSlide > 0) {
+        const newAppState: AppState = {
+            ...currentAppState,
+            previewSlide: currentAppState.previewSlide - 1
+        }
+
+        setAppState(newAppState)
     }
 };
 
-const onNextSlideClick = (currentSlideIndex: number, slidesTotal: number) => {
-    if (currentSlideIndex < slidesTotal - 1) {
-        setPreviewSlide(currentSlideIndex + 1);
+const onNextSlideClick = (slidesTotal: number) => {
+    const currentAppState = getAppState()!
+
+    if (currentAppState.previewSlide < slidesTotal - 1) {
+        const newAppState: AppState = {
+            ...currentAppState,
+            previewSlide: currentAppState.previewSlide + 1
+        }
+
+        setAppState(newAppState)
     }
 };
 

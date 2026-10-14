@@ -57,7 +57,7 @@ const slideWithImageBg2: Slide = {
     id: generateId(),
     name: "And Dima Chizhov",
     background: {
-        src: "some/random/url",
+        src: "src/assets/test_image_4.JPG",
         type: "image"
     },
     objects: [textObject3, imageObject3, imageObject1, textObject2]
