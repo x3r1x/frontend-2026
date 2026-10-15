@@ -1,12 +1,12 @@
 import style from "./SlideCollectionComponent.module.css";
-import textInputStyles from "../../components/General/TextInput.module.css"
-import SlideView from "../SlideView/SlideView.js";
+import textInputStyles from "../../components/general/textInput/TextInput.module.css";
+import SlideView from "../slideView/SlideView.js";
 import type {Slide} from "../../types/slide.js";
-import TextInput from "../../components/General/TextInput.js";
 import {SCALES_CONSTANTS} from "../../AppConstants.js";
 import type {Presentation} from "../../types/presentation.js";
 import type {AppState} from "../../data.js";
 import {onSlideNameChange, onSlideViewClick} from "./SlideCollectionActions.js";
+import TextInput from "../../components/general/textInput/TextInput.js";
 
 type SlideCollectionComponentProps = {
     slideCollection: Slide[],
@@ -29,10 +29,6 @@ function SlideCollectionComponent(props: SlideCollectionComponentProps) {
 }
 
 function translateSlideToPreview(slide: Slide, index: number, selected: SelectedSlide, appState: AppState) {
-    const additionalStyle: object = (selected === "firstSelected" || selected === "latterSelected")
-        ? {border: "3px solid #0033FF"}
-        : {}
-
     const scale = selected === "firstSelected" ? SCALES_CONSTANTS.SELECTED_SLIDE : SCALES_CONSTANTS.UNSELECTED_SLIDE
 
     return (
@@ -53,7 +49,7 @@ function translateSlideToPreview(slide: Slide, index: number, selected: Selected
                 objectsEditable={false}
                 selectedObjectIds={appState.selectedObjectIds}
                 scale={scale}
-                additionalStyle={additionalStyle}
+                isSelected={selected === "firstSelected" || selected === "latterSelected" }
                 onClick={() => onSlideViewClick(slide.id)}
             />
         </div>

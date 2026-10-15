@@ -1,16 +1,15 @@
 import './App.module.css'
-import Header from "./views/Header/Header.js";
+import Header from "./views/header/Header.js";
 import style from "./App.module.css"
-import Toolbar from "./views/Toolbar/Toolbar.js";
-import SlideCollectionComponent from "./views/SlideCollection/SlideCollectionComponent.js";
-import SlideView from "./views/SlideView/SlideView.js";
+import Toolbar from "./views/toolbar/Toolbar.js";
+import SlideCollectionComponent from "./views/slideCollection/SlideCollectionComponent.js";
+import SlideView from "./views/slideView/SlideView.js";
 import type {Presentation} from "./types/presentation.js";
-import PreviewOverlay from "./views/PreviewOverlay/PreviewOverlay.js";
-import {onClose, onNextSlideClick, onPreviousSlideClick} from "./views/PreviewOverlay/PreviewOverlayActions.js";
+import PreviewOverlay from "./views/previewOverlay/PreviewOverlay.js";
+import {onClose, onNextSlideClick, onPreviousSlideClick} from "./views/previewOverlay/PreviewOverlayActions.js";
 import {getSlideById} from "./actions/slide.js";
 import type {AppState} from "./data.js";
-import {onObjectClick, onWorkspaceSlideClick} from "./AppActions.js";
-import type {Coordinates} from "./types/objects.js";
+import {onObjectClick} from "./AppActions.js";
 
 type AppProps = {
     domainState: Presentation,
@@ -63,11 +62,6 @@ function App(props: AppProps) {
                                 selectedObjectIds={appState.selectedObjectIds}
                                 objectsEditable={true}
                                 onObjectClick={onObjectClick}
-                                onClick={(coords: Coordinates) => onWorkspaceSlideClick(
-                                    getSlideById(domainState.slideCollection, appState.selectedSlideIds[0]),
-                                    appState.toolbarOption,
-                                    coords
-                                )}
                                 scale={0.7}
                             />
                             : null

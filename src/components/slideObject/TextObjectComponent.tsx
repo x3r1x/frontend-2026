@@ -1,6 +1,6 @@
 import type {TextObject} from "../../types/objects.js";
-import TextInput from "../General/TextInput.js";
-import inputStyle from "../General/TextInput.module.css";
+import inputStyle from "../general/textInput/TextInput.module.css";
+import TextInput from "../general/textInput/TextInput.js";
 
 type TextObjectComponentProps = {
     textObject: TextObject,

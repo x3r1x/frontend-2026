@@ -1,11 +1,11 @@
 import style from "./Header.module.css";
-import inputStyle from "../../components/General/TextInput.module.css";
-import AppIcon from "../../components/Header/AppIcon/AppIcon.js";
-import ThemeSwitcher from "../../components/Header/ThemeSwitcher/ThemeSwitcher.js";
-import TextInput from "../../components/General/TextInput.js";
-import HeaderButton from "../../components/Header/HeaderButton/HeaderButton.js";
+import inputStyle from "../../components/general/textInput/TextInput.module.css";
+import AppIcon from "../../components/header/appIcon/AppIcon.js";
+import ThemeSwitcher from "../../components/header/themeSwitcher/ThemeSwitcher.js";
+import HeaderButton from "../../components/header/headerButton/HeaderButton.js";
 import {TEXT_CONSTANTS} from "../../AppConstants.js";
 import {onPresentationNameChange, onPreviewClick} from "./HeaderActions.js";
+import TextInput from "../../components/general/textInput/TextInput.js";
 
 type HeaderProps = {
     presentationName: string,

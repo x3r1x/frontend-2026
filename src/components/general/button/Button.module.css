@@ -7,12 +7,26 @@
     display: flex;
     align-items: center;
     gap: 5%;
+    opacity: 1;
+    background-color: #FFFFFF;
     transition: background-color 0.5s ease;
 }
 
+.selected {
+    background: #AC74FF;
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
 .container:hover {
-    background-color: #B991F4;
+    background-color: #cfbaef;
     transition: 0.5s;
+}
+
+.disabled:hover {
+    background-color: #FFFFFF;
 }
 
 .textContainer {

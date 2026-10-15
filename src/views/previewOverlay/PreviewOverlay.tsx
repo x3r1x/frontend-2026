@@ -1,6 +1,6 @@
 import style from "./PreviewOverlay.module.css"
 import type {Presentation} from "../../types/presentation.js";
-import SlideView from "../SlideView/SlideView.js";
+import SlideView from "../slideView/SlideView.js";
 
 type PreviewOverlayProps = {
     presentation: Presentation,

@@ -36,8 +36,12 @@ function onTextObjectChange(slide: Slide, objectId: string, newText: string): vo
 }
 
 function onWorkspaceSlideClick(currentSlide: Slide, selectedOption: ToolbarOptions, coords: Coordinates): void {
-    if (selectedOption === "change background" || selectedOption === "mouse") {
+    if (selectedOption === "change background") {
         return;
+    }
+
+    if (selectedOption === "add text" || selectedOption === "add image") {
+
     }
 
     const baseSlideObject = getBaseSlideObject(coords)

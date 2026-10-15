@@ -1,10 +1,10 @@
 import style from "./Toolbar.module.css"
-import Button from "../../components/Toolbar/Button/Button.js";
 import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
 import type {AppState} from "../../data.js";
 import {onAddSlide, onRemoveObjects, onRemoveSlides, onSlideActionButtonClick} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import {getSlideById} from "../../actions/slide.js";
+import Button from "../../components/general/button/Button.js";
 
 type ToolbarProps = {
     domainState: Presentation
