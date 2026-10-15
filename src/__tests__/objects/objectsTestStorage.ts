@@ -1,4 +1,4 @@
-import {Coordinates, ImageObject, ObjectSize, TextObject} from "../../types/objects.js";
+import type {Coordinates, ImageObject, ObjectSize, TextObject} from "../../types/objects.js";
 import {generateId} from "../../actions/presentation.js";
 
 const newObjectId = generateId()
@@ -21,11 +21,11 @@ const newImageSrc = "ws://localhost:8080/"
 const textObject1: TextObject = {
     id: generateId(),
     position: {
-        x: 23,
-        y: -124.5634
+        x: 1030,
+        y: 124.5634
     },
     size: {
-        width: 21.124,
+        width: 210.124,
         height: 124.231
     },
     text: "ALL MY FELLAS",
@@ -42,8 +42,8 @@ const textObject2: TextObject = {
         y: 314
     },
     size: {
-        width: 0,
-        height: 0
+        width: 100,
+        height: 100
     },
     text: "The betrayal... loses the lead.",
     fontFamily: "Time",
@@ -60,11 +60,11 @@ const textObject3: TextObject = {
     },
     size: {
         width: 32452,
-        height: 1246.23
+        height: 126.23
     },
     text: "HEART AFIRE!🎵",
     fontFamily: "Time",
-    fontSize: 1.1,
+    fontSize: 8.1,
     fontColor: "#123456",
     type: "text"
 }
@@ -79,35 +79,35 @@ const imageObject1: ImageObject = {
         width: 510,
         height: 321
     },
-    src: "https://somerandomurl.su",
+    src: "src/assets/test_image_1.png",
     type: "image"
 }
 
 const imageObject2: ImageObject = {
     id: generateId(),
     position: {
-        x: 5124,
+        x: 512,
         y: 324.14
     },
     size: {
         width: 6000,
-        height: 1
+        height: 100
     },
-    src: "https://vk.ru",
+    src: "src/assets/test_image_3.png",
     type: "image"
 }
 
 const imageObject3: ImageObject = {
     id: generateId(),
     position: {
-        x: 0.5,
-        y: 0.25
+        x: 1080.5,
+        y: 500.25
     },
     size: {
-        width: 0.25,
-        height: 0.5
+        width: 50.25,
+        height: 100.5
     },
-    src: "https://yandex.ru",
+    src: "src/assets/test_image_2.png",
     type: "image"
 }
 

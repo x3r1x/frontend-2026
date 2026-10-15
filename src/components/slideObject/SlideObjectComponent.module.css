@@ -1,0 +1,9 @@
+.imageContainer {
+    border: 1px solid transparent;
+    transition: outline-color 0.4s ease;
+}
+
+.imageContainer:hover {
+    border-color: #B1A3A3;
+    transition: 0.4s;
+}

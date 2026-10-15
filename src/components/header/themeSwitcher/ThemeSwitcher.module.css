@@ -1,0 +1,69 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 125px;
+    /*margin-right: 25%;*/
+}
+
+.headerText {
+    font: 400 24px "Kaisei Decol";
+    user-select: none;
+}
+
+.buttonLabel {
+    position: relative;
+    display: inline-block;
+    width: 125px;
+    height: 25px;
+}
+
+.buttonInput {
+    width: 0;
+    height: 0;
+}
+
+.buttonSpan {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+    border-radius: 18px;
+    font: 400 17px "Kaisei Decol";
+    color: #000000;
+    user-select: none;
+    background-color: rgba(116, 176, 255, 0.15);
+    padding-left: 50px;
+}
+
+.buttonSpan:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 25px;
+    left: 0;
+    bottom: 0;
+    background-color: #000000;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+.buttonInput:focus + .buttonSpan {
+    box-shadow: 0 0 1px #74b0ff;
+}
+
+.buttonInput:checked + .buttonSpan:before {
+    -ms-transform: translateX(100px);
+    transform: translateX(100px);
+    background-color: #ffffff;
+}
+
+.footerText {
+    font: 200 15px "Kaisei Decol";
+    color: rgba(0, 0, 0, 0.5);
+    user-select: none;
+}

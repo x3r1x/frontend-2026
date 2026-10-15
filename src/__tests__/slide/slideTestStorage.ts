@@ -1,4 +1,4 @@
-import {Slide, SolidBackground} from "../../types/slide.js";
+import type {Slide, SolidBackground} from "../../types/slide.js";
 import {generateId} from "../../actions/presentation.js";
 import {
     imageObject1,
@@ -26,7 +26,7 @@ const slideWithImageBg1: Slide = {
     id: generateId(),
     name: "You are gay!",
     background: {
-        src: "She knows...",
+        src: "src/assets/test_bg_1.jpg",
         type: "image"
     },
     objects: [textObject1, imageObject1, imageObject3, textObject3]
@@ -37,15 +37,15 @@ const slideWithGradientBg1: Slide = {
     name: "SIIIIIKE! THAT'S THE WROOOONG NUMBER!",
     background: {
         colors: ["#FFFFFF", "#ABCDEF", "#1243A1", "#8BCED1"],
-        angle: 1.23,
+        angle: 163.23,
         type: "gradient"
     },
-    objects: [imageObject3, textObject3, textObject1, imageObject2, imageObject1]
+    objects: [imageObject3, textObject3, textObject1, imageObject2, imageObject1, textObject2]
 }
 
 const slideWithSolidBg2: Slide = {
     id: generateId(),
-    name: "Gleb Ryzhov",
+    name: "",
     background: {
         color: "#235ABC",
         type: "solid"
@@ -57,7 +57,7 @@ const slideWithImageBg2: Slide = {
     id: generateId(),
     name: "And Dima Chizhov",
     background: {
-        src: "some/random/url",
+        src: "src/assets/test_image_4.JPG",
         type: "image"
     },
     objects: [textObject3, imageObject3, imageObject1, textObject2]
@@ -67,7 +67,7 @@ const slideWithGradientBg2: Slide = {
     id: generateId(),
     name: "They are the best in this!",
     background: {
-        colors: ["#AD12CB", "2591A5"],
+        colors: ["#AD12CB", "#2591A5"],
         angle: -0.05,
         type: "gradient"
     },

@@ -1,0 +1,16 @@
+.container {
+    width: 15.5%;
+    margin: 1% 0;
+    overflow: scroll;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 1% 1% 0;
+    gap: 3%;
+    overflow-x: hidden;
+}
+
+.itemContainer div {
+    border-radius: 15px;
+}

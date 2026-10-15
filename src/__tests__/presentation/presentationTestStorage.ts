@@ -1,4 +1,4 @@
-import {Presentation} from "../../types/presentation.js";
+import type {Presentation} from "../../types/presentation.js";
 import {generateId} from "../../actions/presentation.js";
 import {slideWithGradientBg1, slideWithImageBg1, slideWithSolidBg1} from "../slide/slideTestStorage.js";
 
