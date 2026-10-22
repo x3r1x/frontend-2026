@@ -1,5 +1,5 @@
 import {describe, expect, it} from "vitest";
-import {Presentation} from "../../types/presentation.js";
+import type {Presentation} from "../../types/presentation.js";
 import {
     addSlide, clearSlideBackground,
     duplicateSlide,
@@ -8,7 +8,7 @@ import {
     setSlideBackgroundColor, setSlideBackgroundGradient,
     setSlideBackgroundImage
 } from "../../actions/slide.js";
-import {Slide} from "../../types/slide.js";
+import type {Slide} from "../../types/slide.js";
 import {
     getEmptyPresentation,
     getOldPresentation,

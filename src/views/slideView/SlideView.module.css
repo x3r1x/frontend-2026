@@ -1,0 +1,10 @@
+.container {
+    position: relative;
+    background-color: #FFFFFF;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.selected {
+    border: 3px solid #0033FF;
+}

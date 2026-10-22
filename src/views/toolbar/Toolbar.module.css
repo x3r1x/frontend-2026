@@ -1,0 +1,13 @@
+.container {
+    height: 4%;
+    background-color: rgba(116, 176, 255, 0.5);
+    width: 94%;
+    border-radius: 30px;
+    padding: 0.25% 0.35%;
+    display: flex;
+    gap: 1%;
+}
+
+.spacer {
+    width: 3%;
+}

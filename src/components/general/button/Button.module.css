@@ -1,0 +1,40 @@
+.container {
+    height: 100%;
+    width: fit-content;
+    border-radius: 30px;
+    align-content: center;
+    padding: 0 1%;
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    opacity: 1;
+    background-color: #FFFFFF;
+    transition: background-color 0.5s ease;
+}
+
+.selected {
+    background: #AC74FF;
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+.container:hover {
+    background-color: #cfbaef;
+    transition: 0.5s;
+}
+
+.disabled:hover {
+    background-color: #FFFFFF;
+}
+
+.textContainer {
+    font: 400 24px "Jost";
+    white-space: nowrap;
+}
+
+.imageContainer {
+    width: fit-content;
+    height: fit-content;
+}
