@@ -3,23 +3,21 @@ import textInputStyles from "../../components/general/textInput/TextInput.module
 import SlideView from "../slideView/SlideView.js";
 import type {Slide} from "../../types/slide.js";
 import {SCALES_CONSTANTS} from "../../AppConstants.js";
-import type {Presentation} from "../../types/presentation.js";
-import type {AppState} from "../../data.js";
-import {onSlideNameChange, onSlideViewClick} from "./SlideCollectionActions.js";
+import {onSlideNameChange} from "./SlideCollectionActions.js";
 import TextInput from "../../components/general/textInput/TextInput.js";
+import * as React from "react";
 
 type SlideCollectionComponentProps = {
     slideCollection: Slide[],
-    selectedIds: string[],
-    tempDomainState: Presentation,
-    appState: AppState
+    selectedSlideIds: string[],
+    setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 type SelectedSlide = "unselected" | "firstSelected" | "latterSelected"
 
 function SlideCollectionComponent(props: SlideCollectionComponentProps) {
     const slides = props.slideCollection.map((slide, index) =>
-        translateSlideToPreview(slide, index, getSelectedSlide(slide.id, props.selectedIds), props.appState))
+        translateSlideToPreview(slide, index, getSelectedSlide(slide.id, props.selectedSlideIds), props.selectedSlideIds, props.setSelectedSlideIds))
 
     return (
         <div className={style.container}>
@@ -28,8 +26,10 @@ function SlideCollectionComponent(props: SlideCollectionComponentProps) {
     )
 }
 
-function translateSlideToPreview(slide: Slide, index: number, selected: SelectedSlide, appState: AppState) {
-    const scale = selected === "firstSelected" ? SCALES_CONSTANTS.SELECTED_SLIDE : SCALES_CONSTANTS.UNSELECTED_SLIDE
+function translateSlideToPreview(slide: Slide, index: number, selectedSlide: SelectedSlide, selectedSlideIds: string[], setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>) {
+    const scale = selectedSlide === "firstSelected"
+        ? SCALES_CONSTANTS.SELECTED_SLIDE
+        : SCALES_CONSTANTS.UNSELECTED_SLIDE
 
     return (
         <div className={style.itemContainer} key={slide.id}>
@@ -47,10 +47,10 @@ function translateSlideToPreview(slide: Slide, index: number, selected: Selected
             <SlideView
                 slide={slide}
                 objectsEditable={false}
-                selectedObjectIds={appState.selectedObjectIds}
+                selectedObjectIds={[]}
                 scale={scale}
-                isSelected={selected === "firstSelected" || selected === "latterSelected" }
-                onClick={() => onSlideViewClick(slide.id)}
+                isSelected={selectedSlide === "firstSelected" || selectedSlide === "latterSelected"}
+                onClick={() => setSelectedSlideIds([...selectedSlideIds, slide.id])}
             />
         </div>
     )

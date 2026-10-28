@@ -18,7 +18,9 @@ function SlideObjectComponent(props: SlideObjectProps) {
         top: props.slideObject.position.y * props.scale,
         width: props.slideObject.size.width * props.scale,
         height: props.slideObject.size.height * props.scale,
-        border: props.isSelected && props.editable ? "3px solid #0033FF" : "none"
+        border: props.isSelected && props.editable
+            ? "3px solid #0033FF"
+            : "none"
     }
 
     switch (props.slideObject.type) {
@@ -28,15 +30,27 @@ function SlideObjectComponent(props: SlideObjectProps) {
                 editable={props.editable}
                 baseObjectStyle={baseObjectStyle}
                 scale={props.scale}
-                onChange={props.editable && props.onTextObjectChange ? props.onTextObjectChange : () => {}}
-                onClick={props.editable && props.onClick ? props.onClick : () => {}}
+                onChange={props.editable && props.onTextObjectChange
+                    ? props.onTextObjectChange
+                    : () => {
+                    }
+                }
+                onClick={props.editable && props.onClick
+                    ? props.onClick
+                    : () => {
+                    }
+                }
             />
         case "image":
             return <ImageObjectComponent
                 imageObject={props.slideObject}
                 editable={props.editable}
                 baseObjectStyle={baseObjectStyle}
-                onClick={props.editable && props.onClick ? props.onClick : () => {}}
+                onClick={props.editable && props.onClick
+                    ? props.onClick
+                    : () => {
+                    }
+                }
             />
         default:
             return <></>

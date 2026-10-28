@@ -21,7 +21,10 @@ function TextObjectComponent(props: TextObjectComponentProps) {
     return (
         <TextInput
             text={props.textObject.text}
-            className={props.editable ? inputStyle.slideText : ""}
+            className={props.editable
+                ? inputStyle.slideText
+                : ""
+            }
             onChange={props.onChange}
             onClick={props.onClick}
             editable={props.editable}

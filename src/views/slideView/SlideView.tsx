@@ -2,6 +2,7 @@ import style from "./SlideView.module.css";
 import type {Background, Slide} from "../../types/slide.js";
 import SlideObjectComponent from "../../components/slideObject/SlideObjectComponent.js";
 import {onTextObjectChange} from "../../AppActions.js";
+import * as React from "react";
 
 type SlideViewProps = {
     slide: Slide,
@@ -9,7 +10,7 @@ type SlideViewProps = {
     objectsEditable: boolean,
     selectedObjectIds: string[],
     isSelected?: boolean
-    onClick?: () => void,
+    onClick?: (event: React.MouseEvent<HTMLDivElement>) => void,
     onObjectClick?: (objectId: string) => void
 }
 
@@ -22,7 +23,11 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
         object => <SlideObjectComponent
             slideObject={object}
             isSelected={props.selectedObjectIds.includes(object.id)}
-            onClick={onObjectClick ? () => onObjectClick(object.id) : () => {}}
+            onClick={onObjectClick
+                ? () => onObjectClick(object.id)
+                : () => {
+                }
+            }
             onTextObjectChange={(newText: string) => onTextObjectChange(props.slide, object.id, newText)}
             editable={props.objectsEditable}
             key={object.id}
@@ -33,12 +38,14 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
         height: String(1080 * props.scale) + "px"
     }
 
-    const selectedClassName = props.isSelected ? style.selected : "";
+    const selectedClassName = props.isSelected
+        ? style.selected
+        : "";
 
     return (
         <div className={style.container + " " + selectedClassName}
              style={{...additionalStyle, ...getBackgroundStyle(props.slide.background)}}
-             onClick={props.onClick ?? props.onClick}
+             onClick={props.onClick}
         >
             {objects}
         </div>

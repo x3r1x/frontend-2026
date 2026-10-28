@@ -1,21 +1,28 @@
 import style from "./ThemeSwitcher.module.css"
 import {TEXT_CONSTANTS} from "../../../AppConstants.js";
+import useTheme from "../../../utils/ThemeContext/useTheme.tsx";
 
-type ThemeSwitcherButtonProps = {
-    isDarkMode: boolean
-}
+function ThemeSwitcherButton() {
+    const {theme, changeTheme} = useTheme()
 
-function ThemeSwitcherButton(props: ThemeSwitcherButtonProps) {
+    const buttonSpanThemeClassName = theme === "light"
+        ? style.buttonSpanLight
+        : style.buttonSpanDark
+
     return (
         <label className={style.buttonLabel}>
             <input
                 className={style.buttonInput}
                 type={"checkbox"}
-                checked={props.isDarkMode}
+                checked={theme === "dark"}
+                onClick={changeTheme}
             />
 
-            <span className={style.buttonSpan}>
-                {props.isDarkMode ? TEXT_CONSTANTS.THEME_DARK_TEXT : TEXT_CONSTANTS.THEME_LIGHT_TEXT}
+            <span className={style.buttonSpan + " " + buttonSpanThemeClassName}>
+                {theme === "light"
+                    ? TEXT_CONSTANTS.THEME_LIGHT_TEXT
+                    : TEXT_CONSTANTS.THEME_DARK_TEXT
+                }
             </span>
         </label>
     )

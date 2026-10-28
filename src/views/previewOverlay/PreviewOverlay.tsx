@@ -1,16 +1,17 @@
 import style from "./PreviewOverlay.module.css"
 import type {Presentation} from "../../types/presentation.js";
 import SlideView from "../slideView/SlideView.js";
+import {useState} from "react";
+import {onNextSlideClick, onPreviousSlideClick} from "./PreviewOverlayActions.ts";
 
 type PreviewOverlayProps = {
     presentation: Presentation,
-    currentSelectedSlide: number,
-    onClose: () => void,
-    onBack: () => void,
-    onNext: () => void
+    onClose:  () => void
 }
 
 function PreviewOverlay(props: PreviewOverlayProps) {
+    const [currentSlide, setCurrentSlide] = useState(0);
+
     return (
         <div className={style.container}>
             <div className={style.upperPanel}>
@@ -25,22 +26,22 @@ function PreviewOverlay(props: PreviewOverlayProps) {
 
 
             <SlideView
-                slide={props.presentation.slideCollection[props.currentSelectedSlide]}
+                slide={props.presentation.slideCollection[currentSlide]}
                 selectedObjectIds={[]}
                 scale={0.75}
                 objectsEditable={false}
             />
 
             <div className={style.bottomPanel}>
-                <a onClick={props.onBack}>
+                <a onClick={() => onPreviousSlideClick(currentSlide, setCurrentSlide)}>
                     {"<"}
                 </a>
 
                 <p>
-                    {(props.currentSelectedSlide + 1) + " / " + (props.presentation.slideCollection.length)}
+                    {(currentSlide + 1) + " / " + (props.presentation.slideCollection.length)}
                 </p>
 
-                <a onClick={props.onNext}>
+                <a onClick={() => onNextSlideClick(props.presentation.slideCollection.length, currentSlide, setCurrentSlide)}>
                     {">"}
                 </a>
             </div>

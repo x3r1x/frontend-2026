@@ -4,40 +4,50 @@ import AppIcon from "../../components/header/appIcon/AppIcon.js";
 import ThemeSwitcher from "../../components/header/themeSwitcher/ThemeSwitcher.js";
 import HeaderButton from "../../components/header/headerButton/HeaderButton.js";
 import {TEXT_CONSTANTS} from "../../AppConstants.js";
-import {onPresentationNameChange, onPreviewClick} from "./HeaderActions.js";
+import {onPresentationNameChange} from "./HeaderActions.js";
 import TextInput from "../../components/general/textInput/TextInput.js";
+import useTheme from "../../utils/ThemeContext/useTheme.tsx";
 
 type HeaderProps = {
     presentationName: string,
-    isDarkMode: boolean,
+    onPreviewClick: () => void
 }
 
 function Header(props: HeaderProps) {
+    const {theme} = useTheme()
+
+    const containerThemeClassName = theme === "light"
+        ? style.containerLight
+        : style.containerDark
+
+    const textInputThemeClassName = theme === "light"
+        ? inputStyle.nameFieldLight
+        : inputStyle.nameFieldDark
+
     return (
-        <div className={style.container}>
+        <div className={style.container + " " + containerThemeClassName}>
             <div className={style.nameDiv}>
                 <AppIcon/>
                 <TextInput
                     text={props.presentationName}
-                    className={inputStyle.nameField}
+                    className={inputStyle.nameField + " " + textInputThemeClassName}
                     editable={true}
                     onChange={onPresentationNameChange}
                 />
             </div>
 
             <div className={style.actionDiv}>
-                <ThemeSwitcher
-                    isDarkMode={props.isDarkMode}
-                />
+                <ThemeSwitcher/>
 
                 <HeaderButton
                     text={TEXT_CONSTANTS.PREVIEW_TEXT}
-                    onClick={onPreviewClick}
+                    onClick={props.onPreviewClick}
                 />
 
                 <HeaderButton
                     text={TEXT_CONSTANTS.EXPORT_PRESENTATION_TEXT}
-                    onClick={() => {}}
+                    onClick={() => {
+                    }}
                 />
             </div>
         </div>

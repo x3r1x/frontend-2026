@@ -3,12 +3,19 @@
     flex-direction: column;
     align-items: center;
     width: 125px;
-    /*margin-right: 25%;*/
 }
 
 .headerText {
     font: 400 24px "Kaisei Decol";
     user-select: none;
+}
+
+.headerTextLight {
+    color: #000000;
+}
+
+.headerTextDark {
+    color: #FFFFFF;
 }
 
 .buttonLabel {
@@ -35,8 +42,16 @@
     font: 400 17px "Kaisei Decol";
     color: #000000;
     user-select: none;
+}
+
+.buttonSpanLight {
     background-color: rgba(116, 176, 255, 0.15);
     padding-left: 50px;
+}
+
+.buttonSpanDark {
+    background-color: #74B0FF;
+    padding-left: 36px;
 }
 
 .buttonSpan:before {
@@ -64,6 +79,13 @@
 
 .footerText {
     font: 200 15px "Kaisei Decol";
-    color: rgba(0, 0, 0, 0.5);
     user-select: none;
+}
+
+.footerTextLight {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.footerTextDark {
+    color: rgba(255, 255, 255, 50%);
 }

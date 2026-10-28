@@ -12,10 +12,17 @@ type ButtonProps = {
 }
 
 function Button(props: ButtonProps) {
-    const textElement = props.text ? <ButtonText text={props.text}/> : <></>
-    const imageElement = props.imageSrc ? <ButtonImage imageSrc={props.imageSrc}/> : <></>
-    const onClick = props.mode !== "disabled" ? () => props.onClick() : () => {
-    }
+    const textElement = props.text
+        ? <ButtonText text={props.text}/>
+        : <></>
+
+    const imageElement = props.imageSrc
+        ? <ButtonImage imageSrc={props.imageSrc}/>
+        : <></>
+
+    const onClick = props.mode !== "disabled"
+        ? () => props.onClick()
+        : () => {}
 
     const additionalStyleName = props.mode === "selected"
         ? style.selected

@@ -1,52 +1,27 @@
-import {dispatch, getAppState, setAppState} from "../../editor.js";
+import {dispatch} from "../../editor.js";
 import {addSlide, removeSlides, slideActionContainer} from "../../actions/slide.js";
 import {generateId} from "../../actions/presentation.js";
 import {removeObjects} from "../../actions/objects.js";
 import type {Slide} from "../../types/slide.js";
-import type {AppState, ToolbarOptions} from "../../data.js";
+import * as React from "react";
 
 const onAddSlide = () => dispatch(addSlide, {slideId: generateId()})
 
-const onRemoveSlides = (appState: AppState) => {
-    dispatch(removeSlides, {slideIds: appState.selectedSlideIds})
+const onRemoveSlides = (selectedIds: string[], setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>, setSelectedObjectIds: React.Dispatch<React.SetStateAction<string[]>>) => {
+    dispatch(removeSlides, {slideIds: selectedIds})
 
-    const currentAppState = getAppState()!;
-    const newAppState: AppState = {
-        ...currentAppState,
-        selectedObjectIds: [],
-        selectedSlideIds: []
-    }
-
-    setAppState(newAppState)
+    setSelectedSlideIds([]);
+    setSelectedObjectIds([]);
 }
 
-const onSlideActionButtonClick = (type: ToolbarOptions) => {
-    const currentAppState = getAppState()!;
-
-    const newAppState: AppState = {
-        ...currentAppState,
-        toolbarOption: type
-    }
-
-    setAppState(newAppState)
-}
-
-const onRemoveObjects = (slide: Slide, appState: AppState) => {
-    const newSlide = removeObjects(slide, {objectIds: appState.selectedObjectIds})
+const onRemoveObjects = (slide: Slide, selectedIds: string[], setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>) => {
+    const newSlide = removeObjects(slide, {objectIds: selectedIds})
     dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
-
-    const currentAppState = getAppState()!
-    const newAppState: AppState = {
-        ...currentAppState,
-        selectedObjectIds: []
-    }
-
-    setAppState(newAppState)
+    setSelectedIds([])
 }
 
 export {
     onAddSlide,
     onRemoveSlides,
-    onSlideActionButtonClick,
     onRemoveObjects
 }

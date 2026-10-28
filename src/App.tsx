@@ -6,10 +6,12 @@ import SlideCollectionComponent from "./views/slideCollection/SlideCollectionCom
 import SlideView from "./views/slideView/SlideView.js";
 import type {Presentation} from "./types/presentation.js";
 import PreviewOverlay from "./views/previewOverlay/PreviewOverlay.js";
-import {onClose, onNextSlideClick, onPreviousSlideClick} from "./views/previewOverlay/PreviewOverlayActions.js";
 import {getSlideById} from "./actions/slide.js";
 import type {AppState} from "./data.js";
-import {onObjectClick} from "./AppActions.js";
+import {useState} from "react";
+import useTheme from "./utils/ThemeContext/useTheme.tsx";
+import * as React from "react";
+import useSelection from "./utils/useSelection.tsx";
 
 type AppProps = {
     domainState: Presentation,
@@ -19,49 +21,61 @@ type AppProps = {
 function App(props: AppProps) {
     console.log("Перерисовка!");
     const domainState: Presentation = props.domainState;
-    const appState = props.appState;
+    const [previewMode, setPreviewMode] = useState<boolean>(false)
 
-    if (appState.previewMode) {
+    const {selectedSlideIds, setSelectedSlideIds, selectedObjectIds, setSelectedObjectIds} = useSelection()
+    const {theme} = useTheme()
+
+
+    if (previewMode) {
         return (
             <PreviewOverlay
                 presentation={domainState}
-                currentSelectedSlide={appState.previewSlide}
-                onClose={onClose}
-                onBack={onPreviousSlideClick}
-                onNext={() => onNextSlideClick(props.domainState.slideCollection.length)}
+                onClose={() => setPreviewMode(false)}
             />
         )
     }
 
+    const containerThemeClassName = theme === "light"
+        ? style.containerLight
+        : style.containerDark
+
     return (
-        <div className={style.container}>
+        <div className={style.container + " " + containerThemeClassName}>
             <Header
                 presentationName={domainState.name}
-                isDarkMode={appState.isDarkMode}
+                onPreviewClick={() => setPreviewMode(true)}
             />
             <Toolbar
-                appState={appState}
                 domainState={domainState}
+                selectedSlideIds={selectedSlideIds}
+                selectedObjectIds={selectedObjectIds}
+                setSelectedObjectIds={setSelectedObjectIds}
+                setSelectedSlideIds={setSelectedSlideIds}
             />
 
             <div className={style.workspace}>
                 <SlideCollectionComponent
-                    tempDomainState={domainState}
-                    appState={appState}
                     slideCollection={domainState.slideCollection}
-                    selectedIds={appState.selectedSlideIds}
+                    selectedSlideIds={selectedSlideIds}
+                    setSelectedSlideIds={setSelectedSlideIds}
                 />
 
                 <div className={style.divider}/>
 
                 <div className={style.slideViewContainer}>
                     {
-                        appState.selectedSlideIds
+                        selectedSlideIds
                             ? <SlideView
-                                slide={getSlideById(domainState.slideCollection, appState.selectedSlideIds[0])}
-                                selectedObjectIds={appState.selectedObjectIds}
+                                slide={getSlideById(domainState.slideCollection, selectedSlideIds[0])}
+                                selectedObjectIds={selectedObjectIds}
                                 objectsEditable={true}
-                                onObjectClick={onObjectClick}
+                                onClick={(event: React.MouseEvent<HTMLDivElement>) => {
+                                    if (event.target === event.currentTarget) {
+                                        setSelectedObjectIds([])
+                                    }
+                                }}
+                                onObjectClick={(objectId: string) => setSelectedObjectIds([...selectedObjectIds, objectId])}
                                 scale={0.7}
                             />
                             : null

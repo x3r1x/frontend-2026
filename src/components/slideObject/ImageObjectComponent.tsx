@@ -15,7 +15,10 @@ function ImageObjectComponent(props: ImageObjectComponentProps) {
             alt={""}
             src={props.imageObject.src}
             style={props.baseObjectStyle}
-            className={props.editable ? style.imageContainer : ""}
+            className={props.editable
+                ? style.imageContainer
+                : ""
+            }
             onChange={props.onChange ?? props.onChange}
             onClick={props.onClick ?? props.onClick}
         />

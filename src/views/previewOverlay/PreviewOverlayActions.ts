@@ -1,44 +1,18 @@
-import {getAppState, setAppState} from "../../editor.js";
-import type {AppState} from "../../data.js";
+import * as React from "react";
 
-const onClose = () => {
-    const currentAppState = getAppState()!
-    const newAppState: AppState = {
-        ...currentAppState,
-        previewMode: false
-    }
-
-    setAppState(newAppState)
-};
-
-const onPreviousSlideClick = () => {
-    const currentAppState = getAppState()!
-
-    if (currentAppState.previewSlide > 0) {
-        const newAppState: AppState = {
-            ...currentAppState,
-            previewSlide: currentAppState.previewSlide - 1
-        }
-
-        setAppState(newAppState)
+const onPreviousSlideClick = (currentSlide: number, setCurrentSlide:  React.Dispatch<React.SetStateAction<number>>) => {
+    if (currentSlide > 0) {
+        setCurrentSlide(currentSlide - 1)
     }
 };
 
-const onNextSlideClick = (slidesTotal: number) => {
-    const currentAppState = getAppState()!
-
-    if (currentAppState.previewSlide < slidesTotal - 1) {
-        const newAppState: AppState = {
-            ...currentAppState,
-            previewSlide: currentAppState.previewSlide + 1
-        }
-
-        setAppState(newAppState)
+const onNextSlideClick = (slidesTotal: number, currentSlide: number, setCurrentSlide:  React.Dispatch<React.SetStateAction<number>>) => {
+    if (currentSlide < slidesTotal - 1) {
+        setCurrentSlide(currentSlide + 1)
     }
 };
 
 export {
-    onClose,
     onPreviousSlideClick,
     onNextSlideClick
 }

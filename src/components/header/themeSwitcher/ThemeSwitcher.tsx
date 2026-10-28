@@ -1,21 +1,28 @@
 import style from "./ThemeSwitcher.module.css"
 import ThemeSwitcherButton from "./ThemeSwitcherButton.js";
 import {TEXT_CONSTANTS} from "../../../AppConstants.js";
+import useTheme from "../../../utils/ThemeContext/useTheme.tsx";
 
-type ThemeSwitcherProps = {
-    isDarkMode: boolean
-}
+function ThemeSwitcher() {
+    const {theme} = useTheme()
 
-function ThemeSwitcher(props: ThemeSwitcherProps) {
+    const headerTextThemeClassName = theme === "light"
+        ? style.headerTextLight
+        : style.headerTextDark
+
+    const footerTextThemeClassName = theme === "light"
+        ? style.footerTextLight
+        : style.footerTextDark
+
     return (
         <div className={style.container}>
-            <p className={style.headerText}>
+            <p className={style.headerText + " " + headerTextThemeClassName}>
                 {TEXT_CONSTANTS.THEME_HEADER_TEXT}
             </p>
 
-            <ThemeSwitcherButton isDarkMode={props.isDarkMode}/>
+            <ThemeSwitcherButton/>
 
-            <p className={style.footerText}>
+            <p className={style.footerText + " " + footerTextThemeClassName}>
                 {TEXT_CONSTANTS.THEME_FOOTER_TEXT}
             </p>
         </div>

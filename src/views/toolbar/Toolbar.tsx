@@ -1,19 +1,33 @@
 import style from "./Toolbar.module.css"
 import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
-import type {AppState} from "../../data.js";
-import {onAddSlide, onRemoveObjects, onRemoveSlides, onSlideActionButtonClick} from "./ToolbarActions.js";
+import {onAddSlide, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import {getSlideById} from "../../actions/slide.js";
 import Button from "../../components/general/button/Button.js";
+import * as React from "react";
+import {useState} from "react";
+import useTheme from "../../utils/ThemeContext/useTheme.tsx";
 
 type ToolbarProps = {
     domainState: Presentation
-    appState: AppState
+    selectedSlideIds: string[],
+    selectedObjectIds: string[],
+    setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>
+    setSelectedObjectIds: React.Dispatch<React.SetStateAction<string[]>>
 }
 
+type ToolbarOptions = "mouse" | "add text" | "add image" | "change background";
+
 function Toolbar(props: ToolbarProps) {
+    const [toolbarOption, setToolbarOption] = useState<ToolbarOptions>("mouse")
+    const {theme} = useTheme()
+
+    const containerThemeClassName = theme === "light"
+        ? style.containerLight
+        : style.containerDark
+
     return (
-        <div className={style.container}>
+        <div className={style.container + " " + containerThemeClassName}>
             <Button
                 text={TEXT_CONSTANTS.NEW_SLIDE_TEXT}
                 imageSrc={PATH_CONSTANTS.PLUS_IMAGE_SRC}
@@ -22,11 +36,11 @@ function Toolbar(props: ToolbarProps) {
             <Button
                 imageSrc={PATH_CONSTANTS.TRASH_ICON_SRC}
                 mode={
-                    props.appState.selectedSlideIds.length === 0
+                    props.selectedSlideIds.length === 0
                         ? "disabled"
                         : "default"
                 }
-                onClick={() => onRemoveSlides(props.appState)}
+                onClick={() => onRemoveSlides(props.selectedSlideIds, props.setSelectedSlideIds, props.setSelectedObjectIds)}
             />
 
             <div className={style.spacer}/>
@@ -34,54 +48,55 @@ function Toolbar(props: ToolbarProps) {
             <Button
                 imageSrc={PATH_CONSTANTS.MOUSE_ICON_SRC}
                 mode={
-                    props.appState.toolbarOption === "mouse"
+                    toolbarOption === "mouse"
                         ? "selected"
                         : "default"
                 }
-                onClick={() => onSlideActionButtonClick("mouse")}
+                onClick={() => setToolbarOption("mouse")}
             />
             <Button
                 text={TEXT_CONSTANTS.ADD_NEW_TEXT_TEXT}
                 imageSrc={PATH_CONSTANTS.PLUS_IMAGE_SRC}
                 mode={
-                    props.appState.toolbarOption === "add text"
+                    toolbarOption === "add text"
                         ? "selected"
                         : "default"
                 }
-                onClick={() => onSlideActionButtonClick("add text")}
+                onClick={() => setToolbarOption("add text")}
             />
             <Button
                 text={TEXT_CONSTANTS.ADD_NEW_IMAGE_TEXT}
                 imageSrc={PATH_CONSTANTS.PLUS_IMAGE_SRC}
                 mode={
-                    props.appState.toolbarOption === "add image"
+                    toolbarOption === "add image"
                         ? "selected"
                         : "default"
                 }
-                onClick={() => onSlideActionButtonClick("add image")}
+                onClick={() => setToolbarOption("add image")}
             />
 
             <Button
                 text={TEXT_CONSTANTS.CHANGE_BACKGROUND_TEXT}
                 imageSrc={PATH_CONSTANTS.BACKGROUND_ICON_SRC}
                 mode={
-                    props.appState.toolbarOption === "change background"
+                    toolbarOption === "change background"
                         ? "selected"
                         : "default"
                 }
-                onClick={() => onSlideActionButtonClick("change background")}
+                onClick={() => setToolbarOption("change background")}
             />
 
             <Button
                 imageSrc={PATH_CONSTANTS.TRASH_ICON_SRC}
                 mode={
-                    props.appState.selectedObjectIds.length === 0
+                    props.selectedObjectIds.length === 0
                         ? "disabled"
                         : "default"
                 }
                 onClick={() => onRemoveObjects(
-                    getSlideById(props.domainState.slideCollection, props.appState.selectedSlideIds[0]),
-                    props.appState
+                    getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0]),
+                    props.selectedObjectIds,
+                    props.setSelectedObjectIds
                 )}
             />
         </div>

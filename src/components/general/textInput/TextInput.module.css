@@ -2,7 +2,6 @@
     height: 33%;
     width: fit-content;
     border: none;
-    color: #000000;
     font: 400 130% "Jost";
     padding: 0 2%;
     border-radius: 10px;
@@ -10,6 +9,14 @@
     overflow: clip;
     text-overflow: ellipsis;
     transition: outline-color 0.5s ease;
+}
+
+.nameFieldLight {
+    color: #000000;
+}
+
+.nameFieldDark {
+    color: #FFFFFF;
 }
 
 .nameField:hover {
