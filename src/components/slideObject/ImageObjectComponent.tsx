@@ -6,6 +6,7 @@ type ImageObjectComponentProps = {
     baseObjectStyle: object,
     editable: boolean,
     onChange?: () => void,
+    onMouseDown?: (event: React.MouseEvent) => void
     onClick?: () => void
 }
 
@@ -19,8 +20,9 @@ function ImageObjectComponent(props: ImageObjectComponentProps) {
                 ? style.imageContainer
                 : ""
             }
-            onChange={props.onChange ?? props.onChange}
-            onClick={props.onClick ?? props.onClick}
+            onChange={props.onChange}
+            onMouseDown={props.onMouseDown}
+            onClick={props.onClick}
         />
     )
 }

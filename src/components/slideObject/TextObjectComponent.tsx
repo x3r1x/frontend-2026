@@ -8,6 +8,7 @@ type TextObjectComponentProps = {
     scale: number,
     editable: boolean,
     onChange: (newText: string) => void,
+    onMouseDown?: (event: React.MouseEvent) => void
     onClick?: () => void
 }
 
@@ -26,6 +27,7 @@ function TextObjectComponent(props: TextObjectComponentProps) {
                 : ""
             }
             onChange={props.onChange}
+            onMouseDown={props.onMouseDown}
             onClick={props.onClick}
             editable={props.editable}
             additionalStyle={{...props.baseObjectStyle, ...textObjectStyle}}

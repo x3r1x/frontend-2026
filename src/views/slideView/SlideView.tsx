@@ -3,6 +3,8 @@ import type {Background, Slide} from "../../types/slide.js";
 import SlideObjectComponent from "../../components/slideObject/SlideObjectComponent.js";
 import {onTextObjectChange} from "../../AppActions.js";
 import * as React from "react";
+import useDragAndDrop from "../../utils/useDragAndDrop.tsx";
+import {onObjectDragAndDrop} from "./SlideViewActions.ts";
 
 type SlideViewProps = {
     slide: Slide,
@@ -15,6 +17,10 @@ type SlideViewProps = {
 }
 
 function SlideView({onObjectClick, ...props}: SlideViewProps) {
+    const onObjectMouseDown = useDragAndDrop((offsetX, offsetY) => {
+        onObjectDragAndDrop(props.slide, props.selectedObjectIds, props.scale, offsetX, offsetY)
+    })
+
     if (!props.slide) {
         return null
     }
@@ -23,6 +29,7 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
         object => <SlideObjectComponent
             slideObject={object}
             isSelected={props.selectedObjectIds.includes(object.id)}
+            onMouseDown={props.objectsEditable ? onObjectMouseDown : undefined}
             onClick={onObjectClick
                 ? () => onObjectClick(object.id)
                 : () => {

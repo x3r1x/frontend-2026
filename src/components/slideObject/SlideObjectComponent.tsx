@@ -1,6 +1,7 @@
 import type {SlideObject} from "../../types/objects.js";
 import TextObjectComponent from "./TextObjectComponent.js";
 import ImageObjectComponent from "./ImageObjectComponent.js";
+import * as React from "react";
 
 type SlideObjectProps = {
     slideObject: SlideObject
@@ -8,6 +9,7 @@ type SlideObjectProps = {
     editable: boolean,
     isSelected: boolean,
     onClick?: () => void,
+    onMouseDown?: (event: React.MouseEvent) => void
     onTextObjectChange?: (newText: string) => void
 }
 
@@ -35,6 +37,7 @@ function SlideObjectComponent(props: SlideObjectProps) {
                     : () => {
                     }
                 }
+                onMouseDown={props.onMouseDown}
                 onClick={props.editable && props.onClick
                     ? props.onClick
                     : () => {
@@ -46,6 +49,7 @@ function SlideObjectComponent(props: SlideObjectProps) {
                 imageObject={props.slideObject}
                 editable={props.editable}
                 baseObjectStyle={baseObjectStyle}
+                onMouseDown={props.onMouseDown}
                 onClick={props.editable && props.onClick
                     ? props.onClick
                     : () => {

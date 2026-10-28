@@ -45,7 +45,12 @@ function removeObjects(slide: Slide, {objectIds}: RemoveObjectsParams): Slide {
     }
 }
 
-function moveObjects(slide: Slide, objectIds: string[], shift: Vector): Slide {
+type MoveObjectsParams = {
+    objectIds: string[],
+    shift: Vector
+}
+
+function moveObjects(slide: Slide, {objectIds, shift}: MoveObjectsParams): Slide {
     const newObjectsArray: SlideObject[] = slide.objects.map(object => {
         if (objectIds.includes(object.id)) {
             return {

@@ -4,36 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="lab2 done &amp; some actions done">
-      <change afterPath="$PROJECT_DIR$/src/utils/ThemeContext/ThemeProvider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/ThemeContext/useTheme.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/useSelection.tsx" afterDir="false" />
+    <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="lab3 task 2 done">
+      <change afterPath="$PROJECT_DIR$/src/utils/useDragAndDrop.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/slideView/SlideViewActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/general/button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/general/button/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/general/textInput/TextInput.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/general/textInput/TextInput.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/themeSwitcher/ThemeSwitcher.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/themeSwitcher/ThemeSwitcher.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/themeSwitcher/ThemeSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/themeSwitcher/ThemeSwitcher.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/themeSwitcher/ThemeSwitcherButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/themeSwitcher/ThemeSwitcherButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/objects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/objects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/general/textInput/TextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/general/textInput/TextInput.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/slideObject/ImageObjectComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slideObject/ImageObjectComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/slideObject/SlideObjectActions.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/slideObject/SlideObjectComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slideObject/SlideObjectComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/slideObject/TextObjectComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slideObject/TextObjectComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/header/Header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/header/Header.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/header/HeaderActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/header/HeaderActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/previewOverlay/PreviewOverlay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/previewOverlay/PreviewOverlay.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/previewOverlay/PreviewOverlayActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/previewOverlay/PreviewOverlayActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/slideView/SlideView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/slideView/SlideView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/toolbar/Toolbar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/toolbar/Toolbar.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/toolbar/Toolbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/toolbar/Toolbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/toolbar/ToolbarActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/toolbar/ToolbarActions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -236,6 +217,8 @@
       <workItem from="1792708706201" duration="528000" />
       <workItem from="1792739667631" duration="2182000" />
       <workItem from="1793180567973" duration="8578000" />
+      <workItem from="1793221927169" duration="1214000" />
+      <workItem from="1793223155574" duration="703000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -301,6 +284,7 @@
     <MESSAGE value="duplicate slide bugfix" />
     <MESSAGE value="lab2.1 &amp; lab2.2 accepted by Bogdan Krasilnikov" />
     <MESSAGE value="lab2 done &amp; some actions done" />
-    <option name="LAST_COMMIT_MESSAGE" value="lab2 done &amp; some actions done" />
+    <MESSAGE value="lab3 task 2 done" />
+    <option name="LAST_COMMIT_MESSAGE" value="lab3 task 2 done" />
   </component>
 </project>
