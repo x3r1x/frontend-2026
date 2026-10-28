@@ -6,6 +6,7 @@ import {removeObjects} from "../actions/objects.ts";
 const useSelection = () => {
     const [selectedSlideIds, setSelectedSlideIds] = useState<string[]>([]);
     const [selectedObjectIds, setSelectedObjectIds] = useState<string[]>([]);
+    const [isMultipleSelection, setIsMultipleSelection] = useState<boolean>(false)
 
     useEffect(() => {
         const onKeyboardClick = (event: KeyboardEvent) => {
@@ -39,7 +40,29 @@ const useSelection = () => {
         }
     }, [selectedObjectIds, selectedSlideIds]);
 
-    return {selectedSlideIds, setSelectedSlideIds, selectedObjectIds, setSelectedObjectIds}
+    useEffect(() => {
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Control" || event.key === "Shift") {
+                setIsMultipleSelection(true)
+            }
+        }
+
+        const onKeyUp = (event: KeyboardEvent) => {
+            if (event.key === "Control" || event.key === "Shift") {
+                setIsMultipleSelection(false)
+            }
+        }
+
+        document.addEventListener("keydown", onKeyDown)
+        document.addEventListener("keyup", onKeyUp)
+
+        return () => {
+            document.removeEventListener("keydown", onKeyDown)
+            document.removeEventListener("keyup", onKeyUp)
+        }
+    }, []);
+
+    return {selectedSlideIds, setSelectedSlideIds, selectedObjectIds, setSelectedObjectIds, isMultipleSelection}
 }
 
 export default useSelection;

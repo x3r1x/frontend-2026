@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="lab3 task 2 done">
-      <change afterPath="$PROJECT_DIR$/src/utils/useDragAndDrop.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/slideView/SlideViewActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/objects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/objects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/general/textInput/TextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/general/textInput/TextInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/slideObject/ImageObjectComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slideObject/ImageObjectComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/slideObject/SlideObjectActions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/slideObject/SlideObjectComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slideObject/SlideObjectComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/slideObject/TextObjectComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/slideObject/TextObjectComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/slideView/SlideView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/slideView/SlideView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/useSelection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/useSelection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionComponent.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +214,9 @@
       <workItem from="1792739667631" duration="2182000" />
       <workItem from="1793180567973" duration="8578000" />
       <workItem from="1793221927169" duration="1214000" />
-      <workItem from="1793223155574" duration="703000" />
+      <workItem from="1793223155574" duration="838000" />
+      <workItem from="1793230296418" duration="71000" />
+      <workItem from="1793230375974" duration="1287000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -260,7 +258,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791959273963</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="lab3 task 2 done">
+      <option name="closed" value="true" />
+      <created>1793223921772</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1793223921773</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

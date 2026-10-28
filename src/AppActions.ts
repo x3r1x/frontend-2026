@@ -4,9 +4,21 @@ import type {Slide} from "./types/slide.js";
 import {
     updateTextObjectContent
 } from "./actions/objects.js";
+import * as React from "react";
 
-const onObjectClick = () => {
+const onObjectClick = (
+    objectId: string,
+    isMultipleSelectionEnabled: boolean,
+    selectedObjectIds: string[],
+    setSelectedObjectIds: React.Dispatch<React.SetStateAction<string[]>>
+) => {
+    if (isMultipleSelectionEnabled) {
+        setSelectedObjectIds([...selectedObjectIds, objectId])
+    }
 
+    if (!isMultipleSelectionEnabled) {
+        setSelectedObjectIds([objectId])
+    }
 }
 
 function onTextObjectChange(slide: Slide, objectId: string, newText: string): void {
@@ -15,13 +27,7 @@ function onTextObjectChange(slide: Slide, objectId: string, newText: string): vo
     dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
 }
 
-function onWorkspaceSlideClick(): void {
-
-}
-
-
 export {
     onObjectClick,
-    onTextObjectChange,
-    onWorkspaceSlideClick
+    onTextObjectChange
 }

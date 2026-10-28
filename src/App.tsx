@@ -12,6 +12,7 @@ import {useState} from "react";
 import useTheme from "./utils/ThemeContext/useTheme.tsx";
 import * as React from "react";
 import useSelection from "./utils/useSelection.tsx";
+import {onObjectClick} from "./AppActions.ts";
 
 type AppProps = {
     domainState: Presentation,
@@ -23,7 +24,7 @@ function App(props: AppProps) {
     const domainState: Presentation = props.domainState;
     const [previewMode, setPreviewMode] = useState<boolean>(false)
 
-    const {selectedSlideIds, setSelectedSlideIds, selectedObjectIds, setSelectedObjectIds} = useSelection()
+    const {selectedSlideIds, setSelectedSlideIds, selectedObjectIds, setSelectedObjectIds, isMultipleSelection} = useSelection()
     const {theme} = useTheme()
 
 
@@ -59,6 +60,7 @@ function App(props: AppProps) {
                     slideCollection={domainState.slideCollection}
                     selectedSlideIds={selectedSlideIds}
                     setSelectedSlideIds={setSelectedSlideIds}
+                    isMultipleSelection={isMultipleSelection}
                 />
 
                 <div className={style.divider}/>
@@ -75,7 +77,7 @@ function App(props: AppProps) {
                                         setSelectedObjectIds([])
                                     }
                                 }}
-                                onObjectClick={(objectId: string) => setSelectedObjectIds([...selectedObjectIds, objectId])}
+                                onObjectClick={(objectId: string) => onObjectClick(objectId, isMultipleSelection, selectedObjectIds, setSelectedObjectIds)}
                                 scale={0.7}
                             />
                             : null
