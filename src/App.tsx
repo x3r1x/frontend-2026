@@ -60,6 +60,7 @@ function App(props: AppProps) {
                     slideCollection={domainState.slideCollection}
                     selectedSlideIds={selectedSlideIds}
                     setSelectedSlideIds={setSelectedSlideIds}
+                    setSelectedObjectIds={setSelectedObjectIds}
                     isMultipleSelection={isMultipleSelection}
                 />
 

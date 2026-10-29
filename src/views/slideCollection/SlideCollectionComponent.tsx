@@ -10,6 +10,7 @@ import * as React from "react";
 type SlideCollectionComponentProps = {
     slideCollection: Slide[],
     selectedSlideIds: string[],
+    setSelectedObjectIds: React.Dispatch<React.SetStateAction<string[]>>,
     setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>,
     isMultipleSelection: boolean
 }
@@ -24,6 +25,7 @@ function SlideCollectionComponent(props: SlideCollectionComponentProps) {
             getSelectedSlide(slide.id, props.selectedSlideIds),
             props.isMultipleSelection,
             props.selectedSlideIds,
+            props.setSelectedObjectIds,
             props.setSelectedSlideIds)
     )
 
@@ -40,6 +42,7 @@ function translateSlideToPreview(
     selectedSlide: SelectedSlide,
     isMultipleSelection: boolean,
     selectedSlideIds: string[],
+    setSelectedObjectIds: React.Dispatch<React.SetStateAction<string[]>>,
     setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>
 ) {
     const scale = selectedSlide === "firstSelected"
@@ -65,7 +68,7 @@ function translateSlideToPreview(
                 selectedObjectIds={[]}
                 scale={scale}
                 isSelected={selectedSlide === "firstSelected" || selectedSlide === "latterSelected"}
-                onClick={() => onSlideViewClick(slide.id, isMultipleSelection, selectedSlideIds, setSelectedSlideIds)}
+                onClick={() => onSlideViewClick(slide.id, isMultipleSelection, selectedSlideIds, setSelectedSlideIds, setSelectedObjectIds)}
             />
         </div>
     )

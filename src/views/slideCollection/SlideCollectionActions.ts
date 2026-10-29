@@ -9,13 +9,20 @@ const onSlideNameChange = (slide: Slide, newName: string) => {
     dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
 }
 
-const onSlideViewClick = (slideId: string, isMultipleSelectionEnabled: boolean, selectedSlideIds: string[], setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>) => {
+const onSlideViewClick = (
+    slideId: string,
+    isMultipleSelectionEnabled: boolean,
+    selectedSlideIds: string[],
+    setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>,
+    setSelectedObjectIds: React.Dispatch<React.SetStateAction<string[]>>
+) => {
     if (isMultipleSelectionEnabled) {
         setSelectedSlideIds([...selectedSlideIds, slideId])
     }
 
     if (!isMultipleSelectionEnabled) {
         setSelectedSlideIds([slideId])
+        setSelectedObjectIds([])
     }
 }
 
