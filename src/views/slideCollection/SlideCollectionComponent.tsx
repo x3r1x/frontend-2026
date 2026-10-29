@@ -3,16 +3,13 @@ import textInputStyles from "../../components/general/textInput/TextInput.module
 import SlideView from "../slideView/SlideView.js";
 import type {Slide} from "../../types/slide.js";
 import {SCALES_CONSTANTS} from "../../AppConstants.js";
-import {onSlideNameChange, onSlideViewClick} from "./SlideCollectionActions.js";
+import {onSlideNameChange} from "./SlideCollectionActions.js";
 import TextInput from "../../components/general/textInput/TextInput.js";
-import * as React from "react";
 
 type SlideCollectionComponentProps = {
     slideCollection: Slide[],
     selectedSlideIds: string[],
-    setSelectedObjectIds: React.Dispatch<React.SetStateAction<string[]>>,
-    setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>,
-    isMultipleSelection: boolean
+    onSlideViewClick: (slideId: string) => void
 }
 
 type SelectedSlide = "unselected" | "firstSelected" | "latterSelected"
@@ -23,10 +20,8 @@ function SlideCollectionComponent(props: SlideCollectionComponentProps) {
             slide,
             index,
             getSelectedSlide(slide.id, props.selectedSlideIds),
-            props.isMultipleSelection,
-            props.selectedSlideIds,
-            props.setSelectedObjectIds,
-            props.setSelectedSlideIds)
+            props.onSlideViewClick
+        )
     )
 
     return (
@@ -40,10 +35,7 @@ function translateSlideToPreview(
     slide: Slide,
     index: number,
     selectedSlide: SelectedSlide,
-    isMultipleSelection: boolean,
-    selectedSlideIds: string[],
-    setSelectedObjectIds: React.Dispatch<React.SetStateAction<string[]>>,
-    setSelectedSlideIds: React.Dispatch<React.SetStateAction<string[]>>
+    onSlideViewClick: (slideId: string) => void
 ) {
     const scale = selectedSlide === "firstSelected"
         ? SCALES_CONSTANTS.SELECTED_SLIDE
@@ -68,7 +60,7 @@ function translateSlideToPreview(
                 selectedObjectIds={[]}
                 scale={scale}
                 isSelected={selectedSlide === "firstSelected" || selectedSlide === "latterSelected"}
-                onClick={() => onSlideViewClick(slide.id, isMultipleSelection, selectedSlideIds, setSelectedSlideIds, setSelectedObjectIds)}
+                onClick={() => onSlideViewClick(slide.id)}
             />
         </div>
     )

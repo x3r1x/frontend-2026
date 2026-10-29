@@ -40,7 +40,7 @@
 
 .slideText:hover {
     outline-color: #B1A3A3;
-    transition: 0.4s;
+    transition: outline-color 0.4s;
 }
 
 .slideText:focus {
@@ -61,7 +61,7 @@
 
 .slideName:hover {
     outline-color: #B1A3A3;
-    transition: 0.4s;
+    transition: outline-color 0.4s;
 }
 
 .slideName:focus {

@@ -8,6 +8,45 @@ const useSelection = () => {
     const [selectedObjectIds, setSelectedObjectIds] = useState<string[]>([]);
     const [isMultipleSelection, setIsMultipleSelection] = useState<boolean>(false)
 
+    const onObjectClick = (objectId: string) => {
+        if (isMultipleSelection) {
+            setSelectedObjectIds([...selectedObjectIds, objectId])
+        }
+
+        if (!isMultipleSelection) {
+            setSelectedObjectIds([objectId])
+        }
+    }
+
+    const onSlideViewClick = (slideId: string) => {
+        if (isMultipleSelection) {
+            setSelectedSlideIds([...selectedSlideIds, slideId])
+        }
+
+        if (!isMultipleSelection) {
+            setSelectedSlideIds([slideId])
+            setSelectedObjectIds([])
+        }
+    }
+
+    const onRemoveSlides = () => {
+        dispatch(removeSlides, {slideIds: selectedSlideIds})
+        setSelectedSlideIds([])
+    }
+
+    const onRemoveObjects = () => {
+        const state = getState()!;
+        const currentSlide = getSlideById(state.slideCollection, selectedSlideIds[0]);
+
+        const newSlide = removeObjects(currentSlide, {objectIds: selectedObjectIds})
+        dispatch(slideActionContainer, {slideId: currentSlide.id, newSlide: newSlide})
+        setSelectedObjectIds([])
+    }
+
+    const onSlideWhitespaceClick = () => {
+        setSelectedObjectIds([])
+    }
+
     useEffect(() => {
         const onKeyboardClick = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
@@ -20,15 +59,9 @@ const useSelection = () => {
 
             if (event.key === "Backspace" || event.key === "Delete") {
                 if (selectedObjectIds.length !== 0) {
-                    const state = getState()!;
-                    const currentSlide = getSlideById(state.slideCollection, selectedSlideIds[0]);
-
-                    const newSlide = removeObjects(currentSlide, {objectIds: selectedObjectIds})
-                    dispatch(slideActionContainer, {slideId: currentSlide.id, newSlide: newSlide})
-                    setSelectedObjectIds([])
+                    onRemoveObjects()
                 } else if (selectedSlideIds.length !== 0) {
-                    dispatch(removeSlides, {slideIds: selectedSlideIds})
-                    setSelectedSlideIds([])
+                    onRemoveSlides()
                 }
             }
         }
@@ -62,7 +95,7 @@ const useSelection = () => {
         }
     }, []);
 
-    return {selectedSlideIds, setSelectedSlideIds, selectedObjectIds, setSelectedObjectIds, isMultipleSelection}
+    return {selectedSlideIds, selectedObjectIds, onObjectClick, onSlideViewClick, onRemoveSlides, onRemoveObjects, onSlideWhitespaceClick}
 }
 
 export default useSelection;

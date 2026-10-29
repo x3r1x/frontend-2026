@@ -19,18 +19,17 @@ type SlideViewProps = {
 }
 
 function SlideView({onObjectClick, ...props}: SlideViewProps) {
-    const [offset, setOffset] = useState<Vector>({dx: 0, dy: 0})
+    const [dragOffset, setDragOffset] = useState<Vector>({dx: 0, dy: 0})
 
     const onObjectMouseDown = useDragAndDrop(
-        (offsetX, offsetY) => {
-            setOffset({
+        (offsetX, offsetY) =>
+            setDragOffset({
                 dx: offsetX / props.scale,
                 dy: offsetY / props.scale
             })
-        },
-        (offsetX, offsetY) => {
-            onObjectDragAndDrop(props.slide, props.selectedObjectIds, props.scale, offsetX, offsetY)
-        })
+        ,
+        (offsetX, offsetY) => onObjectDragAndDrop(props.slide, props.selectedObjectIds, props.scale, offsetX, offsetY)
+    )
 
     if (!props.slide) {
         return null
@@ -48,7 +47,7 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
             }
             onTextObjectChange={(newText: string) => onTextObjectChange(props.slide, object.id, newText)}
             editable={props.objectsEditable}
-            offset={props.selectedObjectIds.includes(object.id) ? offset : undefined}
+            offset={props.selectedObjectIds.includes(object.id) ? dragOffset : undefined}
             key={object.id}
             scale={props.scale}
         />

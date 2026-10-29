@@ -12,7 +12,6 @@ import {useState} from "react";
 import useTheme from "./utils/ThemeContext/useTheme.tsx";
 import * as React from "react";
 import useSelection from "./utils/useSelection.tsx";
-import {onObjectClick} from "./AppActions.ts";
 
 type AppProps = {
     domainState: Presentation,
@@ -24,7 +23,7 @@ function App(props: AppProps) {
     const domainState: Presentation = props.domainState;
     const [previewMode, setPreviewMode] = useState<boolean>(false)
 
-    const {selectedSlideIds, setSelectedSlideIds, selectedObjectIds, setSelectedObjectIds, isMultipleSelection} = useSelection()
+    const selectionModule = useSelection()
     const {theme} = useTheme()
 
 
@@ -49,36 +48,34 @@ function App(props: AppProps) {
             />
             <Toolbar
                 domainState={domainState}
-                selectedSlideIds={selectedSlideIds}
-                selectedObjectIds={selectedObjectIds}
-                setSelectedObjectIds={setSelectedObjectIds}
-                setSelectedSlideIds={setSelectedSlideIds}
+                selectedSlideIds={selectionModule.selectedSlideIds}
+                selectedObjectIds={selectionModule.selectedObjectIds}
+                onRemoveSlides={selectionModule.onRemoveSlides}
+                onRemoveObjects={selectionModule.onRemoveObjects}
             />
 
             <div className={style.workspace}>
                 <SlideCollectionComponent
                     slideCollection={domainState.slideCollection}
-                    selectedSlideIds={selectedSlideIds}
-                    setSelectedSlideIds={setSelectedSlideIds}
-                    setSelectedObjectIds={setSelectedObjectIds}
-                    isMultipleSelection={isMultipleSelection}
+                    selectedSlideIds={selectionModule.selectedSlideIds}
+                    onSlideViewClick={selectionModule.onSlideViewClick}
                 />
 
                 <div className={style.divider}/>
 
                 <div className={style.slideViewContainer}>
                     {
-                        selectedSlideIds
+                        selectionModule.selectedSlideIds
                             ? <SlideView
-                                slide={getSlideById(domainState.slideCollection, selectedSlideIds[0])}
-                                selectedObjectIds={selectedObjectIds}
+                                slide={getSlideById(domainState.slideCollection, selectionModule.selectedSlideIds[0])}
+                                selectedObjectIds={selectionModule.selectedObjectIds}
                                 objectsEditable={true}
                                 onClick={(event: React.MouseEvent<HTMLDivElement>) => {
                                     if (event.target === event.currentTarget) {
-                                        setSelectedObjectIds([])
+                                        selectionModule.onSlideWhitespaceClick()
                                     }
                                 }}
-                                onObjectClick={(objectId: string) => onObjectClick(objectId, isMultipleSelection, selectedObjectIds, setSelectedObjectIds)}
+                                onObjectClick={selectionModule.onObjectClick}
                                 scale={0.7}
                             />
                             : null
