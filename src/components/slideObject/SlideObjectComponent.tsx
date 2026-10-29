@@ -1,4 +1,4 @@
-import type {SlideObject} from "../../types/objects.js";
+import type {SlideObject, Vector} from "../../types/objects.js";
 import TextObjectComponent from "./TextObjectComponent.js";
 import ImageObjectComponent from "./ImageObjectComponent.js";
 import * as React from "react";
@@ -8,6 +8,7 @@ type SlideObjectProps = {
     scale: number,
     editable: boolean,
     isSelected: boolean,
+    offset?: Vector,
     onClick?: () => void,
     onMouseDown?: (event: React.MouseEvent) => void
     onTextObjectChange?: (newText: string) => void
@@ -16,8 +17,8 @@ type SlideObjectProps = {
 function SlideObjectComponent(props: SlideObjectProps) {
     const baseObjectStyle = {
         position: "absolute",
-        left: props.slideObject.position.x * props.scale,
-        top: props.slideObject.position.y * props.scale,
+        left: (props.slideObject.position.x + (props.offset ? props.offset.dx : 0)) * props.scale,
+        top: (props.slideObject.position.y + (props.offset ? props.offset.dy : 0)) * props.scale,
         width: props.slideObject.size.width * props.scale,
         height: props.slideObject.size.height * props.scale,
         border: props.isSelected && props.editable

@@ -1,7 +1,10 @@
 import {useEffect, useRef, useState} from "react";
 import * as React from "react";
 
-const useDragAndDrop = (onFinish: (offsetX: number, offsetY: number) => void) => {
+const useDragAndDrop = (
+    onDrag: (offsetX: number, offsetY: number) => void,
+    onFinish: (offsetX: number, offsetY: number) => void
+) => {
     const [isDragging, setIsDragging] = useState(false)
     const startX = useRef(0)
     const startY = useRef(0)
@@ -18,6 +21,7 @@ const useDragAndDrop = (onFinish: (offsetX: number, offsetY: number) => void) =>
     useEffect(() => {
         const onMouseMove = (event: MouseEvent) => {
             if (isDragging) {
+                onDrag(offsetX.current, offsetY.current)
                 offsetX.current = event.clientX - startX.current
                 offsetY.current = event.clientY - startY.current
             }
@@ -36,6 +40,7 @@ const useDragAndDrop = (onFinish: (offsetX: number, offsetY: number) => void) =>
                 setIsDragging(false)
 
                 if (offsetX.current !== 0 || offsetY.current !== 0) {
+                    onDrag(0, 0)
                     onFinish(offsetX.current, offsetY.current)
                 }
 

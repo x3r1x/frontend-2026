@@ -5,6 +5,8 @@ import {onTextObjectChange} from "../../AppActions.js";
 import * as React from "react";
 import useDragAndDrop from "../../utils/useDragAndDrop.tsx";
 import {onObjectDragAndDrop} from "./SlideViewActions.ts";
+import {useState} from "react";
+import type {Vector} from "../../types/objects.ts";
 
 type SlideViewProps = {
     slide: Slide,
@@ -17,9 +19,18 @@ type SlideViewProps = {
 }
 
 function SlideView({onObjectClick, ...props}: SlideViewProps) {
-    const onObjectMouseDown = useDragAndDrop((offsetX, offsetY) => {
-        onObjectDragAndDrop(props.slide, props.selectedObjectIds, props.scale, offsetX, offsetY)
-    })
+    const [offset, setOffset] = useState<Vector>({dx: 0, dy: 0})
+
+    const onObjectMouseDown = useDragAndDrop(
+        (offsetX, offsetY) => {
+            setOffset({
+                dx: offsetX / props.scale,
+                dy: offsetY / props.scale
+            })
+        },
+        (offsetX, offsetY) => {
+            onObjectDragAndDrop(props.slide, props.selectedObjectIds, props.scale, offsetX, offsetY)
+        })
 
     if (!props.slide) {
         return null
@@ -37,6 +48,7 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
             }
             onTextObjectChange={(newText: string) => onTextObjectChange(props.slide, object.id, newText)}
             editable={props.objectsEditable}
+            offset={props.selectedObjectIds.includes(object.id) ? offset : undefined}
             key={object.id}
             scale={props.scale}
         />
