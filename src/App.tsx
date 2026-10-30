@@ -50,8 +50,8 @@ function App(props: AppProps) {
                 domainState={domainState}
                 selectedSlideIds={selectionModule.selectedSlideIds}
                 selectedObjectIds={selectionModule.selectedObjectIds}
-                onRemoveSlides={selectionModule.onRemoveSlides}
-                onRemoveObjects={selectionModule.onRemoveObjects}
+                clearObjectSelection={selectionModule.clearObjectSelection}
+                clearFullSelection={selectionModule.clearFullSelection}
             />
 
             <div className={style.workspace}>
@@ -72,7 +72,7 @@ function App(props: AppProps) {
                                 objectsEditable={true}
                                 onClick={(event: React.MouseEvent<HTMLDivElement>) => {
                                     if (event.target === event.currentTarget) {
-                                        selectionModule.onSlideWhitespaceClick()
+                                        selectionModule.clearObjectSelection()
                                     }
                                 }}
                                 onObjectClick={selectionModule.onObjectClick}

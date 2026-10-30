@@ -29,21 +29,12 @@ const useSelection = () => {
         }
     }
 
-    const onRemoveSlides = () => {
-        dispatch(removeSlides, {slideIds: selectedSlideIds})
+    const clearFullSelection = () => {
+        setSelectedObjectIds([])
         setSelectedSlideIds([])
     }
 
-    const onRemoveObjects = () => {
-        const state = getState()!;
-        const currentSlide = getSlideById(state.slideCollection, selectedSlideIds[0]);
-
-        const newSlide = removeObjects(currentSlide, {objectIds: selectedObjectIds})
-        dispatch(slideActionContainer, {slideId: currentSlide.id, newSlide: newSlide})
-        setSelectedObjectIds([])
-    }
-
-    const onSlideWhitespaceClick = () => {
+    const clearObjectSelection = () => {
         setSelectedObjectIds([])
     }
 
@@ -59,9 +50,15 @@ const useSelection = () => {
 
             if (event.key === "Backspace" || event.key === "Delete") {
                 if (selectedObjectIds.length !== 0) {
-                    onRemoveObjects()
+                    const state = getState()!;
+                    const currentSlide = getSlideById(state.slideCollection, selectedSlideIds[0]);
+
+                    const newSlide = removeObjects(currentSlide, {objectIds: selectedObjectIds})
+                    dispatch(slideActionContainer, {slideId: currentSlide.id, newSlide: newSlide})
+                    clearObjectSelection()
                 } else if (selectedSlideIds.length !== 0) {
-                    onRemoveSlides()
+                    dispatch(removeSlides, {slideIds: selectedSlideIds})
+                    clearFullSelection()
                 }
             }
         }
@@ -95,7 +92,7 @@ const useSelection = () => {
         }
     }, []);
 
-    return {selectedSlideIds, selectedObjectIds, onObjectClick, onSlideViewClick, onRemoveSlides, onRemoveObjects, onSlideWhitespaceClick}
+    return {selectedSlideIds, selectedObjectIds, onObjectClick, onSlideViewClick, clearObjectSelection, clearFullSelection}
 }
 
 export default useSelection;

@@ -27,14 +27,6 @@ const useDragAndDrop = (
             }
         }
 
-        document.addEventListener("mousemove", onMouseMove)
-
-        return () => {
-            document.removeEventListener("mousemove", onMouseMove)
-        }
-    });
-
-    useEffect(() => {
         const onMouseUp = () => {
             if (isDragging) {
                 setIsDragging(false)
@@ -51,9 +43,11 @@ const useDragAndDrop = (
             }
         }
 
+        document.addEventListener("mousemove", onMouseMove)
         document.addEventListener("mouseup", onMouseUp)
 
         return () => {
+            document.removeEventListener("mousemove", onMouseMove)
             document.removeEventListener("mouseup", onMouseUp)
         }
     });

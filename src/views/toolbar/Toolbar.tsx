@@ -1,6 +1,6 @@
 import style from "./Toolbar.module.css"
 import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
-import {onAddSlide} from "./ToolbarActions.js";
+import {onAddSlide, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import Button from "../../components/general/button/Button.js";
 import {useState} from "react";
@@ -10,8 +10,8 @@ type ToolbarProps = {
     domainState: Presentation
     selectedSlideIds: string[],
     selectedObjectIds: string[],
-    onRemoveSlides: () => void,
-    onRemoveObjects: () => void
+    clearObjectSelection: () => void,
+    clearFullSelection: () => void
 }
 
 type ToolbarOptions = "mouse" | "add text" | "add image" | "change background";
@@ -38,7 +38,7 @@ function Toolbar(props: ToolbarProps) {
                         ? "disabled"
                         : "default"
                 }
-                onClick={props.onRemoveSlides}
+                onClick={() => onRemoveSlides(props.selectedSlideIds, props.clearFullSelection)}
             />
 
             <div className={style.spacer}/>
@@ -91,7 +91,7 @@ function Toolbar(props: ToolbarProps) {
                         ? "disabled"
                         : "default"
                 }
-                onClick={props.onRemoveObjects}
+                onClick={() => onRemoveObjects(props.selectedSlideIds[0], props.selectedObjectIds, props.clearObjectSelection)}
             />
         </div>
     )

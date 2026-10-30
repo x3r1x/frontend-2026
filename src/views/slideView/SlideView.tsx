@@ -26,8 +26,7 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
             setDragOffset({
                 dx: offsetX / props.scale,
                 dy: offsetY / props.scale
-            })
-        ,
+            }),
         (offsetX, offsetY) => onObjectDragAndDrop(props.slide, props.selectedObjectIds, props.scale, offsetX, offsetY)
     )
 

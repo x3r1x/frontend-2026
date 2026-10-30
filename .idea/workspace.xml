@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="lab3 task 2 done">
+    <list default="true" id="8556d2d4-478a-4d65-93c6-b5a5d0b14fc6" name="Changes" comment="incapsulated all the logic of useSelection.tsx inside custom hook">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/useSelection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/useSelection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/slideCollection/SlideCollectionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/slideView/SlideView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/slideView/SlideView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/toolbar/Toolbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/toolbar/Toolbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/toolbar/ToolbarActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/toolbar/ToolbarActions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,6 +217,12 @@
       <workItem from="1793223155574" duration="838000" />
       <workItem from="1793230296418" duration="71000" />
       <workItem from="1793230375974" duration="1287000" />
+      <workItem from="1793266689977" duration="167000" />
+      <workItem from="1793266863485" duration="906000" />
+      <workItem from="1793269972749" duration="48000" />
+      <workItem from="1793270034131" duration="6330000" />
+      <workItem from="1793300442107" duration="903000" />
+      <workItem from="1793372903652" duration="838000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -266,7 +272,31 @@
       <option name="project" value="LOCAL" />
       <updated>1793223921773</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Lab3 task 1 bugfix">
+      <option name="closed" value="true" />
+      <created>1793267038503</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1793267038504</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Lab3 task 2 dynamic drag done">
+      <option name="closed" value="true" />
+      <created>1793267758895</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1793267758895</updated>
+    </task>
+    <task id="LOCAL-00009" summary="incapsulated all the logic of useSelection.tsx inside custom hook">
+      <option name="closed" value="true" />
+      <created>1793274726523</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1793274726523</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,6 +321,9 @@
     <MESSAGE value="lab2.1 &amp; lab2.2 accepted by Bogdan Krasilnikov" />
     <MESSAGE value="lab2 done &amp; some actions done" />
     <MESSAGE value="lab3 task 2 done" />
-    <option name="LAST_COMMIT_MESSAGE" value="lab3 task 2 done" />
+    <MESSAGE value="Lab3 task 1 bugfix" />
+    <MESSAGE value="Lab3 task 2 dynamic drag done" />
+    <MESSAGE value="incapsulated all the logic of useSelection.tsx inside custom hook" />
+    <option name="LAST_COMMIT_MESSAGE" value="incapsulated all the logic of useSelection.tsx inside custom hook" />
   </component>
 </project>
