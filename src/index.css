@@ -3,3 +3,9 @@
   padding: 0;
   user-select: none;
 }
+
+.exportToPdfRoot {
+  position: absolute;
+  left: -10000px;
+  top: -10000px;
+}

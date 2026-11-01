@@ -1,0 +1,49 @@
+import {useCallback} from 'react';
+import {jsPDF} from 'jspdf';
+import html2canvas from "html2canvas";
+import type {Presentation} from "../types/presentation.ts";
+import SlideView from "../views/slideView/SlideView.tsx";
+import {createRoot} from "react-dom/client";
+
+const usePdfExport = (presentation: Presentation) => {
+    const exportToPdf = useCallback(async () => {
+        const pdf = new jsPDF("l", "mm", "a4");
+
+        const newSlidesArray = presentation.slideCollection.map(slide =>
+            <div className={"slide-canvas"} key={slide.id}>
+                <SlideView
+                    slide={slide}
+                    scale={1}
+                    objectsEditable={false}
+                    selectedObjectIds={[]}
+                />
+            </div>
+        )
+
+        const tempRoot = createRoot(document.getElementById("exportToPdfRoot")!)
+        await tempRoot.render(newSlidesArray)
+
+        const slideElements = document.querySelectorAll(".slide-canvas");
+
+        for (let i = 0; i < slideElements.length; i++) {
+            const canvas = await html2canvas(slideElements[i] as HTMLElement, {
+                scale: 1,
+                useCORS: true,
+                logging: false
+            });
+            const imgData = canvas.toDataURL("image/png");
+
+            if (i > 0) {
+                pdf.addPage();
+            }
+
+            pdf.addImage(imgData, "PNG", 0, 0, 297, 210);
+        }
+
+        pdf.save(`${presentation.name}.pdf`);
+    }, [presentation.name, presentation.slideCollection]);
+
+    return {exportToPdf};
+};
+
+export default usePdfExport

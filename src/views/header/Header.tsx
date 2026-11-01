@@ -7,6 +7,8 @@ import {TEXT_CONSTANTS} from "../../AppConstants.js";
 import {onPresentationNameChange} from "./HeaderActions.js";
 import TextInput from "../../components/general/textInput/TextInput.js";
 import useTheme from "../../utils/ThemeContext/useTheme.tsx";
+import usePdfExport from "../../utils/usePdfExport.tsx";
+import {getState} from "../../editor.ts";
 
 type HeaderProps = {
     presentationName: string,
@@ -15,6 +17,7 @@ type HeaderProps = {
 
 function Header(props: HeaderProps) {
     const {theme} = useTheme()
+    const {exportToPdf} = usePdfExport(getState()!)
 
     const containerThemeClassName = theme === "light"
         ? style.containerLight
@@ -46,8 +49,7 @@ function Header(props: HeaderProps) {
 
                 <HeaderButton
                     text={TEXT_CONSTANTS.EXPORT_PRESENTATION_TEXT}
-                    onClick={() => {
-                    }}
+                    onClick={exportToPdf}
                 />
             </div>
         </div>
