@@ -9,7 +9,7 @@ import PreviewOverlay from "./views/previewOverlay/PreviewOverlay.js";
 import {getSlideById} from "./actions/slide.js";
 import type {AppState} from "./data.js";
 import {useState} from "react";
-import useTheme from "./utils/ThemeContext/useTheme.tsx";
+import useTheme from "./utils/themeContext/useTheme.tsx";
 import * as React from "react";
 import useSelection from "./utils/useSelection.tsx";
 

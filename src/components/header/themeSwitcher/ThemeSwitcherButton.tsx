@@ -1,6 +1,6 @@
 import style from "./ThemeSwitcher.module.css"
 import {TEXT_CONSTANTS} from "../../../AppConstants.js";
-import useTheme from "../../../utils/ThemeContext/useTheme.tsx";
+import useTheme from "../../../utils/themeContext/useTheme.tsx";
 
 function ThemeSwitcherButton() {
     const {theme, changeTheme} = useTheme()

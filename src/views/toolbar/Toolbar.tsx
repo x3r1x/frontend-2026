@@ -4,7 +4,7 @@ import {onAddSlide, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import Button from "../../components/general/button/Button.js";
 import {useState} from "react";
-import useTheme from "../../utils/ThemeContext/useTheme.tsx";
+import useTheme from "../../utils/themeContext/useTheme.tsx";
 
 type ToolbarProps = {
     domainState: Presentation

@@ -5,8 +5,8 @@ import type {Presentation} from "../types/presentation.ts";
 import SlideView from "../views/slideView/SlideView.tsx";
 import {createRoot} from "react-dom/client";
 
-const usePdfExport = (presentation: Presentation) => {
-    const exportToPdf = useCallback(async () => {
+const usePdfExport = () => {
+    const exportToPdf = useCallback(async (presentation: Presentation) => {
         const pdf = new jsPDF("l", "mm", "a4");
 
         const newSlidesArray = presentation.slideCollection.map(slide =>
@@ -41,7 +41,7 @@ const usePdfExport = (presentation: Presentation) => {
         }
 
         pdf.save(`${presentation.name}.pdf`);
-    }, [presentation.name, presentation.slideCollection]);
+    }, []);
 
     return {exportToPdf};
 };

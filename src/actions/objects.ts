@@ -71,7 +71,12 @@ function moveObjects(slide: Slide, {objectIds, shift}: MoveObjectsParams): Slide
     }
 }
 
-function resizeObject(slide: Slide, objectId: string, newSize: ObjectSize): Slide {
+type ResizeObjectParams = {
+    objectId: string,
+    newSize: ObjectSize
+}
+
+function resizeObject(slide: Slide, {objectId, newSize}: ResizeObjectParams): Slide {
     return modifyObject(slide, objectId, { size: newSize })
 }
 

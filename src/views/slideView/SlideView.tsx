@@ -1,12 +1,12 @@
 import style from "./SlideView.module.css";
 import type {Background, Slide} from "../../types/slide.js";
-import SlideObjectComponent from "../../components/slideObject/SlideObjectComponent.js";
 import {onTextObjectChange} from "../../AppActions.js";
 import * as React from "react";
 import useDragAndDrop from "../../utils/useDragAndDrop.tsx";
 import {onObjectDragAndDrop} from "./SlideViewActions.ts";
 import {useState} from "react";
 import type {Vector} from "../../types/objects.ts";
+import SlideObjectItem from "./SlideObjectItem.tsx";
 
 type SlideViewProps = {
     slide: Slide,
@@ -35,21 +35,29 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
     }
 
     const objects = props.slide.objects.map(
-        object => <SlideObjectComponent
-            slideObject={object}
-            isSelected={props.selectedObjectIds.includes(object.id)}
-            onMouseDown={props.objectsEditable ? onObjectMouseDown : undefined}
-            onClick={onObjectClick
-                ? () => onObjectClick(object.id)
-                : () => {
+        object => {
+            return <SlideObjectItem
+                key={object.id}
+                slide={props.slide}
+                object={object}
+                scale={props.scale}
+                editable={props.objectsEditable}
+                selection={
+                    props.selectedObjectIds.includes(object.id)
+                        ? props.selectedObjectIds[0] === object.id
+                            ? "primary"
+                            : "defaultSelected"
+                        : "unselected"}
+                onMouseDown={onObjectMouseDown}
+                onClick={onObjectClick
+                    ? () => onObjectClick(object.id)
+                    : () => {
+                    }
                 }
-            }
-            onTextObjectChange={(newText: string) => onTextObjectChange(props.slide, object.id, newText)}
-            editable={props.objectsEditable}
-            offset={props.selectedObjectIds.includes(object.id) ? dragOffset : undefined}
-            key={object.id}
-            scale={props.scale}
-        />
+                onTextObjectChange={(newText: string) => onTextObjectChange(props.slide, object.id, newText)}
+                dragOffset={dragOffset}
+            />
+        }
     )
     const additionalStyle = {
         height: String(1080 * props.scale) + "px"

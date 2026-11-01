@@ -2,25 +2,28 @@ import type {SlideObject, Vector} from "../../types/objects.js";
 import TextObjectComponent from "./TextObjectComponent.js";
 import ImageObjectComponent from "./ImageObjectComponent.js";
 import * as React from "react";
+import type {CSSProperties} from "react";
 
 type SlideObjectProps = {
     slideObject: SlideObject
     scale: number,
     editable: boolean,
     isSelected: boolean,
+    resizeOffset: Vector,
+    onMouseDown?: (event: React.MouseEvent) => void,
+    onResizeMarkerDown?: (event: React.MouseEvent) => void
     offset?: Vector,
     onClick?: () => void,
-    onMouseDown?: (event: React.MouseEvent) => void
     onTextObjectChange?: (newText: string) => void
 }
 
 function SlideObjectComponent(props: SlideObjectProps) {
-    const baseObjectStyle = {
+    const baseObjectStyle: CSSProperties = {
         position: "absolute",
         left: (props.slideObject.position.x + (props.offset ? props.offset.dx : 0)) * props.scale,
         top: (props.slideObject.position.y + (props.offset ? props.offset.dy : 0)) * props.scale,
-        width: props.slideObject.size.width * props.scale,
-        height: props.slideObject.size.height * props.scale,
+        width: (props.slideObject.size.width + (props.resizeOffset ? props.resizeOffset.dx : 0)) * props.scale,
+        height: (props.slideObject.size.height + (props.resizeOffset ? props.resizeOffset.dy : 0)) * props.scale,
         border: props.isSelected && props.editable
             ? "3px solid #0033FF"
             : "none"

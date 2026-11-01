@@ -3,7 +3,7 @@ import './index.css'
 import App from './App.tsx'
 import {createTestPresentation, getTestAppState} from "./data.js";
 import {addEditorChangeHandler, getAppState, getState, setInitialAppState, setInitialState} from "./editor.js";
-import ThemeProvider from "./utils/ThemeContext/ThemeProvider.tsx";
+import ThemeProvider from "./utils/themeContext/ThemeProvider.tsx";
 
 const initialPresentation = createTestPresentation();
 setInitialState(initialPresentation)

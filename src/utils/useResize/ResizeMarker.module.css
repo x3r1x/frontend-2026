@@ -1,0 +1,6 @@
+.container {
+    width: 10px;
+    height: 10px;
+    background-color: #0033FF;
+    cursor: nwse-resize;
+}
