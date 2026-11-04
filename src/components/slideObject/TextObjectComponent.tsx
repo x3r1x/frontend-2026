@@ -1,6 +1,7 @@
 import type {TextObject} from "../../types/objects.js";
 import inputStyle from "../general/textInput/TextInput.module.css";
 import TextInput from "../general/textInput/TextInput.js";
+import * as React from "react";
 
 type TextObjectComponentProps = {
     textObject: TextObject,

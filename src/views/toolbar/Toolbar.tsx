@@ -1,12 +1,13 @@
 import style from "./Toolbar.module.css"
 import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
-import {onAddSlide, onAddTextClick, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
+import {onAddImageClick, onAddSlide, onAddTextClick, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import Button from "../../components/general/button/Button.js";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import {getSlideById} from "../../actions/slide.ts";
 import {getObjectById} from "../../actions/objects.ts";
+import useImageLoader from "../../utils/useImageLoader.tsx";
 
 type ToolbarProps = {
     domainState: Presentation
@@ -20,9 +21,14 @@ type ToolbarOptions = "mouse" | "change background" | "text style";
 
 function Toolbar(props: ToolbarProps) {
     const [toolbarOption, setToolbarOption] = useState<ToolbarOptions>("mouse")
-
-    const hiddenInputRef = useRef<HTMLInputElement>(null)
     const {theme} = useTheme()
+    const {inputRef, onButtonClick, onFileChange} = useImageLoader((newSrc: string) => {
+        if (props.selectedSlideIds.length === 0) {
+            return;
+        }
+
+        onAddImageClick(getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0]), newSrc)
+    })
 
     useEffect(() => {
         if (props.selectedSlideIds.length !== 0 && props.selectedObjectIds.length !== 0) {
@@ -44,7 +50,13 @@ function Toolbar(props: ToolbarProps) {
 
     return (
         <div className={style.container + " " + containerThemeClassName}>
-            <input style={{position: "absolute", left: 100000}} ref={hiddenInputRef}/>
+            <input
+                style={{position: "absolute", left: 100000}}
+                ref={inputRef}
+                type={"file"}
+                accept={"image/"}
+                onChange={onFileChange}
+            />
             <Button
                 text={TEXT_CONSTANTS.NEW_SLIDE_TEXT}
                 imageSrc={PATH_CONSTANTS.PLUS_IMAGE_SRC}
@@ -93,8 +105,7 @@ function Toolbar(props: ToolbarProps) {
                         ? "disabled"
                         : "default"
                 }
-                onClick={() => {
-                }}
+                onClick={onButtonClick}
             />
 
             <Button

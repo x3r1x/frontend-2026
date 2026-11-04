@@ -13,7 +13,7 @@ type TextInputProps = {
 function TextInput(props: TextInputProps) {
     return (
         <div
-            contentEditable={props.editable ?? props.editable}
+            contentEditable={props.editable}
             className={props.className}
             style={props.additionalStyle ?? props.additionalStyle}
             suppressContentEditableWarning={true}

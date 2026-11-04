@@ -1,9 +1,10 @@
 import {dispatch, getState} from "../../editor.js";
 import {addSlide, getSlideById, removeSlides, slideActionContainer} from "../../actions/slide.js";
 import {generateId} from "../../actions/presentation.js";
-import {addSlideObject, getObjectById, removeObjects} from "../../actions/objects.js";
+import {addSlideObject, getObjectById, type ImageObjectProps, removeObjects} from "../../actions/objects.js";
 import {getDefaultBaseObject, getDefaultTextObjectProps} from "../../data.ts";
 import type {Slide} from "../../types/slide.ts";
+import type {BaseSlideObject} from "../../types/objects.ts";
 const onAddSlide = () => dispatch(addSlide, {slideId: generateId()})
 
 function getToolbarOption(slideCollection: Slide[], selectedSlideIds: string[], selectedObjectIds: string[]) {
@@ -34,6 +35,17 @@ const onAddTextClick = (slide: Slide) => {
     dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
 }
 
+const onAddImageClick = (slide: Slide, src: string) => {
+    const newBaseObject: BaseSlideObject = getDefaultBaseObject();
+    const imageObjectProps: ImageObjectProps = {
+        type: "image",
+        src: src
+    }
+
+    const newSlide = addSlideObject(slide, {baseObject: newBaseObject, props: imageObjectProps})
+    dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
+}
+
 const onRemoveObjects = (selectedSlideId: string, objectIds: string[], clearObjectSelection: () => void) => {
     const state = getState()!;
     const currentSlide = getSlideById(state.slideCollection, selectedSlideId);
@@ -47,6 +59,7 @@ export {
     getToolbarOption,
     onAddSlide,
     onAddTextClick,
+    onAddImageClick,
     onRemoveSlides,
     onRemoveObjects
 }
