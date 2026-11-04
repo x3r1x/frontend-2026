@@ -12,6 +12,7 @@ import {useState} from "react";
 import useTheme from "./utils/themeContext/useTheme.tsx";
 import * as React from "react";
 import useSelection from "./utils/useSelection.tsx";
+import TextStylePanel from "./components/textStylePanel/TextStylePanel.tsx";
 
 type AppProps = {
     domainState: Presentation,
@@ -25,7 +26,6 @@ function App(props: AppProps) {
 
     const selectionModule = useSelection()
     const {theme} = useTheme()
-
 
     if (previewMode) {
         return (
@@ -81,6 +81,15 @@ function App(props: AppProps) {
                             : null
                     }
                 </div>
+
+                {
+                    selectionModule.selectedObjectIds.length * selectionModule.selectedSlideIds.length !== 0
+                        ? <TextStylePanel
+                            slide={getSlideById(props.domainState.slideCollection, selectionModule.selectedSlideIds[0])}
+                            objectId={selectionModule.selectedObjectIds[0]}
+                        />
+                        : null
+                }
             </div>
         </div>
     )

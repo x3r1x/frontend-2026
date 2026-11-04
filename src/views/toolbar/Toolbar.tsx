@@ -1,10 +1,12 @@
 import style from "./Toolbar.module.css"
 import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
-import {onAddSlide, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
+import {onAddSlide, onAddTextClick, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import Button from "../../components/general/button/Button.js";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
+import {getSlideById} from "../../actions/slide.ts";
+import {getObjectById} from "../../actions/objects.ts";
 
 type ToolbarProps = {
     domainState: Presentation
@@ -14,11 +16,27 @@ type ToolbarProps = {
     clearFullSelection: () => void
 }
 
-type ToolbarOptions = "mouse" | "add text" | "add image" | "change background";
+type ToolbarOptions = "mouse" | "change background" | "text style";
 
 function Toolbar(props: ToolbarProps) {
     const [toolbarOption, setToolbarOption] = useState<ToolbarOptions>("mouse")
+
+    const hiddenInputRef = useRef<HTMLInputElement>(null)
     const {theme} = useTheme()
+
+    useEffect(() => {
+        if (props.selectedSlideIds.length !== 0 && props.selectedObjectIds.length !== 0) {
+            const slide = getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0])
+            const object = getObjectById(slide.objects, props.selectedObjectIds[0])
+
+            if (object.type === "text") {
+                // eslint-disable-next-line react-hooks/set-state-in-effect
+                setToolbarOption("text style")
+            } else {
+                setToolbarOption("mouse")
+            }
+        }
+    }, [props.domainState.slideCollection, props.selectedObjectIds, props.selectedSlideIds]);
 
     const containerThemeClassName = theme === "light"
         ? style.containerLight
@@ -26,6 +44,7 @@ function Toolbar(props: ToolbarProps) {
 
     return (
         <div className={style.container + " " + containerThemeClassName}>
+            <input style={{position: "absolute", left: 100000}} ref={hiddenInputRef}/>
             <Button
                 text={TEXT_CONSTANTS.NEW_SLIDE_TEXT}
                 imageSrc={PATH_CONSTANTS.PLUS_IMAGE_SRC}
@@ -56,32 +75,44 @@ function Toolbar(props: ToolbarProps) {
                 text={TEXT_CONSTANTS.ADD_NEW_TEXT_TEXT}
                 imageSrc={PATH_CONSTANTS.PLUS_IMAGE_SRC}
                 mode={
-                    toolbarOption === "add text"
-                        ? "selected"
+                    props.selectedSlideIds.length === 0
+                        ? "disabled"
                         : "default"
                 }
-                onClick={() => setToolbarOption("add text")}
+                onClick={() => {
+                    if (props.selectedSlideIds.length !== 0) {
+                        onAddTextClick(getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0]))
+                    }
+                }}
             />
             <Button
                 text={TEXT_CONSTANTS.ADD_NEW_IMAGE_TEXT}
                 imageSrc={PATH_CONSTANTS.PLUS_IMAGE_SRC}
                 mode={
-                    toolbarOption === "add image"
-                        ? "selected"
+                    props.selectedSlideIds.length === 0
+                        ? "disabled"
                         : "default"
                 }
-                onClick={() => setToolbarOption("add image")}
+                onClick={() => {
+                }}
             />
 
             <Button
                 text={TEXT_CONSTANTS.CHANGE_BACKGROUND_TEXT}
                 imageSrc={PATH_CONSTANTS.BACKGROUND_ICON_SRC}
                 mode={
-                    toolbarOption === "change background"
-                        ? "selected"
-                        : "default"
+                    props.selectedSlideIds.length !== 0
+                        ? toolbarOption === "change background"
+                            ? "selected"
+                            : "default"
+                        : "disabled"
+
                 }
-                onClick={() => setToolbarOption("change background")}
+                onClick={() => {
+                    if (props.selectedSlideIds.length !== 0) {
+                        setToolbarOption("change background")
+                    }
+                }}
             />
 
             <Button

@@ -68,3 +68,7 @@
     outline: 3px solid #0033FF;
     transition: outline-color 0.4s;
 }
+
+.textSizeParam {
+    font: 800 100% "Jost";
+}

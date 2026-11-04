@@ -5,6 +5,11 @@ import type {
     Vector
 } from "../types/objects.js";
 
+function getObjectById(objects: SlideObject[], id: string): SlideObject {
+    return objects.find(object => object.id === id)!
+}
+
+
 type TextObjectProps = {
     text: string;
     fontFamily: string;
@@ -18,7 +23,12 @@ type ImageObjectProps = {
     type: "image";
 }
 
-function addSlideObject(slide: Slide, baseObject: BaseSlideObject, props: TextObjectProps | ImageObjectProps): Slide {
+type AddSlideObjectProps = {
+    baseObject: BaseSlideObject,
+    props: TextObjectProps | ImageObjectProps
+}
+
+function addSlideObject(slide: Slide, {baseObject, props}: AddSlideObjectProps): Slide {
     const object = {
         ...baseObject,
         ...props
@@ -113,6 +123,7 @@ function modifyObject(slide: Slide, objectId: string, payload: Partial<SlideObje
 export {
     type TextObjectProps,
     type ImageObjectProps,
+    getObjectById,
     addSlideObject,
     removeObjects,
     moveObjects,
