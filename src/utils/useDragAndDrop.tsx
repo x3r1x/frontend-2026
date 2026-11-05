@@ -12,10 +12,12 @@ const useDragAndDrop = (
     const offsetY = useRef(0)
 
     const onMouseDown = (event: React.MouseEvent) => {
-        setIsDragging(true)
-        event.preventDefault()
-        startX.current = event.clientX
-        startY.current = event.clientY
+        if (event.ctrlKey) {
+            setIsDragging(true)
+            event.preventDefault()
+            startX.current = event.clientX
+            startY.current = event.clientY
+        }
     }
 
     useEffect(() => {

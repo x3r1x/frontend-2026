@@ -48,7 +48,7 @@ const useSelection = () => {
                 }
             }
 
-            if (event.key === "Backspace" || event.key === "Delete") {
+            if (event.key === "Delete") {
                 if (selectedObjectIds.length !== 0) {
                     const state = getState()!;
                     const currentSlide = getSlideById(state.slideCollection, selectedSlideIds[0]);
@@ -59,6 +59,22 @@ const useSelection = () => {
                 } else if (selectedSlideIds.length !== 0) {
                     dispatch(removeSlides, {slideIds: selectedSlideIds})
                     clearFullSelection()
+                }
+            }
+
+            if (event.key === "Backspace") {
+                if (selectedObjectIds.length === 0) {
+                    const state = getState()!;
+                    const currentSlide = getSlideById(state.slideCollection, selectedSlideIds[0]);
+
+                    const newSlide = removeObjects(currentSlide, {objectIds: selectedObjectIds})
+                    dispatch(slideActionContainer, {slideId: currentSlide.id, newSlide: newSlide})
+                    clearObjectSelection()
+
+                    if (selectedSlideIds.length !== 0) {
+                        dispatch(removeSlides, {slideIds: selectedSlideIds})
+                        clearFullSelection()
+                    }
                 }
             }
         }
@@ -72,13 +88,13 @@ const useSelection = () => {
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Control" || event.key === "Shift") {
+            if (event.key === "Shift") {
                 setIsMultipleSelection(true)
             }
         }
 
         const onKeyUp = (event: KeyboardEvent) => {
-            if (event.key === "Control" || event.key === "Shift") {
+            if (event.key === "Shift") {
                 setIsMultipleSelection(false)
             }
         }
