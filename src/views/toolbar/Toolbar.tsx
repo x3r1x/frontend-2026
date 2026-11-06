@@ -3,10 +3,9 @@ import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
 import {onAddImageClick, onAddSlide, onAddTextClick, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import Button from "../../components/general/button/Button.js";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import {getSlideById} from "../../actions/slide.ts";
-import {getObjectById} from "../../actions/objects.ts";
 import useImageLoader from "../../utils/useImageLoader.tsx";
 
 type ToolbarProps = {
@@ -17,7 +16,7 @@ type ToolbarProps = {
     clearFullSelection: () => void
 }
 
-type ToolbarOptions = "mouse" | "change background" | "text style";
+type ToolbarOptions = "mouse" | "change background";
 
 function Toolbar(props: ToolbarProps) {
     const [toolbarOption, setToolbarOption] = useState<ToolbarOptions>("mouse")
@@ -30,20 +29,6 @@ function Toolbar(props: ToolbarProps) {
         onAddImageClick(getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0]), newSrc)
     })
 
-    useEffect(() => {
-        if (props.selectedSlideIds.length !== 0 && props.selectedObjectIds.length !== 0) {
-            const slide = getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0])
-            const object = getObjectById(slide.objects, props.selectedObjectIds[0])
-
-            if (object.type === "text") {
-                // eslint-disable-next-line react-hooks/set-state-in-effect
-                setToolbarOption("text style")
-            } else {
-                setToolbarOption("mouse")
-            }
-        }
-    }, [props.domainState.slideCollection, props.selectedObjectIds, props.selectedSlideIds]);
-
     const containerThemeClassName = theme === "light"
         ? style.containerLight
         : style.containerDark
@@ -51,7 +36,7 @@ function Toolbar(props: ToolbarProps) {
     return (
         <div className={style.container + " " + containerThemeClassName}>
             <input
-                style={{position: "absolute", left: 100000}}
+                style={{position: "absolute", left: 100000, display: "none"}}
                 ref={inputRef}
                 type={"file"}
                 accept={"image/"}

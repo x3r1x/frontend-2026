@@ -13,6 +13,8 @@ const useResize = (
     setResizeOffset: React.Dispatch<React.SetStateAction<Vector>>
 ) => {
     const onDrag = (offsetX: number, offsetY: number) => {
+        document.documentElement.style.setProperty("cursor", "nwse-resize")
+
         const newWidth = (object.size.width + offsetX / scale) > 30
             ? offsetX / scale
             : -(object.size.width - 30)
@@ -28,6 +30,8 @@ const useResize = (
     }
 
     const onFinish = (offsetX: number, offsetY: number) => {
+        document.documentElement.style.removeProperty("cursor")
+
         const newWidth = (object.size.width + offsetX / scale) > 30
             ? object.size.width + offsetX / scale
             : 30

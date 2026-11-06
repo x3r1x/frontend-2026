@@ -5,6 +5,9 @@ import type {Presentation} from "../types/presentation.ts";
 import SlideView from "../views/slideView/SlideView.tsx";
 import {createRoot} from "react-dom/client";
 
+const PDF_WIDTH = 297;
+const PDF_HEIGHT = 210;
+
 const usePdfExport = () => {
     const exportToPdf = useCallback(async (presentation: Presentation) => {
         const pdf = new jsPDF("l", "mm", "a4");
@@ -37,7 +40,7 @@ const usePdfExport = () => {
                 pdf.addPage();
             }
 
-            pdf.addImage(imgData, "PNG", 0, 0, 297, 210);
+            pdf.addImage(imgData, "PNG", 0, 0, PDF_WIDTH, PDF_HEIGHT);
         }
 
         pdf.save(`${presentation.name}.pdf`);
