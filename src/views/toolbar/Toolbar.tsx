@@ -7,6 +7,7 @@ import {useState} from "react";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import {getSlideById} from "../../actions/slide.ts";
 import useImageLoader from "../../utils/useImageLoader.tsx";
+import BackgroundPicker from "../../components/toolbar/backgroundPicker/BackgroundPicker.tsx";
 
 type ToolbarProps = {
     domainState: Presentation
@@ -21,7 +22,7 @@ type ToolbarOptions = "mouse" | "change background";
 function Toolbar(props: ToolbarProps) {
     const [toolbarOption, setToolbarOption] = useState<ToolbarOptions>("mouse")
     const {theme} = useTheme()
-    const {inputRef, onButtonClick, onFileChange} = useImageLoader((newSrc: string) => {
+    const {inputRef, onLoaderButtonClick, onFileChange} = useImageLoader((newSrc: string) => {
         if (props.selectedSlideIds.length === 0) {
             return;
         }
@@ -36,7 +37,7 @@ function Toolbar(props: ToolbarProps) {
     return (
         <div className={style.container + " " + containerThemeClassName}>
             <input
-                style={{position: "absolute", left: 100000, display: "none"}}
+                style={{display: "none"}}
                 ref={inputRef}
                 type={"file"}
                 accept={"image/"}
@@ -90,26 +91,34 @@ function Toolbar(props: ToolbarProps) {
                         ? "disabled"
                         : "default"
                 }
-                onClick={onButtonClick}
+                onClick={onLoaderButtonClick}
             />
 
-            <Button
-                text={TEXT_CONSTANTS.CHANGE_BACKGROUND_TEXT}
-                imageSrc={PATH_CONSTANTS.BACKGROUND_ICON_SRC}
+            <BackgroundPicker
                 mode={
                     props.selectedSlideIds.length !== 0
                         ? toolbarOption === "change background"
                             ? "selected"
                             : "default"
                         : "disabled"
-
                 }
-                onClick={() => {
+                onButtonClick={() => {
                     if (props.selectedSlideIds.length !== 0) {
                         setToolbarOption("change background")
                     }
                 }}
+                slideBackground={
+                    props.selectedSlideIds.length !== 0
+                        ? getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0]).background
+                        : undefined
+                }
+                slideId={
+                    props.selectedSlideIds.length !== 0
+                        ? props.selectedSlideIds[0]
+                        : undefined
+                }
             />
+
 
             <Button
                 imageSrc={PATH_CONSTANTS.TRASH_ICON_SRC}

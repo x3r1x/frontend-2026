@@ -61,22 +61,6 @@ const useSelection = () => {
                     clearFullSelection()
                 }
             }
-
-            if (event.key === "Backspace") {
-                if (selectedObjectIds.length === 0) {
-                    if (selectedSlideIds.length !== 0) {
-                        dispatch(removeSlides, {slideIds: selectedSlideIds})
-                        clearFullSelection()
-                    } else {
-                        const state = getState()!;
-                        const currentSlide = getSlideById(state.slideCollection, selectedSlideIds[0]);
-
-                        const newSlide = removeObjects(currentSlide, {objectIds: selectedObjectIds})
-                        dispatch(slideActionContainer, {slideId: currentSlide.id, newSlide: newSlide})
-                        clearObjectSelection()
-                    }
-                }
-            }
         }
 
         document.addEventListener("keydown", onKeyboardClick)

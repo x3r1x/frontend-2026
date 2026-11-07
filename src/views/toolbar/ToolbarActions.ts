@@ -1,24 +1,11 @@
 import {dispatch, getState} from "../../editor.js";
 import {addSlide, getSlideById, removeSlides, slideActionContainer} from "../../actions/slide.js";
 import {generateId} from "../../actions/presentation.js";
-import {addSlideObject, getObjectById, type ImageObjectProps, removeObjects} from "../../actions/objects.js";
+import {addSlideObject, type ImageObjectProps, removeObjects} from "../../actions/objects.js";
 import {getDefaultBaseObject, getDefaultTextObjectProps} from "../../data.ts";
 import type {Slide} from "../../types/slide.ts";
 import type {BaseSlideObject} from "../../types/objects.ts";
 const onAddSlide = () => dispatch(addSlide, {slideId: generateId()})
-
-function getToolbarOption(slideCollection: Slide[], selectedSlideIds: string[], selectedObjectIds: string[]) {
-    if (selectedSlideIds.length !== 0 && selectedObjectIds.length !== 0) {
-        const slide = getSlideById(slideCollection,selectedSlideIds[0])
-        const object = getObjectById(slide.objects, selectedObjectIds[0])
-
-        if (object.type === "text") {
-            return "text style"
-        }
-    }
-
-    return "mouse"
-}
 
 const onRemoveSlides = (slideIds: string[], clearFullSelection: () => void) => {
     dispatch(removeSlides, {
@@ -56,7 +43,6 @@ const onRemoveObjects = (selectedSlideId: string, objectIds: string[], clearObje
 }
 
 export {
-    getToolbarOption,
     onAddSlide,
     onAddTextClick,
     onAddImageClick,

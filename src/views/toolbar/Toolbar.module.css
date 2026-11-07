@@ -18,3 +18,10 @@
 .spacer {
     width: 3%;
 }
+
+.backgroundPickerDiv {
+    position: relative;
+    flex: 0 0 auto;
+    width: max-content;
+    min-width: max-content;
+}

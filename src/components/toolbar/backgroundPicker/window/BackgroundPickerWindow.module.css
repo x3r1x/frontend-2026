@@ -1,0 +1,89 @@
+.container {
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    background-color: #AC74FF;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10% 0;
+    gap: 20px
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    gap: 5%
+}
+
+.headerButton {
+    background-color: #d5d5d5;
+    border: 1px solid #FFFFFF;
+    padding: 2%;
+    border-radius: 10%;
+    transition: background-color 0.5s ease;
+}
+
+.selected {
+    background-color: #CCAAFF;
+    transition: 0.5s;
+}
+
+.solidDialogInput {
+    width: 90%;
+}
+
+.imageDialogButton {
+    width: 90%;
+    background-color: #d5d5d5;
+    border-radius: 10px;
+    padding: 3% 0;
+    text-align: center;
+    transition: background-color 0.5s ease;
+}
+
+.imageDialogButton:hover {
+    background-color: #cfbaef;
+    transition: 0.5s;
+}
+
+.gradientDialogContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.gradientDialogText {
+    font: 400 125% "Jost"
+}
+
+.gradientDialogInput {
+    width: 90%;
+    background-color: #d5d5d5;
+    border-radius: 10px;
+    padding: 3% 0;
+    text-align: center;
+}
+
+.gradientDialogInput:hover {
+    background-color: #cfbaef;
+    transition: 0.5s;
+}
+
+.clearButton {
+    background-color: #FFFFFF;
+    width: 90%;
+    text-align: center;
+    padding: 5% 0;
+    border-radius: 15px;
+    transition: background-color 0.5s ease;
+}
+
+.clearButton:hover {
+    background-color: #cfbaef;
+    transition: 0.5s;
+}

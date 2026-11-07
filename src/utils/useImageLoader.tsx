@@ -1,10 +1,10 @@
 import {useCallback, useRef} from "react";
 import * as React from "react";
 
-const useImageLoader = (onImageLoad: (dataUrl: string, file: File) => void) => {
+const useImageLoader = (onImageLoad: (dataUrl: string) => void) => {
     const inputRef = useRef<HTMLInputElement|null>(null)
 
-    const onButtonClick = useCallback(() => {
+    const onLoaderButtonClick = useCallback(() => {
         inputRef.current?.click()
     }, [])
 
@@ -20,7 +20,7 @@ const useImageLoader = (onImageLoad: (dataUrl: string, file: File) => void) => {
 
             reader.onload = () => {
                 if (typeof reader.result === "string") {
-                    onImageLoad(reader.result, file)
+                    onImageLoad(reader.result)
                 }
             }
 
@@ -30,7 +30,7 @@ const useImageLoader = (onImageLoad: (dataUrl: string, file: File) => void) => {
 
     return {
         inputRef,
-        onButtonClick: onButtonClick,
+        onLoaderButtonClick,
         onFileChange
     }
 }

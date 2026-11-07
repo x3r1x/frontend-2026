@@ -20,7 +20,6 @@ type AppProps = {
 }
 
 function App(props: AppProps) {
-    console.log("Перерисовка!");
     const domainState: Presentation = props.domainState;
     const [previewMode, setPreviewMode] = useState<boolean>(false)
 
