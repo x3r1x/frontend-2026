@@ -12,7 +12,11 @@ import {getState} from "../../editor.ts";
 
 type HeaderProps = {
     presentationName: string,
-    onPreviewClick: () => void
+    onPreviewClick: () => void,
+    canUndo: boolean,
+    canRedo: boolean,
+    onUndo: () => void,
+    onRedo: () => void
 }
 
 function Header(props: HeaderProps) {
@@ -40,15 +44,29 @@ function Header(props: HeaderProps) {
             </div>
 
             <div className={style.actionDiv}>
+                <HeaderButton
+                    text={TEXT_CONSTANTS.UNDO_TEXT}
+                    enabled={props.canUndo}
+                    onClick={props.onUndo}
+                />
+
+                <HeaderButton
+                    text={TEXT_CONSTANTS.REDO_TEXT}
+                    enabled={props.canRedo}
+                    onClick={props.onRedo}
+                />
+
                 <ThemeSwitcher/>
 
                 <HeaderButton
                     text={TEXT_CONSTANTS.PREVIEW_TEXT}
+                    enabled={true}
                     onClick={props.onPreviewClick}
                 />
 
                 <HeaderButton
                     text={TEXT_CONSTANTS.EXPORT_PRESENTATION_TEXT}
+                    enabled={true}
                     onClick={() => exportToPdf(getState()!)}
                 />
             </div>

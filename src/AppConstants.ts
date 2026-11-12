@@ -9,6 +9,8 @@ const TEXT_CONSTANTS = {
     ADD_NEW_TEXT_TEXT: "New text",
     ADD_NEW_IMAGE_TEXT: "New image",
     CHANGE_BACKGROUND_TEXT: "Background",
+    UNDO_TEXT: "<",
+    REDO_TEXT: ">"
 }
 
 const PATH_CONSTANTS = {

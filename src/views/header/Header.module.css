@@ -2,7 +2,7 @@
     height: 10%;
     width: 96%;
     display: flex;
-    justify-content: space-between;
+    gap: 23%;
     padding: 0 2%;
 }
 

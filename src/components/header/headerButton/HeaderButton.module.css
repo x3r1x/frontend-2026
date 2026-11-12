@@ -11,3 +11,7 @@
     background-color: #CCAAFF;
     transition: 0.5s;
 }
+
+.disabled {
+    opacity: 0.5;
+}

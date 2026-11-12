@@ -7,20 +7,20 @@ import SlideView from "./views/slideView/SlideView.js";
 import type {Presentation} from "./types/presentation.js";
 import PreviewOverlay from "./views/previewOverlay/PreviewOverlay.js";
 import {getSlideById} from "./actions/slide.js";
-import type {AppState} from "./data.js";
 import {useState} from "react";
 import useTheme from "./utils/themeContext/useTheme.tsx";
 import * as React from "react";
 import useSelection from "./utils/useSelection.tsx";
 import TextStylePanel from "./components/textStylePanel/TextStylePanel.tsx";
+import useHistoryUI from "./utils/useHistoryUI.tsx";
 
 type AppProps = {
-    domainState: Presentation,
-    appState: AppState
+    domainState: Presentation
 }
 
 function App(props: AppProps) {
     const domainState: Presentation = props.domainState;
+    const {canUndo, canRedo, onUndo, onRedo} = useHistoryUI()
     const [previewMode, setPreviewMode] = useState<boolean>(false)
 
     const selectionModule = useSelection()
@@ -44,6 +44,10 @@ function App(props: AppProps) {
             <Header
                 presentationName={domainState.name}
                 onPreviewClick={() => setPreviewMode(true)}
+                canRedo={canRedo}
+                canUndo={canUndo}
+                onRedo={onRedo}
+                onUndo={onUndo}
             />
             <Toolbar
                 domainState={domainState}
