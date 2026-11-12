@@ -18,13 +18,6 @@ function getState(): Presentation | null {
     return currentPresentation
 }
 
-function getHistoryState(): { canUndo: boolean; canRedo: boolean } {
-    return {
-        canUndo: past.length > 0,
-        canRedo: future.length > 0,
-    }
-}
-
 function addEditorChangeHandler(handler: () => void) {
     editorChangeHandlers.push(handler)
 
@@ -82,7 +75,6 @@ export {
     getState,
     addEditorChangeHandler,
     dispatch,
-    getHistoryState,
     undo,
     redo,
     getCanUndo,

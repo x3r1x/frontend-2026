@@ -4,9 +4,9 @@ import * as React from "react";
 const useImageLoader = (onImageLoad: (dataUrl: string) => void) => {
     const inputRef = useRef<HTMLInputElement|null>(null)
 
-    const onLoaderButtonClick = useCallback(() => {
+    const onLoaderButtonClick = () => {
         inputRef.current?.click()
-    }, [])
+    }
 
     const onFileChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
