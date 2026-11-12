@@ -23,11 +23,11 @@ function useHistoryUI(): HistoryUI {
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
-            if (event.ctrlKey && event.key.toLowerCase() === "z") {
+            if (event.ctrlKey && event.code === "KeyZ") {
                 undo()
             }
 
-            if (event.ctrlKey && event.key.toLowerCase() === "y") {
+            if (event.ctrlKey && event.code === "KeyY") {
                 redo()
             }
         }
