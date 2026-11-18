@@ -23,7 +23,6 @@ type SlideObjectItemProps = {
 function SlideObjectItem(props: SlideObjectItemProps) {
     const [resizeOffset, setResizeOffset] = useState<Vector>({dx: 0, dy: 0})
     const onResizeMarkerDown = useResize(
-        props.slide,
         props.object,
         props.scale,
         setResizeOffset
@@ -64,7 +63,7 @@ function SlideObjectItem(props: SlideObjectItemProps) {
                 resizeOffset={resizeOffset}
                 dragOffset={props.dragOffset}
             />
-            : <></>
+            : null
         }
     </>
 

@@ -1,5 +1,7 @@
-import {useCallback, useEffect, useState} from "react";
-import {addEditorChangeHandler, getCanRedo, getCanUndo, redo, undo} from "../editor.ts";
+import {useCallback, useEffect} from "react";
+import {useSelector} from "react-redux";
+import type {RootState} from "../store";
+import {redo, undo} from "../store/slices/historySlice.ts";
 
 type HistoryUI = {
     canUndo: boolean
@@ -9,17 +11,7 @@ type HistoryUI = {
 }
 
 function useHistoryUI(): HistoryUI {
-    const [canUndo, setCanUndo] = useState(getCanUndo());
-    const [canRedo, setCanRedo] = useState(getCanRedo());
-
-    useEffect(() => {
-        const sync = () => {
-            setCanUndo(getCanUndo())
-            setCanRedo(getCanRedo())
-        };
-
-        return addEditorChangeHandler(sync)
-    }, []);
+    const state = useSelector((state: RootState) => state.history)
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
@@ -45,7 +37,8 @@ function useHistoryUI(): HistoryUI {
     const onRedo = useCallback(() => {
         redo()
     }, [])
-    return { canUndo, canRedo, onUndo, onRedo }
+
+    return { canUndo: state.canUndo, canRedo: state.canRedo, onUndo, onRedo }
 }
 
 export default useHistoryUI

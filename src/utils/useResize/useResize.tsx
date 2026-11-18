@@ -1,17 +1,16 @@
 import type {SlideObject, Vector} from "../../types/objects.ts";
-import {resizeObject} from "../../actions/objects.ts";
 import useDragAndDrop from "../useDragAndDrop.tsx";
-import type {Slide} from "../../types/slide.ts";
-import {dispatch} from "../../editor.ts";
-import {slideActionContainer} from "../../actions/slide.ts";
 import * as React from "react";
+import {useAppDispatch} from "../useAppDispatch.tsx";
+import {resizeObject} from "../../store/slices/slideSlice.ts";
 
 const useResize = (
-    slide: Slide,
     object: SlideObject,
     scale: number,
     setResizeOffset: React.Dispatch<React.SetStateAction<Vector>>
 ) => {
+    const dispatch = useAppDispatch()
+
     const onDrag = (offsetX: number, offsetY: number) => {
         document.documentElement.style.setProperty("cursor", "nwse-resize")
 
@@ -40,14 +39,7 @@ const useResize = (
             ? object.size.height + offsetY / scale
             : 30
 
-        const newSlide = resizeObject(slide, {
-            objectId: object.id,
-            newSize: {
-                width: newWidth,
-                height: newHeight
-            }
-        })
-        dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
+        dispatch(resizeObject({objectId: object.id, newSize: {width: newWidth, height: newHeight}}))
     }
 
     return useDragAndDrop(onDrag, onFinish)

@@ -3,8 +3,9 @@ import textInputStyles from "../../components/general/textInput/TextInput.module
 import SlideView from "../slideView/SlideView.js";
 import type {Slide} from "../../types/slide.js";
 import {SCALES_CONSTANTS} from "../../AppConstants.js";
-import {onSlideNameChange} from "./SlideCollectionActions.js";
 import TextInput from "../../components/general/textInput/TextInput.js";
+import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
+import {changeSlideName} from "../../store/slices/slideSlice.ts";
 
 type SlideCollectionComponentProps = {
     slideCollection: Slide[],
@@ -15,13 +16,19 @@ type SlideCollectionComponentProps = {
 type SelectedSlide = "unselected" | "firstSelected" | "latterSelected"
 
 function SlideCollectionComponent(props: SlideCollectionComponentProps) {
-    const slides = props.slideCollection.map((slide, index) =>
-        translateSlideToPreview(
-            slide,
-            index,
-            getSelectedSlide(slide.id, props.selectedSlideIds),
-            props.onSlideViewClick
-        )
+    const dispatch = useAppDispatch()
+
+    const slides = props.slideCollection.map((slide, index) => {
+            const onSlideNameChange = (newName: string) => dispatch(changeSlideName({newName}))
+
+            return translateSlideToPreview(
+                slide,
+                index,
+                getSelectedSlide(slide.id, props.selectedSlideIds),
+                props.onSlideViewClick,
+                onSlideNameChange
+            )
+        }
     )
 
     return (
@@ -35,7 +42,8 @@ function translateSlideToPreview(
     slide: Slide,
     index: number,
     selectedSlide: SelectedSlide,
-    onSlideViewClick: (slideId: string) => void
+    onSlideViewClick: (slideId: string) => void,
+    onSlideNameChange: (newName: string) => void
 ) {
     const scale = selectedSlide === "firstSelected"
         ? SCALES_CONSTANTS.SELECTED_SLIDE
@@ -51,7 +59,7 @@ function translateSlideToPreview(
                 }
                 editable={true}
                 className={textInputStyles.slideName}
-                onChange={(value: string) => onSlideNameChange(slide, value)}
+                onChange={onSlideNameChange}
             />
 
             <SlideView

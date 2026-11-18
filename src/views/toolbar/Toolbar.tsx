@@ -1,6 +1,5 @@
 import style from "./Toolbar.module.css"
 import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
-import {onAddImageClick, onAddSlide, onAddTextClick, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import Button from "../../components/general/button/Button.js";
 import {useState} from "react";
@@ -8,6 +7,12 @@ import useTheme from "../../utils/themeContext/useTheme.tsx";
 import {getSlideById} from "../../actions/slide.ts";
 import useImageLoader from "../../utils/useImageLoader.tsx";
 import BackgroundPicker from "../../components/toolbar/backgroundPicker/BackgroundPicker.tsx";
+import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
+import {addSlide, removeSlides} from "../../store/slices/presentationSlice.ts";
+import {generateId} from "../../actions/presentation.ts";
+import {addSlideObject, removeObjects} from "../../store/slices/slideSlice.ts";
+import {getDefaultBaseObject, getDefaultTextObjectProps} from "../../data.ts";
+import {type ImageObjectProps} from "../../actions/objects.ts";
 
 type ToolbarProps = {
     domainState: Presentation
@@ -20,15 +25,43 @@ type ToolbarProps = {
 type ToolbarOptions = "mouse" | "change background";
 
 function Toolbar(props: ToolbarProps) {
+    const dispatch = useAppDispatch()
     const [toolbarOption, setToolbarOption] = useState<ToolbarOptions>("mouse")
     const {theme} = useTheme()
+
+    const onAddImageClick = (src: string) => {
+        const props: ImageObjectProps = {
+            type: "image",
+            src: src
+        }
+
+        dispatch(addSlideObject({baseObject: getDefaultBaseObject(), props: props}))
+    }
+
     const {inputRef, onLoaderButtonClick, onFileChange} = useImageLoader((newSrc: string) => {
         if (props.selectedSlideIds.length === 0) {
             return;
         }
 
-        onAddImageClick(getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0]), newSrc)
+        onAddImageClick(newSrc)
     })
+
+    const onAddSlide = () => dispatch(addSlide({slideId: generateId()}))
+
+    const onRemoveSlides = () => {
+        dispatch(removeSlides({slideIds: props.selectedSlideIds}))
+        props.clearFullSelection()
+    }
+
+    const onAddTextClick = () => {
+        dispatch(addSlideObject({baseObject: getDefaultBaseObject(), props: getDefaultTextObjectProps()}))
+    }
+
+    const onRemoveObjects = () => {
+        dispatch(removeObjects({objectIds: props.selectedObjectIds}))
+        props.clearFullSelection()
+    }
+
 
     const containerThemeClassName = theme === "light"
         ? style.containerLight
@@ -55,7 +88,7 @@ function Toolbar(props: ToolbarProps) {
                         ? "disabled"
                         : "default"
                 }
-                onClick={() => onRemoveSlides(props.selectedSlideIds, props.clearFullSelection)}
+                onClick={onRemoveSlides}
             />
 
             <div className={style.spacer}/>
@@ -79,7 +112,7 @@ function Toolbar(props: ToolbarProps) {
                 }
                 onClick={() => {
                     if (props.selectedSlideIds.length !== 0) {
-                        onAddTextClick(getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0]))
+                        onAddTextClick()
                     }
                 }}
             />
@@ -127,7 +160,7 @@ function Toolbar(props: ToolbarProps) {
                         ? "disabled"
                         : "default"
                 }
-                onClick={() => onRemoveObjects(props.selectedSlideIds[0], props.selectedObjectIds, props.clearObjectSelection)}
+                onClick={onRemoveObjects}
             />
         </div>
     )

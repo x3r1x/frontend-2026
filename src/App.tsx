@@ -4,7 +4,6 @@ import style from "./App.module.css"
 import Toolbar from "./views/toolbar/Toolbar.js";
 import SlideCollectionComponent from "./views/slideCollection/SlideCollectionComponent.js";
 import SlideView from "./views/slideView/SlideView.js";
-import type {Presentation} from "./types/presentation.js";
 import PreviewOverlay from "./views/previewOverlay/PreviewOverlay.js";
 import {getSlideById} from "./actions/slide.js";
 import {useState} from "react";
@@ -13,18 +12,21 @@ import * as React from "react";
 import useSelection from "./utils/useSelection.tsx";
 import TextStylePanel from "./components/textStylePanel/TextStylePanel.tsx";
 import useHistoryUI from "./utils/useHistoryUI.tsx";
+import {useSelector} from "react-redux";
+import type {RootState} from "./store";
 
-type AppProps = {
-    domainState: Presentation
-}
+function App() {
+    const domainState = useSelector((state: RootState) => state.presentation.presentation);
 
-function App(props: AppProps) {
-    const domainState: Presentation = props.domainState;
     const {canUndo, canRedo, onUndo, onRedo} = useHistoryUI()
     const [previewMode, setPreviewMode] = useState<boolean>(false)
 
     const selectionModule = useSelection()
     const {theme} = useTheme()
+
+    if (!domainState) {
+        return <div>Загрузка...</div>;
+    }
 
     if (previewMode) {
         return (
@@ -88,7 +90,7 @@ function App(props: AppProps) {
                 {
                     selectionModule.selectedObjectIds.length * selectionModule.selectedSlideIds.length !== 0
                         ? <TextStylePanel
-                            slide={getSlideById(props.domainState.slideCollection, selectionModule.selectedSlideIds[0])}
+                            slide={getSlideById(domainState.slideCollection, selectionModule.selectedSlideIds[0])}
                             objectId={selectionModule.selectedObjectIds[0]}
                         />
                         : null

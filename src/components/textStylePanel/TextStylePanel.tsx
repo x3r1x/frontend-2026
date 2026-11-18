@@ -1,31 +1,47 @@
 import style from "./TextStylePanel.module.css"
 import textInputStyle from "../general/textInput/TextInput.module.css"
 import type {Slide} from "../../types/slide.ts";
-import {getObjectById} from "../../actions/objects.ts";
+import {getObjectById, type TextObjectProps} from "../../actions/objects.ts";
 import {useEffect, useState} from "react";
 import TextInput from "../general/textInput/TextInput.tsx";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
-import {onTextObjectParamChange} from "./TextStylePanelActions.ts";
+import type {TextObject} from "../../types/objects.ts";
+import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
+import {updateTextObjectStyle} from "../../store/slices/slideSlice.ts";
 
 type TextStylePanelProps = {
     slide: Slide,
     objectId: string
 }
 
-type TextObjectProps = {
+type TextObjectComponentProps = {
     fontFamily: string,
     fontSize: number,
     fontColor: string
 }
 
 function TextStylePanel(props: TextStylePanelProps) {
+    const dispatch = useAppDispatch()
+
     const object = getObjectById(props.slide.objects, props.objectId)
-    const [textObjectProps, setTextObjectProps] = useState<TextObjectProps>({
+    const [textObjectProps, setTextObjectProps] = useState<TextObjectComponentProps>({
         fontFamily: "",
         fontColor: "",
         fontSize: 0
     })
     const {theme} = useTheme();
+
+    function onTextObjectParamChange(object: TextObject, fontFamily: string, fontColor: string, fontSize: number) {
+        const props: TextObjectProps = {
+            text: object.text,
+            fontColor: fontColor,
+            fontFamily: fontFamily,
+            fontSize: fontSize,
+            type: "text"
+        }
+
+        dispatch(updateTextObjectStyle({objectId: object.id, props}))
+    }
 
     useEffect(() => {
         if (object.type !== "text") {
@@ -68,7 +84,6 @@ function TextStylePanel(props: TextStylePanelProps) {
                         })
 
                         onTextObjectParamChange(
-                            props.slide,
                             object,
                             event.target.value,
                             textObjectProps.fontColor,
@@ -95,7 +110,6 @@ function TextStylePanel(props: TextStylePanelProps) {
                             })
 
                             onTextObjectParamChange(
-                                props.slide,
                                 object,
                                 textObjectProps.fontFamily,
                                 textObjectProps.fontColor,
@@ -117,7 +131,6 @@ function TextStylePanel(props: TextStylePanelProps) {
                                 })
 
                                 onTextObjectParamChange(
-                                    props.slide,
                                     object,
                                     textObjectProps.fontFamily,
                                     textObjectProps.fontColor,
@@ -135,7 +148,6 @@ function TextStylePanel(props: TextStylePanelProps) {
                             })
 
                             onTextObjectParamChange(
-                                props.slide,
                                 object,
                                 textObjectProps.fontFamily,
                                 textObjectProps.fontColor,
@@ -160,7 +172,6 @@ function TextStylePanel(props: TextStylePanelProps) {
                         })
 
                         onTextObjectParamChange(
-                            props.slide,
                             object,
                             textObjectProps.fontFamily,
                             event.target.value,

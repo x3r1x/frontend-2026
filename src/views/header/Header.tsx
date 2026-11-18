@@ -4,11 +4,13 @@ import AppIcon from "../../components/header/appIcon/AppIcon.js";
 import ThemeSwitcher from "../../components/header/themeSwitcher/ThemeSwitcher.js";
 import HeaderButton from "../../components/header/headerButton/HeaderButton.js";
 import {TEXT_CONSTANTS} from "../../AppConstants.js";
-import {onPresentationNameChange} from "./HeaderActions.js";
 import TextInput from "../../components/general/textInput/TextInput.js";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import usePdfExport from "../../utils/usePdfExport.tsx";
-import {getState} from "../../editor.ts";
+import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
+import {updatePresentationName} from "../../store/slices/presentationSlice.ts";
+import {useSelector} from "react-redux";
+import type {RootState} from "../../store";
 
 type HeaderProps = {
     presentationName: string,
@@ -22,6 +24,13 @@ type HeaderProps = {
 function Header(props: HeaderProps) {
     const {theme} = useTheme()
     const {exportToPdf} = usePdfExport()
+
+    const dispatch = useAppDispatch()
+    const currentState = useSelector((state: RootState) => state.presentation.presentation)
+
+    if (!currentState) {
+        return null
+    }
 
     const containerThemeClassName = theme === "light"
         ? style.containerLight
@@ -39,7 +48,7 @@ function Header(props: HeaderProps) {
                     text={props.presentationName}
                     className={inputStyle.nameField + " " + textInputThemeClassName}
                     editable={true}
-                    onChange={onPresentationNameChange}
+                    onChange={(name: string) => dispatch(updatePresentationName({name}))}
                 />
             </div>
 
@@ -67,8 +76,8 @@ function Header(props: HeaderProps) {
                 <HeaderButton
                     text={TEXT_CONSTANTS.EXPORT_PRESENTATION_TEXT}
                     enabled={true}
-                    onClick={() => exportToPdf(getState()!)}
-                />
+                    onClick={() => exportToPdf(currentState)}
+                />as a review of
             </div>
         </div>
     )

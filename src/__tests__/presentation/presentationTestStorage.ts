@@ -24,8 +24,8 @@ function getPresentationWithDuplicatedSlide(): Presentation {
 
 function getEmptyPresentation(): Presentation {
     return {
-        id: "",
-        name: "",
+        id: generateId(),
+        name: "New presentation",
         slideCollection: []
     }
 }

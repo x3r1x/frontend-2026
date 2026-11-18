@@ -1,12 +1,12 @@
 import style from "./SlideView.module.css";
 import type {Background, Slide} from "../../types/slide.js";
-import {onTextObjectChange} from "../../AppActions.js";
 import * as React from "react";
 import useDragAndDrop from "../../utils/useDragAndDrop.tsx";
-import {onObjectDragAndDrop} from "./SlideViewActions.ts";
 import {useState} from "react";
 import type {Vector} from "../../types/objects.ts";
 import SlideObjectItem from "./SlideObjectItem.tsx";
+import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
+import {moveObjects, updateTextObjectContent} from "../../store/slices/slideSlice.ts";
 
 type SlideViewProps = {
     slide: Slide,
@@ -20,6 +20,20 @@ type SlideViewProps = {
 
 function SlideView({onObjectClick, ...props}: SlideViewProps) {
     const [dragOffset, setDragOffset] = useState<Vector>({dx: 0, dy: 0})
+    const dispatch = useAppDispatch()
+
+    function onObjectDragAndDrop(offsetX: number, offsetY: number) {
+        dispatch(moveObjects({
+            objectIds: props.selectedObjectIds, shift: {
+                dx: offsetX / props.scale,
+                dy: offsetY / props.scale
+            }
+        }))
+    }
+
+    const onTextObjectChange = (newText: string) => {
+        dispatch(updateTextObjectContent({objectId: props.selectedObjectIds[0], content: newText}))
+    }
 
     const onObjectMouseDown = useDragAndDrop(
         (offsetX, offsetY) =>
@@ -27,7 +41,7 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
                 dx: offsetX / props.scale,
                 dy: offsetY / props.scale
             }),
-        (offsetX, offsetY) => onObjectDragAndDrop(props.slide, props.selectedObjectIds, props.scale, offsetX, offsetY)
+        onObjectDragAndDrop
     )
 
     if (!props.slide) {
@@ -54,7 +68,7 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
                     : () => {
                     }
                 }
-                onTextObjectChange={(newText: string) => onTextObjectChange(props.slide, object.id, newText)}
+                onTextObjectChange={onTextObjectChange}
                 dragOffset={dragOffset}
             />
         }

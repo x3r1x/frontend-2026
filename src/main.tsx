@@ -1,23 +1,20 @@
-import { createRoot } from 'react-dom/client'
+import {createRoot} from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import {createTestPresentation} from "./data.js";
-import {addEditorChangeHandler, getState, setInitialState} from "./editor.js";
 import ThemeProvider from "./utils/themeContext/ThemeProvider.tsx";
+import {store} from "./store";
+import {setPresentation} from "./store/slices/presentationSlice.ts";
+import {getEmptyPresentation} from "./__tests__/presentation/presentationTestStorage.ts";
+import {Provider} from "react-redux";
 
-const initialPresentation = createTestPresentation();
-setInitialState(initialPresentation)
-
+store.dispatch(setPresentation(getEmptyPresentation()));
 
 const root = createRoot(document.getElementById('root')!)
 
-function renderApp(): void {
-    root.render(
+root.render(
+    <Provider store={store}>
         <ThemeProvider>
-            <App domainState={getState()!}/>
+            <App />
         </ThemeProvider>
-    )
-}
-
-addEditorChangeHandler(renderApp);
-renderApp();
+    </Provider>
+)

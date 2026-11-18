@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react";
-import {dispatch, getState} from "../editor.ts";
-import {getSlideById, removeSlides, slideActionContainer} from "../actions/slide.ts";
-import {removeObjects} from "../actions/objects.ts";
+import {useAppDispatch} from "./useAppDispatch.tsx";
+import {removeObjects} from "../store/slices/slideSlice.ts";
+import {removeSlides} from "../store/slices/presentationSlice.ts";
 
 const useSelection = () => {
     const [selectedSlideIds, setSelectedSlideIds] = useState<string[]>([]);
     const [selectedObjectIds, setSelectedObjectIds] = useState<string[]>([]);
     const [isMultipleSelection, setIsMultipleSelection] = useState<boolean>(false)
+    const dispatch = useAppDispatch();
 
     const onObjectClick = (objectId: string) => {
         if (isMultipleSelection) {
@@ -50,14 +51,10 @@ const useSelection = () => {
 
             if (event.key === "Delete") {
                 if (selectedObjectIds.length !== 0) {
-                    const state = getState()!;
-                    const currentSlide = getSlideById(state.slideCollection, selectedSlideIds[0]);
-
-                    const newSlide = removeObjects(currentSlide, {objectIds: selectedObjectIds})
-                    dispatch(slideActionContainer, {slideId: currentSlide.id, newSlide: newSlide})
+                    dispatch(removeObjects({objectIds: selectedObjectIds}))
                     clearObjectSelection()
                 } else if (selectedSlideIds.length !== 0) {
-                    dispatch(removeSlides, {slideIds: selectedSlideIds})
+                    dispatch(removeSlides({slideIds: selectedSlideIds}))
                     clearFullSelection()
                 }
             }
@@ -68,7 +65,7 @@ const useSelection = () => {
         return () => {
             document.removeEventListener("keydown", onKeyboardClick)
         }
-    }, [selectedObjectIds, selectedSlideIds]);
+    }, [dispatch, selectedObjectIds, selectedSlideIds]);
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {

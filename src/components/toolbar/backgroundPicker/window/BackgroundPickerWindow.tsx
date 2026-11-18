@@ -5,7 +5,8 @@ import {useEffect, useState} from "react";
 import SolidPickerDialog from "./dialogs/SolidPickerDialog.tsx";
 import ImagePickerDialog from "./dialogs/ImagePickerDialog.tsx";
 import GradientPickerDialog from "./dialogs/GradientPickerDialog.tsx";
-import {onBackgroundClear} from "./BackgroundPickerWindowActions.ts";
+import {useAppDispatch} from "../../../../utils/useAppDispatch.tsx";
+import {clearSlideBackground} from "../../../../store/slices/slideSlice.ts";
 
 type BackgroundPickerWindowProps = {
     isShown: boolean
@@ -14,6 +15,7 @@ type BackgroundPickerWindowProps = {
 }
 
 function BackgroundPickerWindow(props: BackgroundPickerWindowProps) {
+    const dispatch = useAppDispatch()
     const [selectedBackgroundType, setSelectedBackgroundType] = useState(props.slideBackground?.type)
 
     useEffect(() => {
@@ -24,6 +26,11 @@ function BackgroundPickerWindow(props: BackgroundPickerWindowProps) {
     if (!props.isShown || !props.slideBackground) {
         return null
     }
+
+    const onBackgroundClear = () => {
+        dispatch(clearSlideBackground())
+    }
+
 
     return (
         <div className={style.container}>
@@ -51,7 +58,7 @@ function BackgroundPickerWindow(props: BackgroundPickerWindowProps) {
 
             <a
                 className={style.clearButton}
-                onClick={() => onBackgroundClear(props.slideId)}
+                onClick={onBackgroundClear}
             >
                 Clear background
             </a>

@@ -1,6 +1,5 @@
 import style from "../BackgroundPickerWindow.module.css"
 import {useRef} from "react";
-import {onGradientAdd, onGradientAngleChange} from "../BackgroundPickerWindowActions.ts";
 import TextInput from "../../../../general/textInput/TextInput.tsx";
 
 type GradientPickerDialogProps = {
@@ -10,7 +9,44 @@ type GradientPickerDialogProps = {
 }
 
 function GradientPickerDialog(props: GradientPickerDialogProps) {
+    // const dispatch = useAppDispatch()
     const colorInputRef = useRef<HTMLInputElement>(null)
+
+    // const onGradientAdd = (value: string, slideId: string | undefined) => {
+        // if (!slideId) {
+        //     return
+        // }
+        //
+        // const newColors = slide.background.type === "gradient"
+        //     ? [...slide.background.colors, value]
+        //     : [value]
+        //
+        // const newAngle = slide.background.type === "gradient"
+        //     ? slide.background.angle
+        //     : 0
+        //
+        // const newSlide = setSlideBackgroundGradient(slide, newColors, newAngle);
+        // dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
+    // }
+
+    // const onGradientAngleChange = (value: number, slideId: string | undefined) => {
+        // if (!slideId) {
+        //     return
+        // }
+        //
+        // const slide = getSlideById(getState()!.slideCollection, slideId)
+        //
+        // const newColors = slide.background.type === "gradient"
+        //     ? slide.background.colors
+        //     : []
+        //
+        // const newAngle = slide.background.type === "gradient"
+        //     ? value
+        //     : 0
+        //
+        // const newSlide = setSlideBackgroundGradient(slide, newColors, newAngle);
+        // dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
+    // }
 
     if (!props.slideId) {
         return null
@@ -22,7 +58,9 @@ function GradientPickerDialog(props: GradientPickerDialogProps) {
                 type={"color"}
                 ref={colorInputRef}
                 style={{display: "none"}}
-                onInput={event => onGradientAdd(event.currentTarget.value, props.slideId)}
+                onInput={() => {
+                }
+            }
             />
 
             <p className={style.gradientDialogText}>Colors selected: {props.colors.length}</p>
@@ -31,10 +69,10 @@ function GradientPickerDialog(props: GradientPickerDialogProps) {
                 text={props.angle.toString()}
                 className={""}
                 editable={true}
-                onChange={newValue => {
-                    if (!isNaN(Number(newValue))) {
-                        onGradientAngleChange(Number(newValue), props.slideId)
-                    }
+                onChange={() => {
+                    // if (!isNaN(Number(newValue))) {
+                    //     onGradientAngleChange(Number(newValue), props.slideId)
+                    // }
                 }}
             />
         </div>
