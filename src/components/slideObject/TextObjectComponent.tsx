@@ -2,6 +2,7 @@ import type {TextObject} from "../../types/objects.js";
 import inputStyle from "../general/textInput/TextInput.module.css";
 import TextInput from "../general/textInput/TextInput.js";
 import * as React from "react";
+import type {TextStylePreview} from "../textStylePanel/TextStylePanel.tsx";
 
 type TextObjectComponentProps = {
     textObject: TextObject,
@@ -11,13 +12,20 @@ type TextObjectComponentProps = {
     onChange: (newText: string) => void,
     onMouseDown?: (event: React.MouseEvent) => void
     onClick?: () => void
+    textStylePreview?: TextStylePreview
 }
 
 function TextObjectComponent(props: TextObjectComponentProps) {
     const textObjectStyle = {
-        fontFamily: props.textObject.fontFamily,
-        fontSize: props.textObject.fontSize * props.scale,
-        color: props.textObject.fontColor
+        fontFamily: props.textStylePreview
+            ? props.textStylePreview.fontFamily
+            : props.textObject.fontFamily,
+        fontSize: props.textStylePreview
+            ? props.textStylePreview.fontSize * props.scale
+            : props.textObject.fontSize * props.scale,
+        color: props.textStylePreview
+            ? props.textStylePreview.fontColor
+            : props.textObject.fontColor
     }
 
     return (

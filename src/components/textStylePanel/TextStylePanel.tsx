@@ -2,15 +2,17 @@ import style from "./TextStylePanel.module.css"
 import textInputStyle from "../general/textInput/TextInput.module.css"
 import type {Slide} from "../../types/slide.ts";
 import {getObjectById} from "../../actions/objects.ts";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import TextInput from "../general/textInput/TextInput.tsx";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import {onTextObjectParamChange} from "./TextStylePanelActions.ts";
 
-type TextStylePanelProps = {
-    slide: Slide,
-    objectId: string
-}
+export type TextStylePreview = {
+    objectId: string;
+    fontFamily: string;
+    fontSize: number;
+    fontColor: string;
+};
 
 type TextObjectProps = {
     fontFamily: string,
@@ -18,27 +20,20 @@ type TextObjectProps = {
     fontColor: string
 }
 
+type TextStylePanelProps = {
+    slide: Slide,
+    objectId: string
+    onTextPreviewChange: (newTextStylePreview: TextStylePreview) => void
+}
+
 function TextStylePanel(props: TextStylePanelProps) {
     const object = getObjectById(props.slide.objects, props.objectId)
     const [textObjectProps, setTextObjectProps] = useState<TextObjectProps>({
-        fontFamily: "",
-        fontColor: "",
-        fontSize: 0
+        fontFamily: object.type === "text" ? object.fontFamily : "",
+        fontColor: object.type === "text" ? object.fontColor : "",
+        fontSize: object.type === "text" ? object.fontSize : 0
     })
     const {theme} = useTheme();
-
-    useEffect(() => {
-        if (object.type !== "text") {
-            return;
-        }
-
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setTextObjectProps({
-            fontFamily: object.fontFamily,
-            fontSize: object.fontSize,
-            fontColor: object.fontColor
-        })
-    }, [object]);
 
     if (object.type !== "text") {
         return;
@@ -63,6 +58,11 @@ function TextStylePanel(props: TextStylePanelProps) {
                     value={textObjectProps.fontFamily}
                     onChange={event => {
                         setTextObjectProps({
+                            ...textObjectProps,
+                            fontFamily: event.target.value
+                        })
+                        props.onTextPreviewChange({
+                            objectId: props.objectId,
                             ...textObjectProps,
                             fontFamily: event.target.value
                         })
@@ -94,14 +94,19 @@ function TextStylePanel(props: TextStylePanelProps) {
                                 fontSize: textObjectProps.fontSize + 1
                             })
 
-                            onTextObjectParamChange(
-                                props.slide,
-                                object,
-                                textObjectProps.fontFamily,
-                                textObjectProps.fontColor,
-                                textObjectProps.fontSize + 1
-                            )
+                            props.onTextPreviewChange({
+                                objectId: props.objectId,
+                                ...textObjectProps,
+                                fontSize: textObjectProps.fontSize + 1
+                            })
                         }}
+                        onMouseLeave={() => onTextObjectParamChange(
+                            props.slide,
+                            object,
+                            textObjectProps.fontFamily,
+                            textObjectProps.fontColor,
+                            textObjectProps.fontSize + 1
+                        )}
                         className={style.fontSizeText + " " + textThemeClassName}
                     >+</a>
 
@@ -134,14 +139,19 @@ function TextStylePanel(props: TextStylePanelProps) {
                                 fontSize: textObjectProps.fontSize - 1
                             })
 
-                            onTextObjectParamChange(
-                                props.slide,
-                                object,
-                                textObjectProps.fontFamily,
-                                textObjectProps.fontColor,
-                                textObjectProps.fontSize - 1
-                            )
+                            props.onTextPreviewChange({
+                                objectId: props.objectId,
+                                ...textObjectProps,
+                                fontSize: textObjectProps.fontSize - 1
+                            })
                         }}
+                        onMouseLeave={() => onTextObjectParamChange(
+                            props.slide,
+                            object,
+                            textObjectProps.fontFamily,
+                            textObjectProps.fontColor,
+                            textObjectProps.fontSize - 1
+                        )}
                         className={style.fontSizeText + " " + textThemeClassName}
                     >---</a>
                 </div>
@@ -159,14 +169,19 @@ function TextStylePanel(props: TextStylePanelProps) {
                             fontColor: event.target.value
                         })
 
-                        onTextObjectParamChange(
-                            props.slide,
-                            object,
-                            textObjectProps.fontFamily,
-                            event.target.value,
-                            textObjectProps.fontSize
-                        )
+                        props.onTextPreviewChange({
+                            objectId: props.objectId,
+                            ...textObjectProps,
+                            fontColor: event.target.value
+                        })
                     }}
+                    onBlur={event => onTextObjectParamChange(
+                        props.slide,
+                        object,
+                        textObjectProps.fontFamily,
+                        event.target.value,
+                        textObjectProps.fontSize
+                    )}
                 />
             </div>
         </div>

@@ -7,11 +7,11 @@ import SlideView from "./views/slideView/SlideView.js";
 import type {Presentation} from "./types/presentation.js";
 import PreviewOverlay from "./views/previewOverlay/PreviewOverlay.js";
 import {getSlideById} from "./actions/slide.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useTheme from "./utils/themeContext/useTheme.tsx";
 import * as React from "react";
 import useSelection from "./utils/useSelection.tsx";
-import TextStylePanel from "./components/textStylePanel/TextStylePanel.tsx";
+import TextStylePanel, {type TextStylePreview} from "./components/textStylePanel/TextStylePanel.tsx";
 import useHistoryUI from "./utils/useHistoryUI.tsx";
 
 type AppProps = {
@@ -20,11 +20,17 @@ type AppProps = {
 
 function App(props: AppProps) {
     const domainState: Presentation = props.domainState;
-    const {canUndo, canRedo, onUndo, onRedo} = useHistoryUI()
+    const [textStylePreview, setTextStylePreview] = useState<TextStylePreview | undefined>(undefined)
     const [previewMode, setPreviewMode] = useState<boolean>(false)
 
     const selectionModule = useSelection()
+    const {canUndo, canRedo, onUndo, onRedo} = useHistoryUI(selectionModule.clearObjectSelection)
     const {theme} = useTheme()
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setTextStylePreview(undefined)
+    }, [domainState])
 
     if (previewMode) {
         return (
@@ -75,9 +81,11 @@ function App(props: AppProps) {
                                 objectsEditable={true}
                                 onClick={(event: React.MouseEvent<HTMLDivElement>) => {
                                     if (event.target === event.currentTarget) {
+                                        setTextStylePreview(undefined)
                                         selectionModule.clearObjectSelection()
                                     }
                                 }}
+                                textStylePreview={textStylePreview}
                                 onObjectClick={selectionModule.onObjectClick}
                                 scale={0.7}
                             />
@@ -90,6 +98,7 @@ function App(props: AppProps) {
                         ? <TextStylePanel
                             slide={getSlideById(props.domainState.slideCollection, selectionModule.selectedSlideIds[0])}
                             objectId={selectionModule.selectedObjectIds[0]}
+                            onTextPreviewChange={(newTextStylePreview) => setTextStylePreview(newTextStylePreview)}
                         />
                         : null
                 }

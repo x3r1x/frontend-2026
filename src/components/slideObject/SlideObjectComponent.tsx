@@ -3,6 +3,7 @@ import TextObjectComponent from "./TextObjectComponent.js";
 import ImageObjectComponent from "./ImageObjectComponent.js";
 import * as React from "react";
 import type {CSSProperties} from "react";
+import type {TextStylePreview} from "../textStylePanel/TextStylePanel.tsx";
 
 type SlideObjectProps = {
     slideObject: SlideObject
@@ -12,6 +13,7 @@ type SlideObjectProps = {
     resizeOffset: Vector,
     onMouseDown?: (event: React.MouseEvent) => void,
     onResizeMarkerDown?: (event: React.MouseEvent) => void
+    textStylePreview?: TextStylePreview
     offset?: Vector,
     onClick?: () => void,
     onTextObjectChange?: (newText: string) => void
@@ -46,6 +48,10 @@ function SlideObjectComponent(props: SlideObjectProps) {
                     ? props.onClick
                     : () => {
                     }
+                }
+                textStylePreview={props.textStylePreview?.objectId === props.slideObject.id
+                    ? props.textStylePreview
+                    : undefined
                 }
             />
         case "image":
