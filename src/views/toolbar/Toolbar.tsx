@@ -3,7 +3,7 @@ import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
 import {onAddImageClick, onAddSlide, onAddTextClick, onRemoveObjects, onRemoveSlides} from "./ToolbarActions.js";
 import type {Presentation} from "../../types/presentation.js";
 import Button from "../../components/general/button/Button.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import {getSlideById} from "../../actions/slide.ts";
 import useImageLoader from "../../utils/useImageLoader.tsx";
@@ -29,6 +29,12 @@ function Toolbar(props: ToolbarProps) {
 
         onAddImageClick(getSlideById(props.domainState.slideCollection, props.selectedSlideIds[0]), newSrc)
     })
+
+    useEffect(() => {
+        if (props.selectedSlideIds.length === 0 || props.selectedObjectIds.length !== 0) {
+            setToolbarOption("mouse")
+        }
+    }, [props.selectedObjectIds, props.selectedSlideIds.length])
 
     const containerThemeClassName = theme === "light"
         ? style.containerLight

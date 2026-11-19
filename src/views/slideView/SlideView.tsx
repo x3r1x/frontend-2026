@@ -4,7 +4,7 @@ import {onTextObjectChange} from "../../AppActions.js";
 import * as React from "react";
 import useDragAndDrop from "../../utils/useDragAndDrop.tsx";
 import {onObjectDragAndDrop} from "./SlideViewActions.ts";
-import {useState} from "react";
+import {type CSSProperties, useState} from "react";
 import type {Vector} from "../../types/objects.ts";
 import SlideObjectItem from "./SlideObjectItem.tsx";
 import type {TextStylePreview} from "../../components/textStylePanel/TextStylePanel.tsx";
@@ -80,7 +80,7 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
     )
 }
 
-function getBackgroundStyle(background: Background) {
+function getBackgroundStyle(background: Background): CSSProperties {
     switch (background.type) {
         case "image": {
             return {

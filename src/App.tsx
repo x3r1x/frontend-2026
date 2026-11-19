@@ -28,7 +28,6 @@ function App(props: AppProps) {
     const {theme} = useTheme()
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setTextStylePreview(undefined)
     }, [domainState])
 

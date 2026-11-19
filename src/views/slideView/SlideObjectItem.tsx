@@ -28,7 +28,7 @@ function SlideObjectItem(props: SlideObjectItemProps) {
         props.slide,
         props.object,
         props.scale,
-        setResizeOffset
+        (resizeOffset: Vector) => setResizeOffset(resizeOffset)
     )
 
     return <>
