@@ -6,7 +6,7 @@ import {useState} from "react";
 import type {Vector} from "../../types/objects.ts";
 import SlideObjectItem from "./SlideObjectItem.tsx";
 import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
-import {moveObjects, updateTextObjectContent} from "../../store/slices/slideSlice.ts";
+import {moveObjects, updateTextObjectContent} from "../../store/slices/presentationSlice.ts";
 
 type SlideViewProps = {
     slide: Slide,
@@ -23,7 +23,12 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
     const dispatch = useAppDispatch()
 
     function onObjectDragAndDrop(offsetX: number, offsetY: number) {
+        if (!props.slide) {
+            return
+        }
+
         dispatch(moveObjects({
+            slideId: props.slide.id,
             objectIds: props.selectedObjectIds, shift: {
                 dx: offsetX / props.scale,
                 dy: offsetY / props.scale
@@ -32,7 +37,11 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
     }
 
     const onTextObjectChange = (newText: string) => {
-        dispatch(updateTextObjectContent({objectId: props.selectedObjectIds[0], content: newText}))
+        if (!props.slide) {
+            return
+        }
+
+        dispatch(updateTextObjectContent({slideId: props.slide.id, objectId: props.selectedObjectIds[0], content: newText}))
     }
 
     const onObjectMouseDown = useDragAndDrop(

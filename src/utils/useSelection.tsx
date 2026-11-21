@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {useAppDispatch} from "./useAppDispatch.tsx";
-import {removeObjects} from "../store/slices/slideSlice.ts";
-import {removeSlides} from "../store/slices/presentationSlice.ts";
+import {removeObjects, removeSlides} from "../store/slices/presentationSlice.ts";
 
 const useSelection = () => {
     const [selectedSlideIds, setSelectedSlideIds] = useState<string[]>([]);
@@ -50,8 +49,8 @@ const useSelection = () => {
             }
 
             if (event.key === "Delete") {
-                if (selectedObjectIds.length !== 0) {
-                    dispatch(removeObjects({objectIds: selectedObjectIds}))
+                if (selectedObjectIds.length !== 0 && selectedSlideIds.length !== 0) {
+                    dispatch(removeObjects({slideId: selectedSlideIds[0], objectIds: selectedObjectIds}))
                     clearObjectSelection()
                 } else if (selectedSlideIds.length !== 0) {
                     dispatch(removeSlides({slideIds: selectedSlideIds}))

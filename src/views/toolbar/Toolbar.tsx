@@ -8,9 +8,8 @@ import {getSlideById} from "../../actions/slide.ts";
 import useImageLoader from "../../utils/useImageLoader.tsx";
 import BackgroundPicker from "../../components/toolbar/backgroundPicker/BackgroundPicker.tsx";
 import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
-import {addSlide, removeSlides} from "../../store/slices/presentationSlice.ts";
+import {addSlide, removeSlides, addSlideObject, removeObjects} from "../../store/slices/presentationSlice.ts";
 import {generateId} from "../../actions/presentation.ts";
-import {addSlideObject, removeObjects} from "../../store/slices/slideSlice.ts";
 import {getDefaultBaseObject, getDefaultTextObjectProps} from "../../data.ts";
 import {type ImageObjectProps} from "../../actions/objects.ts";
 
@@ -30,12 +29,20 @@ function Toolbar(props: ToolbarProps) {
     const {theme} = useTheme()
 
     const onAddImageClick = (src: string) => {
-        const props: ImageObjectProps = {
+        if (props.selectedSlideIds.length === 0) {
+            return;
+        }
+
+        const imageProps: ImageObjectProps = {
             type: "image",
             src: src
         }
 
-        dispatch(addSlideObject({baseObject: getDefaultBaseObject(), props: props}))
+        dispatch(addSlideObject({
+            slideId: props.selectedSlideIds[0],
+            baseObject: getDefaultBaseObject(),
+            props: imageProps
+        }))
     }
 
     const {inputRef, onLoaderButtonClick, onFileChange} = useImageLoader((newSrc: string) => {
@@ -54,11 +61,23 @@ function Toolbar(props: ToolbarProps) {
     }
 
     const onAddTextClick = () => {
-        dispatch(addSlideObject({baseObject: getDefaultBaseObject(), props: getDefaultTextObjectProps()}))
+        if (props.selectedSlideIds.length === 0) {
+            return;
+        }
+
+        dispatch(addSlideObject({
+            slideId: props.selectedSlideIds[0],
+            baseObject: getDefaultBaseObject(),
+            props: getDefaultTextObjectProps()
+        }))
     }
 
     const onRemoveObjects = () => {
-        dispatch(removeObjects({objectIds: props.selectedObjectIds}))
+        if (props.selectedSlideIds.length === 0) {
+            return;
+        }
+
+        dispatch(removeObjects({slideId: props.selectedSlideIds[0], objectIds: props.selectedObjectIds}))
         props.clearFullSelection()
     }
 

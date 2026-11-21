@@ -1,6 +1,6 @@
 import style from "../BackgroundPickerWindow.module.css"
 import {useAppDispatch} from "../../../../../utils/useAppDispatch.tsx";
-import {setSlideBackgroundColor} from "../../../../../store/slices/slideSlice.ts";
+import {setSlideBackgroundColor} from "../../../../../store/slices/presentationSlice.ts";
 
 type SolidPickerDialogProps = {
     color: string,
@@ -14,8 +14,10 @@ function SolidPickerDialog(props: SolidPickerDialogProps) {
         return null
     }
 
+    const slideId = props.slideId
+
     const onSolidInput = (value: string) => {
-        dispatch(setSlideBackgroundColor({color: value}))
+        dispatch(setSlideBackgroundColor({slideId: slideId, color: value}))
     }
 
     return (

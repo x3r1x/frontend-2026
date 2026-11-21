@@ -1,6 +1,11 @@
 import style from "../BackgroundPickerWindow.module.css"
 import {useRef} from "react";
 import TextInput from "../../../../general/textInput/TextInput.tsx";
+import {useAppDispatch} from "../../../../../utils/useAppDispatch.tsx";
+import {getSlideById} from "../../../../../actions/slide.ts";
+import {useSelector} from "react-redux";
+import type {RootState} from "../../../../../store";
+import {setSlideBackgroundGradient} from "../../../../../store/slices/presentationSlice.ts";
 
 type GradientPickerDialogProps = {
     slideId?: string,
@@ -9,44 +14,39 @@ type GradientPickerDialogProps = {
 }
 
 function GradientPickerDialog(props: GradientPickerDialogProps) {
-    // const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
+    const domainState = useSelector((state: RootState) => state.presentation.presentation)
     const colorInputRef = useRef<HTMLInputElement>(null)
 
-    // const onGradientAdd = (value: string, slideId: string | undefined) => {
-        // if (!slideId) {
-        //     return
-        // }
-        //
-        // const newColors = slide.background.type === "gradient"
-        //     ? [...slide.background.colors, value]
-        //     : [value]
-        //
-        // const newAngle = slide.background.type === "gradient"
-        //     ? slide.background.angle
-        //     : 0
-        //
-        // const newSlide = setSlideBackgroundGradient(slide, newColors, newAngle);
-        // dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
-    // }
+    if (!props.slideId || !domainState) {
+        return
+    }
 
-    // const onGradientAngleChange = (value: number, slideId: string | undefined) => {
-        // if (!slideId) {
-        //     return
-        // }
-        //
-        // const slide = getSlideById(getState()!.slideCollection, slideId)
-        //
-        // const newColors = slide.background.type === "gradient"
-        //     ? slide.background.colors
-        //     : []
-        //
-        // const newAngle = slide.background.type === "gradient"
-        //     ? value
-        //     : 0
-        //
-        // const newSlide = setSlideBackgroundGradient(slide, newColors, newAngle);
-        // dispatch(slideActionContainer, {slideId: slide.id, newSlide: newSlide})
-    // }
+    const slide = getSlideById(domainState.slideCollection, props.slideId)
+
+    const onGradientAdd = (value: string) => {
+        const newColors = slide.background.type === "gradient"
+            ? [...slide.background.colors, value]
+            : [value]
+
+        const newAngle = slide.background.type === "gradient"
+            ? slide.background.angle
+            : 0
+
+        dispatch(setSlideBackgroundGradient({slideId: props.slideId!, colors: newColors, angle: newAngle}))
+    }
+
+    const onGradientAngleChange = (value: number) => {
+        const newColors = slide.background.type === "gradient"
+            ? slide.background.colors
+            : []
+
+        const newAngle = slide.background.type === "gradient"
+            ? value
+            : 0
+
+        dispatch(setSlideBackgroundGradient({slideId: props.slideId!, colors: newColors, angle: newAngle}))
+    }
 
     if (!props.slideId) {
         return null
@@ -58,7 +58,8 @@ function GradientPickerDialog(props: GradientPickerDialogProps) {
                 type={"color"}
                 ref={colorInputRef}
                 style={{display: "none"}}
-                onInput={() => {
+                onInput={(event) => {
+                    onGradientAdd(event.currentTarget.value)
                 }
             }
             />
@@ -69,10 +70,10 @@ function GradientPickerDialog(props: GradientPickerDialogProps) {
                 text={props.angle.toString()}
                 className={""}
                 editable={true}
-                onChange={() => {
-                    // if (!isNaN(Number(newValue))) {
-                    //     onGradientAngleChange(Number(newValue), props.slideId)
-                    // }
+                onChange={(newValue: string) => {
+                    if (!isNaN(Number(newValue))) {
+                        onGradientAngleChange(Number(newValue))
+                    }
                 }}
             />
         </div>

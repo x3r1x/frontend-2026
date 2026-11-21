@@ -6,7 +6,7 @@ import SolidPickerDialog from "./dialogs/SolidPickerDialog.tsx";
 import ImagePickerDialog from "./dialogs/ImagePickerDialog.tsx";
 import GradientPickerDialog from "./dialogs/GradientPickerDialog.tsx";
 import {useAppDispatch} from "../../../../utils/useAppDispatch.tsx";
-import {clearSlideBackground} from "../../../../store/slices/slideSlice.ts";
+import {clearSlideBackground} from "../../../../store/slices/presentationSlice.ts";
 
 type BackgroundPickerWindowProps = {
     isShown: boolean
@@ -23,12 +23,14 @@ function BackgroundPickerWindow(props: BackgroundPickerWindowProps) {
         setSelectedBackgroundType(props.slideBackground?.type)
     }, [props.slideBackground?.type]);
 
-    if (!props.isShown || !props.slideBackground) {
+    if (!props.isShown || !props.slideBackground || !props.slideId) {
         return null
     }
 
+    const slideId = props.slideId
+
     const onBackgroundClear = () => {
-        dispatch(clearSlideBackground())
+        dispatch(clearSlideBackground({slideId: slideId}))
     }
 
 

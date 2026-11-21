@@ -7,7 +7,7 @@ import TextInput from "../general/textInput/TextInput.tsx";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import type {TextObject} from "../../types/objects.ts";
 import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
-import {updateTextObjectStyle} from "../../store/slices/slideSlice.ts";
+import {updateTextObjectStyle} from "../../store/slices/presentationSlice.ts";
 
 type TextStylePanelProps = {
     slide: Slide,
@@ -32,7 +32,7 @@ function TextStylePanel(props: TextStylePanelProps) {
     const {theme} = useTheme();
 
     function onTextObjectParamChange(object: TextObject, fontFamily: string, fontColor: string, fontSize: number) {
-        const props: TextObjectProps = {
+        const textProps: TextObjectProps = {
             text: object.text,
             fontColor: fontColor,
             fontFamily: fontFamily,
@@ -40,7 +40,7 @@ function TextStylePanel(props: TextStylePanelProps) {
             type: "text"
         }
 
-        dispatch(updateTextObjectStyle({objectId: object.id, props}))
+        dispatch(updateTextObjectStyle({slideId: props.slide.id, objectId: object.id, props: textProps}))
     }
 
     useEffect(() => {

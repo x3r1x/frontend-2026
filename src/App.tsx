@@ -41,6 +41,13 @@ function App() {
         ? style.containerLight
         : style.containerDark
 
+    const selectedSlideId = selectionModule.selectedSlideIds.length !== 0
+        ? selectionModule.selectedSlideIds[0]
+        : undefined
+    const selectedSlide = selectedSlideId
+        ? getSlideById(domainState.slideCollection, selectedSlideId)
+        : undefined
+
     return (
         <div className={style.container + " " + containerThemeClassName}>
             <Header
@@ -70,9 +77,9 @@ function App() {
 
                 <div className={style.slideViewContainer}>
                     {
-                        selectionModule.selectedSlideIds
+                        selectedSlide
                             ? <SlideView
-                                slide={getSlideById(domainState.slideCollection, selectionModule.selectedSlideIds[0])}
+                                slide={selectedSlide}
                                 selectedObjectIds={selectionModule.selectedObjectIds}
                                 objectsEditable={true}
                                 onClick={(event: React.MouseEvent<HTMLDivElement>) => {
@@ -88,9 +95,9 @@ function App() {
                 </div>
 
                 {
-                    selectionModule.selectedObjectIds.length * selectionModule.selectedSlideIds.length !== 0
+                    selectionModule.selectedObjectIds.length !== 0 && selectedSlide
                         ? <TextStylePanel
-                            slide={getSlideById(domainState.slideCollection, selectionModule.selectedSlideIds[0])}
+                            slide={selectedSlide}
                             objectId={selectionModule.selectedObjectIds[0]}
                         />
                         : null

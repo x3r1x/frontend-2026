@@ -5,7 +5,7 @@ import type {Slide} from "../../types/slide.js";
 import {SCALES_CONSTANTS} from "../../AppConstants.js";
 import TextInput from "../../components/general/textInput/TextInput.js";
 import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
-import {changeSlideName} from "../../store/slices/slideSlice.ts";
+import {changeSlideName} from "../../store/slices/presentationSlice.ts";
 
 type SlideCollectionComponentProps = {
     slideCollection: Slide[],
@@ -19,7 +19,7 @@ function SlideCollectionComponent(props: SlideCollectionComponentProps) {
     const dispatch = useAppDispatch()
 
     const slides = props.slideCollection.map((slide, index) => {
-            const onSlideNameChange = (newName: string) => dispatch(changeSlideName({newName}))
+            const onSlideNameChange = (newName: string) => dispatch(changeSlideName({slideId: slide.id, newName}))
 
             return translateSlideToPreview(
                 slide,
