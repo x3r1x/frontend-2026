@@ -6,11 +6,11 @@ import SlideCollectionComponent from "./views/slideCollection/SlideCollectionCom
 import SlideView from "./views/slideView/SlideView.js";
 import PreviewOverlay from "./views/previewOverlay/PreviewOverlay.js";
 import {getSlideById} from "./actions/slide.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useTheme from "./utils/themeContext/useTheme.tsx";
 import * as React from "react";
 import useSelection from "./utils/useSelection.tsx";
-import TextStylePanel from "./components/textStylePanel/TextStylePanel.tsx";
+import TextStylePanel, {type TextStylePreview} from "./components/textStylePanel/TextStylePanel.tsx";
 import useHistoryUI from "./utils/useHistoryUI.tsx";
 import {useSelector} from "react-redux";
 import type {RootState} from "./store";
@@ -18,10 +18,11 @@ import type {RootState} from "./store";
 function App() {
     const domainState = useSelector((state: RootState) => state.presentation.presentation);
 
-    const {canUndo, canRedo, onUndo, onRedo} = useHistoryUI()
+    const [textStylePreview, setTextStylePreview] = useState<TextStylePreview | undefined>(undefined)
     const [previewMode, setPreviewMode] = useState<boolean>(false)
 
     const selectionModule = useSelection()
+    const {canUndo, canRedo, onUndo, onRedo} = useHistoryUI(selectionModule.clearObjectSelection)
     const {theme} = useTheme()
 
     if (!domainState) {
@@ -84,9 +85,11 @@ function App() {
                                 objectsEditable={true}
                                 onClick={(event: React.MouseEvent<HTMLDivElement>) => {
                                     if (event.target === event.currentTarget) {
+                                        setTextStylePreview(undefined)
                                         selectionModule.clearObjectSelection()
                                     }
                                 }}
+                                textStylePreview={textStylePreview}
                                 onObjectClick={selectionModule.onObjectClick}
                                 scale={0.7}
                             />
@@ -99,6 +102,7 @@ function App() {
                         ? <TextStylePanel
                             slide={selectedSlide}
                             objectId={selectionModule.selectedObjectIds[0]}
+                            onTextPreviewChange={(newTextStylePreview) => setTextStylePreview(newTextStylePreview)}
                         />
                         : null
                 }

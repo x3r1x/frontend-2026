@@ -2,11 +2,12 @@ import style from "./SlideView.module.css";
 import type {Background, Slide} from "../../types/slide.js";
 import * as React from "react";
 import useDragAndDrop from "../../utils/useDragAndDrop.tsx";
-import {useState} from "react";
+import {type CSSProperties, useState} from "react";
 import type {Vector} from "../../types/objects.ts";
 import SlideObjectItem from "./SlideObjectItem.tsx";
 import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
 import {moveObjects, updateTextObjectContent} from "../../store/slices/presentationSlice.ts";
+import type {TextStylePreview} from "../../components/textStylePanel/TextStylePanel.tsx";
 
 type SlideViewProps = {
     slide: Slide,
@@ -15,6 +16,7 @@ type SlideViewProps = {
     selectedObjectIds: string[],
     isSelected?: boolean
     onClick?: (event: React.MouseEvent<HTMLDivElement>) => void,
+    textStylePreview?: TextStylePreview
     onObjectClick?: (objectId: string) => void
 }
 
@@ -65,6 +67,7 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
                 object={object}
                 scale={props.scale}
                 editable={props.objectsEditable}
+                textStylePreview={props.textStylePreview}
                 selection={
                     props.selectedObjectIds.includes(object.id)
                         ? props.selectedObjectIds[0] === object.id
@@ -100,7 +103,7 @@ function SlideView({onObjectClick, ...props}: SlideViewProps) {
     )
 }
 
-function getBackgroundStyle(background: Background) {
+function getBackgroundStyle(background: Background): CSSProperties {
     switch (background.type) {
         case "image": {
             return {

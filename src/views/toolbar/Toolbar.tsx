@@ -2,7 +2,7 @@ import style from "./Toolbar.module.css"
 import {PATH_CONSTANTS, TEXT_CONSTANTS} from "../../AppConstants.js";
 import type {Presentation} from "../../types/presentation.js";
 import Button from "../../components/general/button/Button.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import {getSlideById} from "../../actions/slide.ts";
 import useImageLoader from "../../utils/useImageLoader.tsx";
@@ -81,6 +81,12 @@ function Toolbar(props: ToolbarProps) {
         props.clearFullSelection()
     }
 
+
+    useEffect(() => {
+        if (props.selectedSlideIds.length === 0 || props.selectedObjectIds.length !== 0) {
+            setToolbarOption("mouse")
+        }
+    }, [props.selectedObjectIds, props.selectedSlideIds.length])
 
     const containerThemeClassName = theme === "light"
         ? style.containerLight

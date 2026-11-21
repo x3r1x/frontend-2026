@@ -8,7 +8,7 @@ const useResize = (
     slideId: string,
     object: SlideObject,
     scale: number,
-    setResizeOffset: React.Dispatch<React.SetStateAction<Vector>>
+    onResizeDrag: (resizeOffset: Vector) => void
 ) => {
     const dispatch = useAppDispatch()
 
@@ -23,7 +23,7 @@ const useResize = (
             ? offsetY / scale
             : -(object.size.height - 30)
 
-        setResizeOffset({
+        onResizeDrag({
             dx: newWidth,
             dy: newHeight
         })

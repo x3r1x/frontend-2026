@@ -2,17 +2,19 @@ import style from "./TextStylePanel.module.css"
 import textInputStyle from "../general/textInput/TextInput.module.css"
 import type {Slide} from "../../types/slide.ts";
 import {getObjectById, type TextObjectProps} from "../../actions/objects.ts";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import TextInput from "../general/textInput/TextInput.tsx";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import type {TextObject} from "../../types/objects.ts";
 import {useAppDispatch} from "../../utils/useAppDispatch.tsx";
 import {updateTextObjectStyle} from "../../store/slices/presentationSlice.ts";
 
-type TextStylePanelProps = {
-    slide: Slide,
-    objectId: string
-}
+export type TextStylePreview = {
+    objectId: string;
+    fontFamily: string;
+    fontSize: number;
+    fontColor: string;
+};
 
 type TextObjectComponentProps = {
     fontFamily: string,
@@ -20,14 +22,20 @@ type TextObjectComponentProps = {
     fontColor: string
 }
 
+type TextStylePanelProps = {
+    slide: Slide,
+    objectId: string
+    onTextPreviewChange: (newTextStylePreview: TextStylePreview) => void
+}
+
 function TextStylePanel(props: TextStylePanelProps) {
     const dispatch = useAppDispatch()
 
     const object = getObjectById(props.slide.objects, props.objectId)
     const [textObjectProps, setTextObjectProps] = useState<TextObjectComponentProps>({
-        fontFamily: "",
-        fontColor: "",
-        fontSize: 0
+        fontFamily: object.type === "text" ? object.fontFamily : "",
+        fontColor: object.type === "text" ? object.fontColor : "",
+        fontSize: object.type === "text" ? object.fontSize : 0
     })
     const {theme} = useTheme();
 
@@ -82,6 +90,11 @@ function TextStylePanel(props: TextStylePanelProps) {
                             ...textObjectProps,
                             fontFamily: event.target.value
                         })
+                        props.onTextPreviewChange({
+                            objectId: props.objectId,
+                            ...textObjectProps,
+                            fontFamily: event.target.value
+                        })
 
                         onTextObjectParamChange(
                             object,
@@ -109,13 +122,19 @@ function TextStylePanel(props: TextStylePanelProps) {
                                 fontSize: textObjectProps.fontSize + 1
                             })
 
-                            onTextObjectParamChange(
+                            props.onTextPreviewChange({
+                                objectId: props.objectId,
+                                ...textObjectProps,
+                                fontSize: textObjectProps.fontSize + 1
+                            })
+                        }}
+                        onMouseLeave={() =>onTextObjectParamChange(
                                 object,
                                 textObjectProps.fontFamily,
                                 textObjectProps.fontColor,
                                 textObjectProps.fontSize + 1
                             )
-                        }}
+                        }
                         className={style.fontSizeText + " " + textThemeClassName}
                     >+</a>
 
@@ -147,13 +166,19 @@ function TextStylePanel(props: TextStylePanelProps) {
                                 fontSize: textObjectProps.fontSize - 1
                             })
 
-                            onTextObjectParamChange(
+                            props.onTextPreviewChange({
+                                objectId: props.objectId,
+                                ...textObjectProps,
+                                fontSize: textObjectProps.fontSize - 1
+                            })
+                        }}
+                        onMouseLeave={() =>onTextObjectParamChange(
                                 object,
                                 textObjectProps.fontFamily,
                                 textObjectProps.fontColor,
                                 textObjectProps.fontSize - 1
                             )
-                        }}
+                        }
                         className={style.fontSizeText + " " + textThemeClassName}
                     >---</a>
                 </div>
@@ -171,13 +196,19 @@ function TextStylePanel(props: TextStylePanelProps) {
                             fontColor: event.target.value
                         })
 
-                        onTextObjectParamChange(
+                        props.onTextPreviewChange({
+                            objectId: props.objectId,
+                            ...textObjectProps,
+                            fontColor: event.target.value
+                        })
+                    }}
+                    onBlur={event =>onTextObjectParamChange(
                             object,
                             textObjectProps.fontFamily,
                             event.target.value,
                             textObjectProps.fontSize
                         )
-                    }}
+                    }
                 />
             </div>
         </div>

@@ -19,7 +19,6 @@ function BackgroundPickerWindow(props: BackgroundPickerWindowProps) {
     const [selectedBackgroundType, setSelectedBackgroundType] = useState(props.slideBackground?.type)
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedBackgroundType(props.slideBackground?.type)
     }, [props.slideBackground?.type]);
 

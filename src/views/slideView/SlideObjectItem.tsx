@@ -5,6 +5,7 @@ import useResize from "../../utils/useResize/useResize.tsx";
 import type {Slide} from "../../types/slide.ts";
 import {useState} from "react";
 import ResizeMarker from "../../utils/useResize/ResizeMarker.tsx";
+import type {TextStylePreview} from "../../components/textStylePanel/TextStylePanel.tsx";
 
 type SlideObjectItemSelection = "primary" | "defaultSelected" | "unselected"
 
@@ -16,6 +17,7 @@ type SlideObjectItemProps = {
     selection: SlideObjectItemSelection,
     onMouseDown: (event: React.MouseEvent) => void,
     onClick: () => void,
+    textStylePreview?: TextStylePreview
     onTextObjectChange: (newText: string) => void,
     dragOffset: Vector
 }
@@ -26,7 +28,7 @@ function SlideObjectItem(props: SlideObjectItemProps) {
         props.slide.id,
         props.object,
         props.scale,
-        setResizeOffset
+        (resizeOffset: Vector) => setResizeOffset(resizeOffset)
     )
 
     return <>
@@ -48,6 +50,7 @@ function SlideObjectItem(props: SlideObjectItemProps) {
                 : () => {
                 }
             }
+            textStylePreview={props.textStylePreview}
             onTextObjectChange={props.onTextObjectChange}
             offset={props.selection !== "unselected"
                 ? props.dragOffset

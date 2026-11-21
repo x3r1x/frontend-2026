@@ -10,7 +10,7 @@ type HistoryUI = {
     onRedo: () => void
 }
 
-function useHistoryUI(): HistoryUI {
+function useHistoryUI(clearSelection: () => void): HistoryUI {
     const state = useSelector((state: RootState) => state.history)
 
     useEffect(() => {
@@ -31,12 +31,14 @@ function useHistoryUI(): HistoryUI {
     }, [])
 
     const onUndo = useCallback(() => {
+        clearSelection()
         undo()
-    }, [])
+    }, [clearSelection])
 
     const onRedo = useCallback(() => {
+        clearSelection()
         redo()
-    }, [])
+    }, [clearSelection])
 
     return { canUndo: state.canUndo, canRedo: state.canRedo, onUndo, onRedo }
 }
