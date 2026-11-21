@@ -1,6 +1,5 @@
 import type {SlideObject, Vector} from "../../types/objects.ts";
 import useDragAndDrop from "../useDragAndDrop.tsx";
-import * as React from "react";
 import {useAppDispatch} from "../useAppDispatch.tsx";
 import {resizeObject} from "../../store/slices/presentationSlice.ts";
 

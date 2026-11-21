@@ -6,7 +6,7 @@ import SlideCollectionComponent from "./views/slideCollection/SlideCollectionCom
 import SlideView from "./views/slideView/SlideView.js";
 import PreviewOverlay from "./views/previewOverlay/PreviewOverlay.js";
 import {getSlideById} from "./actions/slide.js";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import useTheme from "./utils/themeContext/useTheme.tsx";
 import * as React from "react";
 import useSelection from "./utils/useSelection.tsx";

@@ -2,7 +2,7 @@ import style from "./TextStylePanel.module.css"
 import textInputStyle from "../general/textInput/TextInput.module.css"
 import type {Slide} from "../../types/slide.ts";
 import {getObjectById, type TextObjectProps} from "../../actions/objects.ts";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import TextInput from "../general/textInput/TextInput.tsx";
 import useTheme from "../../utils/themeContext/useTheme.tsx";
 import type {TextObject} from "../../types/objects.ts";
@@ -56,7 +56,6 @@ function TextStylePanel(props: TextStylePanelProps) {
             return;
         }
 
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setTextObjectProps({
             fontFamily: object.fontFamily,
             fontSize: object.fontSize,
